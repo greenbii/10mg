@@ -1,0 +1,144 @@
+nav {
+    background: var(--white);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 100px;
+    width: 100%;
+}
+
+.nav-brand {
+    position: absolute;
+    left: 100px;
+}
+
+.nav-contents {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.nav-links a {
+    color: var(--text-color);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-btns {
+    position: absolute;
+    right: 100px;
+}
+
+.open-icon, .close-icon {
+    display: none;
+}
+
+
+/* MEDIA QUERY */
+
+@media screen and (max-width: 1200px) {
+    nav {
+        padding: 15px 50px;
+    }
+
+    .nav-brand {
+        left: 50px;
+    }
+
+    .nav-btns {
+        right: 50px;
+    }
+}
+
+@media screen and (max-width: 998px) {
+    nav {
+        justify-content: space-between;
+    }
+
+    .nav-brand, .nav-btns {
+        position: unset;
+    }
+
+    .nav-btns {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .button {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+
+    .nav-contents {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: fixed;
+        left: -100%;
+        top: 0;
+        z-index: 100;
+        padding: 100px 40px;
+        background: var(--white);
+        box-shadow: var(--box-shadow);
+        height: 100%;
+        width: 300px;
+        overflow: auto;
+        transition: .3s ease-in-out;
+    }
+
+    .nav-contents-open {
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links ul a {
+        margin: 0 0 4rem !important;
+    }
+
+    .nav-links ul a:last-child {
+        margin: 0 0 3rem !important;
+    }
+
+    .open-icon, .close-icon {
+        display: block;
+        font-size: 25px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    nav {
+        padding: 15px 20px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .nav-contents {
+        width: 220px;
+    }
+
+    .nav-brand img {
+        width: 80px;
+    }
+
+    .open-icon, .close-icon {
+        font-size: 16px;
+    }
+}

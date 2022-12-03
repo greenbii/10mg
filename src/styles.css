@@ -18,7 +18,7 @@
     --cancelled-color: rgba(219, 75, 74, 0.1);
     --footer-background: #F4FAFF;
     --primary-fade-color: #7BB9FC;
-    --box-shadow: 1px solid var(--primary-color);
+    --box-shadow: 0 0 25px #00000012;
     --grey-bg: #FAFAFA;
     --text-color: #0A142F;
 }
@@ -65,22 +65,30 @@ li {
     opacity: 0.2;
 }
 
+.button {
+    width: max-content;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 5px 15px;
+}
+
 .primary-btn {
     background: var(--primary-color);
     color: var(--white);
-    width: max-content;
-    padding: 10px;
-    border: none;
-    box-sizing: var(--box-shadow);
+    box-shadow: var(--box-shadow);
+}
+
+.primary-btn:hover, .secondary-btn:hover {
+    background: var(--primary-fade-color);
+    border-color: var(--primary-fade-color);
+    color: var(--white);
 }
 
 .secondary-btn {
-    background: var(--white);
+    background: transparent;
     color: var(--primary-color);
-    width: max-content;
-    padding: 10px;
-    border: none;
-    box-sizing: var(--box-shadow);
+    border-color: var(--primary-color);
+
 }
 
 .texfield {
