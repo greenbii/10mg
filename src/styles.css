@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 * {
     padding: 0;
@@ -13,6 +14,8 @@
     --order-placed-color: #2FBD6A;
     --delivered-color: #F2C422;
     --pending-color: #FFF0DB;
+    --completed-color: #C4EFDF;
+    --cancelled-color: rgba(219, 75, 74, 0.1);
     --footer-background: #F4FAFF;
     --primary-fade-color: #7BB9FC;
     --box-shadow: 1px solid var(--primary-color);
@@ -20,7 +23,11 @@
     --text-color: #0A142F;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-family: "Cabin", sans-serif;
     line-height: 64px;
 }
@@ -36,6 +43,13 @@ a {
 
 li {
     list-style: none;
+}
+
+.body-container {
+    width: 100%;
+    height: max-content;
+    background: var(--white);
+    padding: 0 20px;
 }
 
 .h-line {
@@ -80,3 +94,22 @@ li {
     height: 1px;
 }
 
+.tag {
+    border-radius: 10px;
+    width: 52px;
+}
+
+.pending-tag {
+    background: var(--pending-color);
+    color: #573302;
+}
+
+.completed-tag {
+    background: var(--completed-color);
+    color: #1F624A;
+}
+
+.cancelled-tag {
+    background: var(--cancelled-color);
+    color: #DB4B4A;
+}
