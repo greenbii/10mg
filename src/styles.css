@@ -23,7 +23,7 @@
     --text-color: #0A142F;
 }
 
-h1,
+h1, 
 h2,
 h3,
 h4,
@@ -49,7 +49,7 @@ li {
 .body-container {
     width: 100%;
     height: max-content;
-    padding: 0 200px;
+    padding: 5rem 200px;
 }
 
 .h-line {

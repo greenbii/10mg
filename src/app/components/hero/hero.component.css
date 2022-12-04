@@ -30,6 +30,15 @@
     padding: 15px 30px;
 }
 
+iframe {
+    height: 500px;
+}
+
+.modal-content {
+    background: transparent;
+    border: 0;
+}
+
 
 /* MEDIA QUERY */
 @media screen and (max-width: 998px) {
