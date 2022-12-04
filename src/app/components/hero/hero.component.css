@@ -1,0 +1,92 @@
+.hero-container {
+    background-color: #000;
+    background-image: url(../../../assets/images/hero-img1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 90vh;
+}
+
+.body-container {
+    padding-top: 14rem;
+    width: 850px;
+    color: var(--white);
+    height: 90vh;
+}
+
+.body-container h1 {
+    font-size: 62px;
+    font-weight: 700;
+}
+
+.vid-btn {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.body-container a .button {
+    padding: 15px 30px;
+}
+
+
+/* MEDIA QUERY */
+@media screen and (max-width: 998px) {
+    .body-container {
+        padding-top: 10rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .vid-btn {
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .body-container {
+        padding: 10rem 80px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .body-container {
+        padding: 10rem 40px;
+    }
+
+    .body-container h1 {
+        font-size: 52px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .body-container {
+        padding: 10rem 20px;
+    }
+
+    .body-container h1 {
+        font-size: 45px;
+    }
+}
+
+@media screen and (max-width: 285px) {
+    .body-container {
+        padding: 10rem 10px;
+    }
+
+    .body-container h1 {
+        font-size: 25px;
+        line-height: 34px;
+    }
+
+    .body-container p {
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 5px !important;
+    }
+
+    .vid-btn {
+        margin-bottom: 15px !important;
+    }
+}

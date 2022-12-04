@@ -35,6 +35,7 @@ h5 {
 p {
     font-family: "Roboto", sans-serif;
     line-height: 24px;
+    margin-bottom: 0;
 }
 
 a {
@@ -48,8 +49,7 @@ li {
 .body-container {
     width: 100%;
     height: max-content;
-    background: var(--white);
-    padding: 0 20px;
+    padding: 0 200px;
 }
 
 .h-line {
