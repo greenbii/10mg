@@ -1,0 +1,28 @@
+.become-supplier {
+    background-image: url(../../../assets/images/bc-bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5rem;
+    color: var(--white);
+}
+
+h2 {
+    line-height: 34px;
+    margin-bottom: 1rem;
+}
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 950px) {
+    .become-supplier {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .body-container {
+        padding: 5rem 10px;
+    }
+}

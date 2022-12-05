@@ -91,6 +91,12 @@ li {
 
 }
 
+.red-btn {
+    background: var(--secondary-color);
+    color: var(--white);
+    box-shadow: var(--box-shadow);
+}
+
 .texfield {
     background: var(--grey-bg);
     color: var(--text-color);

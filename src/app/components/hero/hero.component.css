@@ -26,10 +26,6 @@
     border: 1px solid var(--white);
 }
 
-.body-container a .button {
-    padding: 15px 30px;
-}
-
 iframe {
     height: 500px;
 }

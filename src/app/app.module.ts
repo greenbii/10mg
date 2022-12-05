@@ -8,6 +8,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { TrustedclientsComponent } from './components/trustedclients/trustedclients.component';
+import { BtnCompComponent } from './components/btn-comp/btn-comp.component';
+import { BecomeSupplierComponent } from './components/become-supplier/become-supplier.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { TrustedclientsComponent } from './components/trustedclients/trustedclie
     FooterComponent,
     HeroComponent,
     LandingComponent,
-    TrustedclientsComponent
+    TrustedclientsComponent,
+    BtnCompComponent,
+    BecomeSupplierComponent
   ],
   imports: [
     BrowserModule,
