@@ -11,6 +11,7 @@
     --primary-color: #0072CE;
     --secondary-color: #EF8A89;
     --white: #FFF;
+    --fade-black: #ddd;
     --order-placed-color: #2FBD6A;
     --delivered-color: #F2C422;
     --pending-color: #FFF0DB;
@@ -97,9 +98,11 @@ li {
     box-shadow: var(--box-shadow);
 }
 
-.texfield {
+.textfield {
     background: var(--grey-bg);
     color: var(--text-color);
+    border: 1px solid var(--fade-black);
+    border-radius: 10px;
 }
 
 .divider {

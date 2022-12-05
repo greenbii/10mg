@@ -139,3 +139,9 @@ img {
         text-align: center;
     }
 }
+
+@media screen and (max-width: 290px) {
+    .hiw-contents img {
+        width: 250px;
+    }
+}
