@@ -10,6 +10,8 @@ import { LandingComponent } from './components/landingComponent/landing/landing.
 import { TrustedclientsComponent } from './components/landingComponent/trustedclients/trustedclients.component';
 import { BtnCompComponent } from './components/landingComponent/btn-comp/btn-comp.component';
 import { BecomeSupplierComponent } from './components/landingComponent/become-supplier/become-supplier.component';
+import { AboutHeroComponent } from './components/aboutComponent/about-hero/about-hero.component';
+import { AboutComponent } from './components/aboutComponent/about/about.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { BecomeSupplierComponent } from './components/landingComponent/become-su
     LandingComponent,
     TrustedclientsComponent,
     BtnCompComponent,
-    BecomeSupplierComponent
+    BecomeSupplierComponent,
+    AboutHeroComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

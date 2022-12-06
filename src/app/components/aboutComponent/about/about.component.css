@@ -1,0 +1,122 @@
+.solution {
+    text-align: center;
+}
+
+.sol-img img {
+    width: 100%;
+}
+
+.result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+}
+
+.mission_vision_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.center {
+    text-align: center;
+    color: var(--white);
+}
+
+.mission {
+    background: var(--primary-color);
+    padding: 30px 50px 50px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.vision {
+    background: var(--secondary-color);
+    padding: 30px 50px 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.center h4 {
+    line-height: 40px;
+}
+
+.support {
+    background-image: url(../../../../assets/images/support-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: var(--white);
+}
+
+
+
+/* MEDIA QUERY */
+@media screen and (max-width: 1400px    ) {
+    .result img {
+        width: 500px;
+    }
+
+    h3 {
+        line-height: 34px;
+    }
+}
+
+@media screen and (max-width: 1200px    ) {
+    .body-container {
+        padding: 10rem 50px;
+    } 
+
+    h4 {
+        line-height: 34px;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .result {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .mission_vision_container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .body-container {
+        padding: 5rem 20px;
+    } 
+
+    .result img {
+        width: 300px;
+    }
+
+    .center {
+        border-radius: 40px;
+    }
+}
+
+@media screen and (max-width: 290px) {
+    .body-container {
+        padding: 3rem 10px;
+    } 
+
+    .r-lead-texts {
+        font-size: 14px;
+    }
+
+    .result img {
+        width: 250px;
+    }
+
+    h3 {
+        line-height: 24px;
+    }
+}
