@@ -12,6 +12,15 @@ import { BtnCompComponent } from './components/landingComponent/btn-comp/btn-com
 import { BecomeSupplierComponent } from './components/landingComponent/become-supplier/become-supplier.component';
 import { AboutHeroComponent } from './components/aboutComponent/about-hero/about-hero.component';
 import { AboutComponent } from './components/aboutComponent/about/about.component';
+import { TestimonialsComponent } from './components/aboutComponent/testimonials/testimonials.component';
+import { SwiperModule } from 'swiper/angular';
+import { BecomeSupplierLandingComponent } from './components/becomeSupplier/become-supplier-landing/become-supplier-landing.component';
+import { HelpFaqComponent } from './components/FAQ/help-faq/help-faq.component';
+import { PrivacyPolicyComponent } from './components/privacyPolicy/privacy-policy/privacy-policy.component';
+import { TermsandconditionComponent } from './components/terms/termsandcondition/termsandcondition.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { SigninComponent } from './components/signin/signin.component';
+import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +33,20 @@ import { AboutComponent } from './components/aboutComponent/about/about.componen
     BtnCompComponent,
     BecomeSupplierComponent,
     AboutHeroComponent,
-    AboutComponent
+    AboutComponent,
+    TestimonialsComponent,
+    BecomeSupplierLandingComponent,
+    HelpFaqComponent,
+    PrivacyPolicyComponent,
+    TermsandconditionComponent,
+    SignupComponent,
+    SigninComponent,
+    ComingsoonComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SwiperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

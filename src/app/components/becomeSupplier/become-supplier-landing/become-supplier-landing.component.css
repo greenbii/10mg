@@ -1,0 +1,65 @@
+.hero {
+    background-image: url(../../../../assets/images/hero-img2.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: var(--white);
+    padding: 20rem 200px;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.red-btn {
+    padding: 15px 30px;
+    margin-top: 5rem;
+}
+
+.ecosystem {
+    background-image: url(../../../../assets/images/val-prop-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    color: var(--white);
+}
+
+@media screen and (max-width: 1200px) {
+    h2 {
+        line-height: 34px;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .body-container {
+        padding: 10rem 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .body-container {
+        padding: 5rem 10px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    h1 {
+        font-size: 2rem;
+        line-height: 34px;
+    }
+
+    .body-container {
+        padding: 5rem 10px;
+    }
+}

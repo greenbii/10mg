@@ -3,7 +3,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 100vh;
+    padding: 10rem 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,7 +57,7 @@
 
 @media screen and (max-width: 500px) {
     .body-container {
-        padding: 3rem 20px;
+        padding: 8rem 20px;
     }
 }
 

@@ -21,6 +21,7 @@
     --primary-fade-color: #7BB9FC;
     --box-shadow: 0 0 25px #00000012;
     --grey-bg: #FAFAFA;
+    --grey: #555;
     --text-color: #0A142F;
 }
 
@@ -102,7 +103,7 @@ li {
     background: var(--grey-bg);
     color: var(--text-color);
     border: 1px solid var(--fade-black);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .divider {

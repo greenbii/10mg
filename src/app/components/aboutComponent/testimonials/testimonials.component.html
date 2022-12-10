@@ -1,0 +1,10 @@
+<section class="body-container testimonial">
+    <h5>Customer Testimonials</h5>
+    <div class="testimonials">
+        <div class="testimony" *ngFor="let testimony of testimonies">
+            <p>{{testimony.testimony}}</p>
+            <p class="mt-3 mb-0"><strong>{{testimony.name}}</strong></p>
+            <small>{{testimony.description}}</small>
+        </div>
+    </div>
+</section>

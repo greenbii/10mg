@@ -1,0 +1,172 @@
+.signup {
+    padding: 4rem 80px;
+}
+
+img {
+    width: 80px;
+}
+
+.form-contents, .tabs {
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.top-contents {
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.form-title {
+    margin: 2rem 0;
+    font-size: 1.5rem;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+a {
+    color: var(--primary-color);
+}
+
+a.active {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 15px 30px;
+    border-radius: 10px;
+}
+
+form input, select {
+    width: 100%;
+    padding: 10px;
+}
+
+.password-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.password-container input {
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.password-container i {
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.button {
+    padding: 10px;
+    width: 100%;
+}
+
+.code-input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.code-input input {
+    text-align: center;
+}
+
+.pag {
+    color: black;
+    text-align: right;
+}
+
+.pag span {
+    color: var(--fade-black)
+}
+
+.actions-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-input {
+    width: 100%;
+    background: var(--fade-black);
+    cursor: pointer;
+    text-align: center;
+}
+
+.sel-file p {
+    text-align: left;
+}
+
+label {
+    text-align: left;
+    margin-bottom: 10px;
+    width: 100%
+}
+
+.form-check {
+    text-align: left;
+}
+
+.form-check label, .form-check input {
+    width: 0;
+    text-align: left;
+}
+
+.details {
+    color: #777;
+    font-size: 14px;
+}
+
+.form-contents img {
+    width: 180px;
+}
+
+@media screen and (max-width: 1450px) {
+    .form-contents {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .signup {
+        text-align: center;
+    }
+
+    .form-contents {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .signup {
+        text-align: center;
+        padding: 4rem 20px;
+    }
+
+    .form-contents {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-title {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .tabs {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}

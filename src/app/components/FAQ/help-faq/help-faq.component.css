@@ -1,0 +1,42 @@
+.faq {
+    background-image: url(../../../../assets/images/faq-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 10rem 200px;
+    text-align: center;
+    color: var(--white);
+}
+
+.message {
+    text-align: center;
+}
+
+.message a {
+    color: var(--primary-color);
+}
+
+/* MEDIA QUERY */
+@media screen and (max-width: 990px) {
+    .body-container {
+        padding: 10rem 50px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .body-container {
+        padding: 10rem 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .body-container {
+        padding: 10rem 10px;
+    }
+
+    .message {
+        padding: 2rem 10px;
+        margin-bottom: 3rem;
+    }
+}
+

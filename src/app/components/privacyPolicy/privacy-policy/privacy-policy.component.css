@@ -1,0 +1,47 @@
+.privacy-policy {
+    background-image: url(../../../../assets/images/privacy-bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 10rem 200px;
+    text-align: center;
+    color: var(--white);
+    text-align: center;
+}
+
+.policies li {
+    list-style-type: decimal;
+    padding: 1rem 0;
+}
+
+@media screen and (max-width: 1300px) {
+    .body-container {
+        padding: 10rem 50px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .body-container {
+        padding: 10rem 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .policies {
+        text-align: center;
+    }
+
+    .policies li {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .body-container {
+        padding: 10rem 10px;
+    }
+
+    .policies {
+        padding: 5rem 30px;
+    }
+}

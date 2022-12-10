@@ -1,0 +1,21 @@
+.error-page {
+    text-align: center;
+    width: 100%;
+}
+
+.error-page img {
+    width: 50%;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .body-container {
+        padding: 10rem 20px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .error-page img {
+        width: 100%;
+    }
+}

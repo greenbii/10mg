@@ -1,3 +1,7 @@
+.footer-container {
+    background: var(--footer-background);
+}
+
 .footer-contents {
     display: flex;
     justify-content: space-between;
