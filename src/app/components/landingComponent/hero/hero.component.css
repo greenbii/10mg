@@ -9,10 +9,9 @@
 }
 
 .body-container {
-    padding-top: 14rem;
+    padding: 10rem 200px;
     width: 850px;
     color: var(--white);
-    height: 90vh;
 }
 
 .body-container h1 {
