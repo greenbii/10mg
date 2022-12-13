@@ -1,5 +1,5 @@
 nav {
-    background: var(--white);
+    background: var(--footer-background);
     box-shadow: var(--box-shadow);
     display: flex;
     justify-content: center;
