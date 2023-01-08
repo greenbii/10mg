@@ -1,1 +1,32 @@
-<p>wishlist works!</p>
+<section class="body-container">
+    <div class="breadcrumb">
+        <a href="#">Previous</a>
+        <i class="fa-solid fa-chevron-right mx-4"></i>
+        <p>Wishlist</p>
+    </div>
+
+    <div class="wishlist-container">
+        <h3>Wishlist (3 Items)</h3>
+        <div class="wishlists-product" *ngFor="let wishlist of wishlists">
+            <div class="product-type">
+                <div class="product-image"></div>
+                <div class="product-details">
+                    <p>{{wishlist.name}}</p>
+                    <small>{{wishlist.size}}</small>
+                    <small>{{wishlist.brand}}</small>
+                    <small>{{wishlist.date}}</small>
+                </div>
+            </div>
+            <div class="price-action">
+                <div class="price">
+                    <div class="current-cost">{{wishlist.currentpPice | currency}}</div>
+                    <div class="old-cost">{{wishlist.oldPrice | currency}}</div>
+                </div>
+                <div class="action">
+                    <button class="button primary-btn">Add to cart</button>
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

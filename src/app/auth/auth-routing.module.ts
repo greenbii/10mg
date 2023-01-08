@@ -9,6 +9,7 @@ import { ProductStatusComponent } from './components/product-status/product-stat
 import { TrackProductComponent } from './components/track-product/track-product.component';
 import { ProductStatusCompletedComponent } from './components/product-status-completed/product-status-completed.component';
 import { ProductStatusCancelledComponent } from './components/product-status-cancelled/product-status-cancelled.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,10 @@ const routes: Routes = [
       {
         path: 'product-status-cancelled',
         component: ProductStatusCancelledComponent
+      },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
       }
     ],
   },
