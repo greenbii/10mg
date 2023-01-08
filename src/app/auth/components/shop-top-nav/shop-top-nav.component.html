@@ -1,0 +1,72 @@
+<div class="shop-top-nav">
+    <img src="../../../../assets/images/10mgVert.png" alt="logo">
+    <div class="search-container">
+        <div class="search textfield">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" name="search" class="search">
+        </div>
+        <button class="filter button red-btn">
+            <i class="fa-solid fa-filter"></i>
+            <span>Filter</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+    </div>
+    <div class="shop-top-action-icons" [ngClass]="openShopNav ? 'shop-top-action-icons-open' : 'shop-top-action-icons' ">
+        <div class="dropdown">
+            <div class="account" data-bs-toggle="dropdown">
+                <i class="fa-solid fa-user"></i>
+                <p class="mb-0">Account</p>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" routerLink="/auth/account">
+                        <i class="fa-solid fa-user me-2"></i> Account Overview
+                    </a>
+                </li>
+                <div class="divider mt-2"></div>
+                <li>
+                    <a class="dropdown-item" routerLink="/auth/orders">
+                        <i class="fa-solid fa-bag-shopping me-2"></i> My Orders
+                    </a>
+                </li>
+                <div class="divider mt-2"></div>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <i class="fa-solid fa-heart me-2"></i> Wishlist
+                    </a>
+                </li>
+                <div class="divider mt-2"></div>
+                <li><a class="dropdown-item" href="#">
+                        <i class="fa-solid fa-phone me-2"></i> Support
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <p>Cart</p>
+        </div>
+        <div class="notification dropdown">
+            <i class="fa-solid fa-bell" data-bs-toggle="dropdown"></i>
+            <span>Notification</span>
+            <ul class="dropdown-menu">
+                <li class="py-5 px-2">
+                    No notification now
+                </li>
+            </ul>
+        </div>
+        <div class="search-container-mobile">
+            <div class="search textfield">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" name="search" class="search">
+            </div>
+        </div>
+    </div>
+    <div class="open-icon" *ngIf="!openShopNav" (click)="openShopNav = true">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="close-icon" *ngIf="openShopNav" (click)="openShopNav = false">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+</div>

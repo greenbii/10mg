@@ -1,0 +1,22 @@
+<div class="product-container">
+    <div class="product-flex">
+        <div class="products" *ngFor="let product of products">
+            <div class="product">
+                <p class="product-percentage">{{product.productPercentage}}</p>
+                <div class="favorite-product"><i class="fa-regular fa-heart"></i></div>
+            </div>
+            <div class="product-details">
+                <div class="product-name">
+                    <p>{{product.name}}</p>
+                </div>
+                <div class="product-price">
+                    <p>{{product.price | currency}}</p>
+                </div>
+                <div class="product-old-price">
+                    <small>{{product.oldPrice | currency}}</small>
+                </div>
+                <button class="button primary-btn add-to-cart-btn">Add to cart</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,142 @@
+.shop-top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.shop-top-nav img {
+    width: 80px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-container-mobile {
+    display: none;
+}
+
+.search {
+    padding: 5px 10px;
+}
+
+.search input {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.filter {
+    padding: 10px;
+    width: 120px;
+}
+
+.shop-top-action-icons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.account,
+.notification {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+}
+
+.notification span {
+    display: none;
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.open-icon,
+.close-icon {
+    font-size: 21px;
+    z-index: 200;
+    cursor: pointer;
+    display: none;
+}
+
+
+@media screen and (min-width: 1200px) {
+    .body-container {
+        padding: 5rem 100px;
+    }
+}
+
+@media screen and (max-width: 998px) {
+    .shop-top-action-icons {
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        right: 0;
+        top: -100%;
+        z-index: 100;
+        padding: 100px 40px;
+        background: var(--white);
+        box-shadow: var(--box-shadow);
+        height: 40%;
+        width: 250px;
+        overflow: auto;
+        transition: .5s ease-in-out;
+    }
+
+    .shop-top-action-icons-open {
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
+
+    .filter {
+        width: 60px;
+    }
+
+    .filter i:first-child,
+    .filter span {
+        display: none;
+    }
+
+    .open-icon,
+    .close-icon {
+        display: block;
+    }
+
+    .notification {
+        gap: 0.5rem;
+    }
+
+    .notification span {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    .search-container {
+        display: none;
+    }
+
+    .search-container-mobile {
+        display: block;
+        width: 180px;
+    }
+
+    .search input {
+        width: 88%;
+    }
+
+    .shop-top-action-icons {
+        height: 55%;
+    }
+
+}

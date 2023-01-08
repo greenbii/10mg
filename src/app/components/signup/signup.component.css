@@ -27,7 +27,7 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 a {
@@ -132,7 +132,7 @@ label {
 }
 
 @media screen and (max-width: 1450px) {
-    .form-contents {
+    .form-contents, .tabs {
         width: 50%;
     }
 }
@@ -153,7 +153,7 @@ label {
         padding: 4rem 20px;
     }
 
-    .form-contents {
+    .form-contents, .tabs {
         width: 100%;
     }
 }

@@ -1,0 +1,82 @@
+.top-items {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.top-items i {
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.top-items h3 {
+    font-weight: 700;
+}
+
+.top-items p {
+    background: var(--completed-color);
+    color: #1F624A;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.flex-product {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 5rem;
+    gap: 4rem;
+}
+
+.table-product {
+    width: 80%;
+}
+
+.table-product td {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+} 
+
+.product {
+    text-align: center;
+}
+
+.product-image {
+    background-image: url(../../../../assets/images/pills-img.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+}
+
+.action-btns button {
+    width: 100%;
+    padding: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+    .body-container {
+        padding: 5rem 50px;
+    }
+}
+
+@media screen and (max-width: 998px) {
+    .flex-product {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .table-product {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .body-container {
+        padding: 5rem 20px;
+    }
+}

@@ -17,6 +17,10 @@ const routes: Routes = [
     component: LandingComponent,
   },
   {
+    path: 'auth',
+    loadChildren: ()=>import('./auth/auth.module').then(a=> a.AuthModule)
+  },
+  {
     path: 'about',
     component: AboutComponent
   },

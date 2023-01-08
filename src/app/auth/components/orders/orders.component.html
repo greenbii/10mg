@@ -1,0 +1,98 @@
+<section class="body-container order-container">
+    <div class="breadcrumb">
+        <a href="#">Previous</a>
+        <i class="fa-solid fa-chevron-right mx-4"></i>
+        <p>Orders</p>
+    </div>
+    <div class="tabs">
+        <div class="pending-delivery">
+            <a class="tab-title" role="button" (click)="current_tab = 'pending' "
+                [ngClass]="{active: current_tab === 'pending'}">Pending Delivery</a>
+        </div>
+        <div class="completed">
+            <a class="tab-title" role="button" (click)="current_tab = 'completed' "
+                [ngClass]="{active: current_tab === 'completed'}">Completed</a>
+        </div>
+        <div class="cancelled">
+            <a class="tab-title" role="button" (click)="current_tab = 'cancelled' "
+                [ngClass]="{active: current_tab === 'cancelled'}">Cancelled</a>
+        </div>
+    </div>
+    <div class="divider my-2"></div>
+
+
+    <!-- Pending delivery -->
+    <a routerLink="/auth/product-status" *ngIf="current_tab === 'pending' ">
+        <div class="orders mt-5" *ngFor="let order of orders">
+            <div class="order-items-type">
+                <div class="order-type">
+                    <div class="order-item"></div>
+                    <div class="order-item-details">
+                        <div class="order-name">{{order.productName}}</div>
+                        <p class="order-size">{{order.size}}</p>
+                        <p class="order-brand">{{order.brand}}</p>
+                        <p class="order-date">{{order.deliveryDate}}</p>
+                    </div>
+                </div>
+                <div class="order-details">
+                    <div class="order-cost">
+                        <div class="order-current-price">{{order.currentPrice | currency}}</div>
+                        <small class="order-old-price">{{order.oldPrice | currency}}</small>
+                    </div>
+                    <a routerLink="/auth/product-status">Details</a>
+                </div>
+            </div>
+            <div class="divider my-4"></div>
+        </div>
+    </a>
+
+    <!-- Completed delivery -->
+    <a routerLink="/auth/product-status-completed" *ngIf="current_tab === 'completed' ">
+        <div class="orders mt-5" *ngFor="let orderCompleted of ordersCompleted">
+            <div class="order-items-type">
+                <div class="order-type">
+                    <div class="order-item"></div>
+                    <div class="order-item-details">
+                        <div class="order-name">{{orderCompleted.productName}}</div>
+                        <p class="order-size">{{orderCompleted.size}}</p>
+                        <p class="order-brand">{{orderCompleted.brand}}</p>
+                        <p class="order-date">{{orderCompleted.deliveryDate}}</p>
+                    </div>
+                </div>
+                <div class="order-details">
+                    <div class="order-cost">
+                        <div class="order-current-price">{{orderCompleted.currentPrice | currency}}</div>
+                        <small class="order-old-price">{{orderCompleted.oldPrice | currency}}</small>
+                    </div>
+                    <a routerLink="/auth/product-status-completed">Details</a>
+                </div>
+            </div>
+            <div class="divider my-4"></div>
+        </div>
+    </a>
+
+    <!-- Cancelled delivery -->
+    <a routerLink="/auth/product-status-cancelled" *ngIf="current_tab === 'cancelled' ">
+        <div class="orders mt-5" *ngFor="let orderCancelled of ordersCancelled">
+            <div class="order-items-type">
+                <div class="order-type">
+                    <div class="order-item"></div>
+                    <div class="order-item-details">
+                        <div class="order-name">{{orderCancelled.productName}}</div>
+                        <p class="order-size">{{orderCancelled.size}}</p>
+                        <p class="order-brand">{{orderCancelled.brand}}</p>
+                        <p class="order-date">{{orderCancelled.deliveryDate}}</p>
+                    </div>
+                </div>
+                <div class="order-details">
+                    <div class="order-cost">
+                        <div class="order-current-price">{{orderCancelled.currentPrice | currency}}</div>
+                        <small class="order-old-price">{{orderCancelled.oldPrice | currency}}</small>
+                    </div>
+                    <a routerLink="/auth/product-status-cancelled">Details</a>
+                </div>
+            </div>
+            <div class="divider my-4"></div>
+        </div>
+    </a>
+</section>
