@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiURL: ""
+  apiURL: "https://api.greenbii.com/10mg"
 };

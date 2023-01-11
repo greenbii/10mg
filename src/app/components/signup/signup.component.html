@@ -35,7 +35,7 @@
                     <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="confirm_password" placeholder="Confirm Password" required>
                     <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
                 </div>
-                <button class="button primary-btn my-4" type="button" [disabled]="!regForm.valid || is_registering" (click)="register()">Continue</button>
+                <button class="button primary-btn my-4" type="button" [disabled]="!regForm.valid || is_registering" (click)="register()">Join Waiting List</button>
                 <p *ngIf="reg_error !== null" class="border border-danger d-block text-center bg-danger p-2 rounded text-white mb-2 small">{{reg_error}}</p>
                 <p class="mb-5">I have an account? <a routerLink="/signin">Login</a></p>
                 <a href="#">Forgot Password</a>
