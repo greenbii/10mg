@@ -15,26 +15,28 @@
         <div class="form-contents" *ngIf="steps === 1">
             <!-- For Pharmacy -->
             <div class=""></div>
-            <form action="">
-                <input type="text" name="name" placeholder="Name of Pharmacy" class="textfield mt-3">
-                <input type="text" name="contact" placeholder="Name of contact person" class="textfield mt-3">
-                <select class="form-select textfield mt-3" aria-label="Default select example">
+            <form action="" [formGroup]="regForm">
+                <input type="text" name="name" required formControlName="pharmacy_name" placeholder="Name of Pharmacy" class="textfield mt-3">
+                <input type="text" name="contact" formControlName="contact_person" placeholder="Name of contact person" class="textfield mt-3">
+                <!-- <select class="form-select textfield mt-3" aria-label="Default select example">
                     <option selected>Position</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
-                </select>
-                <input type="email" name="email" placeholder="Email" class="textfield mt-3">
-                <input type="tel" name="telephone" placeholder="Phone number" class="textfield mt-3">
+                </select> -->
+                <input type="text" name="contact" placeholder="Position" formControlName="position" required class="textfield mt-3">
+                <input type="email" name="email" placeholder="Email" formControlName="email" class="textfield mt-3">
+                <input type="tel" name="telephone" placeholder="Phone number" formControlName="phone" required class="textfield mt-3">
                 <div class="password-container textfield mt-3">
-                    <input type="password" name="password" placeholder="Password">
-                    <i class="fa-regular fa-eye"></i>
+                    <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="password" placeholder="Password" required>
+                    <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
                 </div>
                 <div class="password-container textfield mt-3">
-                    <input type="password" name="password" placeholder="Confirm Password">
-                    <i class="fa-regular fa-eye"></i>
+                    <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="confirm_password" placeholder="Confirm Password" required>
+                    <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
                 </div>
-                <button class="button primary-btn my-4" type="button" (click)="steps = 2">Continue</button>
+                <button class="button primary-btn my-4" type="button" [disabled]="!regForm.valid || is_registering" (click)="register()">Continue</button>
+                <p *ngIf="reg_error !== null" class="border border-danger d-block text-center bg-danger p-2 rounded text-white mb-2 small">{{reg_error}}</p>
                 <p class="mb-5">I have an account? <a routerLink="/signin">Login</a></p>
                 <a href="#">Forgot Password</a>
             </form>

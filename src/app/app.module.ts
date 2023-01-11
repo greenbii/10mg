@@ -22,6 +22,24 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
 
+import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDn9BUzzZu1gGAUtHIBh6JG4sPJ81kp61g",
+  authDomain: "mg-cbc21.firebaseapp.com",
+  projectId: "mg-cbc21",
+  storageBucket: "mg-cbc21.appspot.com",
+  messagingSenderId: "507588601673",
+  appId: "1:507588601673:web:af709ac803984bacfbdc98",
+  measurementId: "G-86W5RJG89H"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,9 +62,14 @@ import { ComingsoonComponent } from './components/comingsoon/comingsoon.componen
     ComingsoonComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
-    SwiperModule
+    SwiperModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
