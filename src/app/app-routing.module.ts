@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './admin.guard';
 import { AboutComponent } from './components/aboutComponent/about/about.component';
 import { BecomeSupplierLandingComponent } from './components/becomeSupplier/become-supplier-landing/become-supplier-landing.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
@@ -7,6 +8,7 @@ import { HelpFaqComponent } from './components/FAQ/help-faq/help-faq.component';
 // import { BecomeSupplierComponent } from './components/landingComponent/become-supplier/become-supplier.component';
 import { LandingComponent } from './components/landingComponent/landing/landing.component';
 import { PrivacyPolicyComponent } from './components/privacyPolicy/privacy-policy/privacy-policy.component';
+import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TermsandconditionComponent } from './components/terms/termsandcondition/termsandcondition.component';
@@ -49,6 +51,10 @@ const routes: Routes = [
     component: SigninComponent
   },
   {
+    path: 'registrations',
+    component: RegistrationsComponent
+  },
+  {
     path: '**',
     component: ComingsoonComponent
   }
@@ -56,6 +62,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AdminGuard]
 })
 export class AppRoutingModule { }

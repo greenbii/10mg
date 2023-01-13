@@ -49,4 +49,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  f() {
+    return this.regForm.controls
+  }
+
 }

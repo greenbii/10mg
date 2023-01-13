@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-signin',
@@ -6,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+  regForm: FormGroup = new FormGroup({
+    
+  })
+signin() {
+  //throw new Error('Method not implemented.');
+  
+}
 
   constructor() { }
 
