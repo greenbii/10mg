@@ -27,6 +27,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RegistrationsComponent } from './components/registrations/registrations.component';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -59,7 +60,8 @@ const firebaseConfig = {
     TermsandconditionComponent,
     SignupComponent,
     SigninComponent,
-    ComingsoonComponent
+    ComingsoonComponent,
+    RegistrationsComponent
   ],
   imports: [
     CommonModule,

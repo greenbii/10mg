@@ -14,8 +14,8 @@ export class SignupComponent implements OnInit {
     email: new FormControl(null, [Validators.email, Validators.required]),
     phone: new FormControl(null),
     pharmacy_name: new FormControl(null, [Validators.required, Validators.minLength(2)]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
-    confirm_password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+    confirm_password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
     position: new FormControl(null, Validators.required)
   })
 
@@ -47,6 +47,10 @@ export class SignupComponent implements OnInit {
       this.reg_error = e.toString();
       this.is_registering = false;
     }
+  }
+
+  get f() {
+    return this.regForm.controls
   }
 
 }

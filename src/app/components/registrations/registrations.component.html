@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="card border border-primary">
+        <div class="card-body table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>Business Name</th>
+                    <th>Type</th>
+                    <th>Contact Person</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Position</th>
+                    <th>Registration Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reg of registrations">
+                        <td>{{reg.name}}</td>
+                        <td>Pharmacy</td>
+                        <td>{{reg.contact_person}}</td>
+                        <td>{{reg.email}}</td>
+                        <td>{{reg.phone}}</td>
+                        <td>{{reg.position}}</td>
+                        <td>{{reg.date_created}}</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary" (click)="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
