@@ -80,6 +80,14 @@ li {
     box-shadow: var(--box-shadow);
 }
 
+.primary-btn:disabled {
+    background: var(--fade-black);
+}
+
+.primary-btn:disabled:hover {
+    background: var(--fade-black);
+}
+
 .primary-btn:hover, .secondary-btn:hover {
     background: var(--primary-fade-color);
     border-color: var(--primary-fade-color);

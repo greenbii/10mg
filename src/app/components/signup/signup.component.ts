@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
 
   async register() {
     try {
+      this.reg_error = null;
       this.is_registering = true;
       const rs = await this.appService.initiateHttpRequest('post', '/register', this.regForm.value).toPromise();
       if(rs?.status !== true) throw rs?.message;

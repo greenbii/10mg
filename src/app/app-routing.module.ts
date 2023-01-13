@@ -52,7 +52,8 @@ const routes: Routes = [
   },
   {
     path: 'registrations',
-    component: RegistrationsComponent
+    component: RegistrationsComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: '**',
