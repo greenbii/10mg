@@ -1,9 +1,14 @@
-<div class="container">
+<div class="container" style="margin-top: 5rem;">
     <div class="card border border-primary">
+        <p class="small text-center text-muted" *ngIf="is_loading_users">...Please waiting loading</p>
         <div class="card-body table-responsive">
-            <table class="table table-striped">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-info" style="margin-right: 1rem;" (click)="loadRegistrations()">Refresh List</button>
+                <!-- <button class="btn btn-primary" (click)="logout()">Logout</button> -->
+            </div>
+            <table class="table table-striped" *ngIf="!is_loading_users && registrations.length !== 0">
                 <thead>
-                    <tr>
+                    <tr style="cursor: pointer;">
                     <th>Business Name</th>
                     <th>Type</th>
                     <th>Contact Person</th>
@@ -16,20 +21,17 @@
                 <tbody>
                     <tr *ngFor="let reg of registrations">
                         <td>{{reg.name}}</td>
-                        <td>Pharmacy</td>
+                        <td>{{reg.type}}</td>
                         <td>{{reg.contact_person}}</td>
                         <td>{{reg.email}}</td>
                         <td>{{reg.phone}}</td>
                         <td>{{reg.position}}</td>
-                        <td>{{reg.date_created}}</td>
+                        <td>{{reg.date_created | date: "d-M-Y h:m a"}}</td>
                         
                     </tr>
                 </tbody>
             </table>
-
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-primary" (click)="logout()">Logout</button>
-            </div>
         </div>
+        <p class="small text-center p-3" *ngIf="!is_loading_users && registrations.length === 0">No user record is available</p>
     </div>
 </div>

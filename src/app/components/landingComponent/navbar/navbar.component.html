@@ -3,7 +3,7 @@
         <img src="./assets/images/10mg-logo.png" alt="logo">
     </a>
     <div class="nav-contents" [ngClass]="openNav ? 'nav-contents-open' : 'nav-contents' ">
-        <div class="nav-links">
+        <div class="nav-links" *ngIf="!show_header">
             <ul class="mb-0 ps-0">
                 <a routerLink="/" class="me-4">
                     <li>Home</li>
@@ -19,9 +19,12 @@
                 </a>
             </ul>
         </div>
-        <div class="nav-btns">
+        <div class="nav-btns" *ngIf="!show_header">
             <a routerLink="/signin"><button class="button secondary-btn me-4">Sign in</button></a>
             <a routerLink="/signup"><button class="button primary-btn">Sign up</button></a>
+        </div>
+        <div class="nav-btns" *ngIf="show_header">
+            <button class="button secondary-btn" (click)="logout()">Logout</button>
         </div>
     </div>
 
