@@ -24,12 +24,15 @@ logout() {
     try {
       const token = 'asdfghjklqwertyuiop';
       const rs = await this.appService.initiateHttpRequest('get', '/registrations', token).toPromise();
-      if(rs.status === true) {
-        this.registrations = rs.data;
+      if(rs) {
+        if(rs.status === true) {
+          this.registrations = rs.data;
+        }
+        else {
+          throw rs.message;
+        }
       }
-      else {
-        throw rs.message;
-      }
+      
     }
     catch(e: any){
       alert(e.toString());

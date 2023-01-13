@@ -1,10 +1,10 @@
 <section class="signin">
-    <img src="./assets/images/10mgVert.png" alt="logo">
+    <!-- <img src="./assets/images/10mgVert.png" alt="logo"> -->
     <form action="">
         <h3>Welcome Back</h3>
-        <input type="email" name="email" id="email" placeholder="Email" required class="mt-3">
-        <input type="password" name="password" id="password" placeholder="********" class="mt-3">
-        <button class="button primary-btn mt-4" type="submit" (click)="signin()">Sign in</button>
+        <input type="email" formControlName="email" name="email" id="email" placeholder="Email" required class="mt-3">
+        <input type="password" formControlName="password" name="password" id="password" placeholder="********" class="mt-3">
+        <button class="button primary-btn mt-4" [disabled]="!regForm.valid" type="submit" (click)="signin()">Sign in</button>
         <p class="my-3">Don't have an account? <a routerLink="/signup">Sign up</a></p>
         <a href="#" class="black-link">Forgot Password?</a>
     </form>
