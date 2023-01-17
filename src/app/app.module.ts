@@ -25,7 +25,7 @@ import { ComingsoonComponent } from './components/comingsoon/comingsoon.componen
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
 
@@ -70,6 +70,7 @@ const firebaseConfig = {
     SwiperModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
   ],
