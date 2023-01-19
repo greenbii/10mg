@@ -49,6 +49,16 @@ export class SignupComponent implements OnInit {
 
   }
 
+  async verifyToken(){
+    const token = await this.appService.getCurrentUserIdToken();
+    //use the token to verify the code
+    const response = await this.appService.initiateHttpRequest("post", "/auth/verify-user-email", {code: this.code_fields.join()}, token || undefined).toPromise();
+    if(response?.status === true) {
+      //move to the next step
+      this.steps += 1;
+    }
+  }
+
   async register() {
     try {
       this.reg_error = null;

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -34,7 +35,7 @@ export class AppService {
 
   requests: Observable<responseObject>[] = [];
 
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient, public auth: AngularFireAuth) { 
   }
 
 
@@ -68,5 +69,31 @@ export class AppService {
         req
       )*/
       return req;
+  }
+
+  async getCurrentUser() {
+    try {
+      const u = await this.auth.currentUser
+      return u;
+    }
+    catch(er) {
+      console.log(er)
+      return null;
+    }  
+  }
+
+  async getCurrentUserIdToken() {
+    try {
+      const u = await this.auth.currentUser;
+      if(u !== null) {
+        return await u.getIdToken()
+      }
+      return null;
+
+    }
+    catch(er){
+      console.log(er);
+      return null
+    }
   }
 }
