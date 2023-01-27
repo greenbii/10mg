@@ -1,0 +1,100 @@
+<app-db-side-nav></app-db-side-nav>
+<section class="dashboard-container">
+    <div class="heading">
+        <div class="head-title">
+            <h4 class="mb-0">Dashboard</h4>
+        </div>
+        <div class="head-actions">
+            <i class="fa-solid fa-user" role="button" data-bs-toggle="dropdown"></i>
+            <div class="dropdown">
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item">Uyi Vincent</li>
+                    <li><a class="dropdown-item" href="#">View Profile</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <i class="fa-solid fa-bell" role="button" data-bs-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">You have no message</a></li>
+                </ul>
+            </div>
+            <div class="vr"></div>
+            <div class="user-name">
+                <p>Nordic Naturals</p>
+                <small>#122-8234-0612</small>
+            </div>
+        </div>
+    </div>
+    <div class="user-details">
+        <div class="user-details-card" *ngFor="let userCard of userCards">
+            <i class={{userCard.icon}}></i>
+            <p>{{userCard.title}}</p>
+            <h4>{{userCard.cost | currency : 'NGN' : 'symbol-narrow'}}</h4>
+        </div>
+    </div>
+
+    <div class="chart-details p-4">
+        <div class="income">
+            <h4>{{income | currency : 'NGN' : 'symbol-narrow'}}</h4>
+        </div>
+        <div class="tabs">
+            <div class="month-tab" role="button" (click)="current_tab = 'monthChart' ">Month</div>
+            <div class="year-tab" role="button" (click)="current_tab = 'yearChart' ">Year</div>
+        </div>
+    </div>
+
+    <div class="chart-container p-4">
+        <canvas id="MyChart">{{ chart }}</canvas>
+    </div>
+
+    <div class="chart-container p-4" *ngIf="current_tab === 'yearChart' ">
+        <canvas id="MyYearChart">{{ yearChart }}</canvas>
+    </div>
+
+    <div class="table-details p-4">
+
+        <div class="recent-orders">
+            <div class="top-heading flex-title">
+                <h5 class="mb-0">Recent Orders</h5>
+                <a href="#">See All</a>
+            </div>
+            <table>
+                <thead>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Price</th>
+                </thead>
+                <tbody *ngFor="let recentOrder of recentOrders">
+                    <tr>
+                        <td>{{recentOrder.product}}</td>
+                        <td>{{recentOrder.quantity}}</td>
+                        <td class="status">{{recentOrder.status}}</td>
+                        <td>{{recentOrder.price | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="recent-transactions">
+            <div class="top-heading flex-title">
+                <h5 class="mb-0">Recent Transactions</h5>
+                <a href="#">See All</a>
+            </div>
+            <table>
+                <thead>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                </thead>
+                <tbody *ngFor="let recentTransaction of recentTransactions">
+                    <tr>
+                        <td>{{recentTransaction.date}}</td>
+                        <td>{{recentTransaction.product}}</td>
+                        <td>{{recentTransaction.price | currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
