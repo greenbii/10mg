@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -35,7 +36,7 @@ export class AppService {
 
   requests: Observable<responseObject>[] = [];
 
-  constructor(private httpClient: HttpClient, public auth: AngularFireAuth) { 
+  constructor(private httpClient: HttpClient, public auth: AngularFireAuth, private router: Router) { 
   }
 
 
@@ -74,26 +75,49 @@ export class AppService {
   async getCurrentUser() {
     try {
       const u = await this.auth.currentUser
-      return u;
+      if(u !== null) return u;
+
+      throw "No signed in user";
     }
     catch(er) {
-      console.log(er)
-      return null;
+      //console.log(er)
+      //return null;
+      throw er;
     }  
   }
 
-  async getCurrentUserIdToken() {
+  async getCurrentUserClaims() {
     try {
       const u = await this.auth.currentUser;
       if(u !== null) {
-        return await u.getIdToken()
+        return await u.getIdTokenResult()
       }
-      return null;
+      throw "No signed in user is available";
 
     }
     catch(er){
-      console.log(er);
-      return null
+      //console.log(er);
+      throw er;
     }
   }
+
+  async getCurrentUserToken() {
+    try {
+      const u = await this.auth.currentUser
+      if(u !== null) return await u.getIdToken();
+
+      throw "No signed in user";
+    }
+    catch(er) {
+      //console.log(er)
+      //return null;
+      throw er;
+    }  
+  }
+
+  redirect(path: string) {
+    this.router.navigate([path]);
+  }
+
+  
 }
