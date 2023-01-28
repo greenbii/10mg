@@ -1,0 +1,126 @@
+<section class="dashboard-container">
+    <div class="heading">
+        <div class="head-title">
+            <h4 class="mb-0">Products</h4>
+        </div>
+        <div class="head-actions">
+            <i class="fa-solid fa-user" role="button" data-bs-toggle="dropdown"></i>
+            <div class="dropdown">
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item">Uyi Vincent</li>
+                    <li><a class="dropdown-item" href="#">View Profile</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <i class="fa-solid fa-bell" role="button" data-bs-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">You have no message</a></li>
+                </ul>
+            </div>
+            <div class="vr"></div>
+            <div class="user-name">
+                <p>Nordic Naturals</p>
+                <small>#122-8234-0612</small>
+            </div>
+        </div>
+    </div>
+    <div class="sub-heading p-4">
+        <div class="left-content">
+            <i class="fa-solid fa-arrow-left" role="button" onclick="history.back()"></i>
+            <p>Add Product</p>
+        </div>
+        <button class="button primary-btn">Add Product</button>
+    </div>
+
+    <div class="add-product-container p-4">
+        <div class="name div-container">
+            <label for="name">Name of Product</label>
+            <input type="text" name="name">
+        </div>
+        <div class="brand-name div-container">
+            <div class="brand-name-label">
+                <label for="brandName">Brand Name</label>
+                <label for="add-new-brand"><i class="fa-solid fa-plus"></i> Add new brand</label>
+            </div>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">Nordic Natural</option>
+                <option value="2">Green Pharma</option>
+                <option value="3">Emzol Enterprise</option>
+            </select>
+        </div>
+        <div class="description div-container">
+            <label for="description">Description</label>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, illum laborum explicabo aut eius cumque
+                ducimus magni quasi sit nam enim officiis impedit labore dicta voluptatibus veniam numquam voluptatem
+                facere.</p>
+        </div>
+        <div class="quantity div-container">
+            <label for="quantity">Quantity</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="actual-price div-container">
+            <label for="price">Actual Price</label>
+            <input type="text" name="act-price">
+        </div>
+        <div class="discount-price div-container">
+            <label for="dPrice">Discount Price</label>
+            <input type="text" name="disc-price">
+        </div>
+        <div class="image-upload div-container">
+            <label for="image">Image</label>
+            <div class="img-up">
+                <div class="upload-img">Click to upload or drag and drop SVG, PNG, JPG, or Gif (max: 800px x 400px)
+                </div>
+                <button class="button primary--btn">Add more</button>
+            </div>
+        </div>
+        <div class="package-per-roll div-container">
+            <label for="ppr">Package Per Roll</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">Package 1</option>
+                <option value="2">Package 2</option>
+                <option value="3">Package 3</option>
+            </select>
+        </div>
+        <div class="weight-per-roll div-container">
+            <label for="wpr">Weight per Roll</label>
+            <input type="text" name="weight">
+        </div>
+        <div class="strength div-container">
+            <label for="strength">Strength</label>
+            <input type="text" name="strength">
+        </div>
+        <div class="presentation div-container">
+            <label for="presentation">Presentation</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">Presentation 1</option>
+                <option value="2">Presentation 2</option>
+                <option value="3">Presentation 3</option>
+            </select>
+        </div>
+        <div class="product-sku div-container">
+            <label for="product-sku-ukc">Product SKU/UPC</label>
+            <input type="text" name="psu">
+        </div>
+        <div class="start-delivery-duration div-container">
+            <label for="sdd">Start Deliver Duration</label>
+            <input type="date" name="sdd">
+        </div>
+        <div class="end-delivery-duration div-container">
+            <label for="edd">End Deliver Duration</label>
+            <input type="date" name="edd">
+        </div>
+        <div class="notify">
+            <input type="checkbox" name="notify">
+            <p class="mb-0">Notify me when product are on low in store</p>
+        </div>
+    </div>
+</section>

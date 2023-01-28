@@ -29,7 +29,7 @@ h5 {
 /* MEDIA QUERY */
 @media screen and (max-width: 1300px) {
     .body-container {
-        padding: 10rem 50px;
+        padding: 5rem 50px;
     }
 }
 

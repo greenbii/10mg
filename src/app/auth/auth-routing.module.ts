@@ -10,6 +10,9 @@ import { TrackProductComponent } from './components/track-product/track-product.
 import { ProductStatusCompletedComponent } from './components/product-status-completed/product-status-completed.component';
 import { ProductStatusCancelledComponent } from './components/product-status-cancelled/product-status-cancelled.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DbproductComponent } from './components/dbproduct/dbproduct.component';
+import { AddproductComponent } from './components/addproduct/addproduct.component';
 
 const routes: Routes = [
   {
@@ -52,7 +55,19 @@ const routes: Routes = [
       {
         path: 'wishlist',
         component: WishlistComponent,
-      }
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'products',
+        component: DbproductComponent,
+      },
+      {
+        path: 'add-products',
+        component: AddproductComponent
+      },
     ],
   },
 ];
