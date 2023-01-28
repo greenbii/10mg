@@ -13,6 +13,10 @@ import { ProductStatusCompletedComponent } from './components/product-status-com
 import { ProductStatusCancelledComponent } from './components/product-status-cancelled/product-status-cancelled.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CartComponent } from './components/cart/cart.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DbSideNavComponent } from './components/db-side-nav/db-side-nav.component';
+import { DbproductComponent } from './components/dbproduct/dbproduct.component';
+import { AddproductComponent } from './components/addproduct/addproduct.component';
 
 
 
@@ -29,7 +33,11 @@ import { CartComponent } from './components/cart/cart.component';
     ProductStatusCompletedComponent,
     ProductStatusCancelledComponent,
     WishlistComponent,
-    CartComponent
+    CartComponent,
+    DashboardComponent,
+    DbSideNavComponent,
+    DbproductComponent,
+    AddproductComponent
   ],
   imports: [
     CommonModule,

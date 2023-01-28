@@ -1,0 +1,95 @@
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.head-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.head-actions i {
+    cursor: pointer;
+}
+
+.dropdown-menu li:first-child {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.sub-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.left-content i {
+    cursor: pointer;
+}
+
+.add-product-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.add-product-container label {
+    font-weight: 700;
+}
+
+.add-product-container .div-container {
+    width: 49%;
+}
+
+.brand-name-label {
+    display: flex !important;
+    justify-content: space-between;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccc;
+}
+
+.img-up{
+    background: var(--footer-background);
+    padding: 30px 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.primary--btn {
+    margin-top: 20px;
+}
+
+.notify {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.notify input {
+    width: unset;
+    margin-top: 0;
+}
+
+
+@media screen and (max-width: 1098px) {
+    .add-product-container .div-container {
+        width: 100%;
+    }
+}
