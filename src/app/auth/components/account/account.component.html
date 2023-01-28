@@ -1,40 +1,45 @@
 <section class="body-container account-container ">
     <div class="account mt-5">
-        <div class="breadcrumb d-flex align-items-center">
+        <!--<div class="breadcrumb d-flex align-items-center">
             <a href="#">Previous</a>
             <i class="fa-solid fa-chevron-right mx-3"></i>
             <p class="mb-0">Product details</p>
-        </div>
+        </div>-->
         <div class="overview">
             <p>Account Overview</p>
         </div>
         <div class="account-details">
             <div class="pharmarcy-details details-container">
-                <div class="texts">
-                    <h3>{{title1.toUpperCase()}}</h3>
-                    <p>ID: {{id}}</p>
-                    <p>Name: Laura Pharmarcy</p>
-                    <p>Contact: 090123456789</p>
-                    <p>Location: Lagos, Nigeria</p>
-                    <p>License no: 124564BC</p>
-                    <p>Expiring date: 03-05-26</p>
+                <div class="texts" *ngIf="business !== null">
+                    <h3>{{business.name.toUpperCase()}}</h3>
+                    <p>ID: {{business.id.toUpperCase()}}</p>
+                    <p>Name: {{business.name}}</p>
+                    <p>Contact: {{business.phone}}</p>
+                    <!-- <p>Location: Lagos, Nigeria</p> -->
+                    <p *ngIf="licence !== null">License no: {{licence.licence_number}}</p>
+                    <p *ngIf="licence !== null">Expiring date: {{licence.expiry_date | date: "d/M/y"}}</p>
                 </div>
                 <div class="action-btn">
                     <button class="button secondary-btn">Edit</button>
                 </div>
             </div>
             <div class="pry-delivery-address details-container">
-                <div class="texts">
+                <div class="texts" *ngIf="address !== null">
                     <h3>{{title2.toUpperCase()}}</h3>
-                    <p>2 Oduyebo Ikorodu Odogunyan, Ikorodu, Lagos, Nigeria</p>
+                    <p>
+                    <br>{{address.address}}
+                    <br>{{address.city | titlecase}}
+                    <br>{{address.state | titlecase}}
+                    <br>{{address.country |titlecase}}</p>
+                    <p><span class="p-2 mt-2 small text-white bg-danger rounded">{{address.verification_status}}</span></p>
                 </div>
                 <div class="action-btn">
                     <button class="button secondary-btn">Edit</button>
                 </div>
             </div>
-            <div class="account-settings details-container">
+            <!-- <div class="account-settings details-container">
                 <h3>{{title3.toUpperCase()}}</h3>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>

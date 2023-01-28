@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, Event } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent implements OnInit {
   openNav: boolean = false
   show_header: boolean = false;
 
-  constructor(private router: Router) { 
+  constructor(private router: Router, public appService: AppService) { 
     this.router.events.subscribe((r: Event)=>{
 
       const no_header_routes = [
@@ -35,9 +36,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logout() {
+  async logout() {
     localStorage.removeItem("logged_10mg_user");
-    this.router.navigate(["/signin"])
+    try {
+      await this.appService.auth.signOut();
+    }
+    catch(e){}
+    this.router.navigate(["/signin"]);
   }
 
 }

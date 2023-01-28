@@ -11,19 +11,19 @@
                 <a routerLink="/about" class="mx-4">
                     <li>About Us</li>
                 </a>
-                <a routerLink="/auth/shop" class="mx-4">
+                <a routerLink="/auth/shop" class="mx-4" [ngClass]="{'d-none': !appService._is_current_user}">
                     <li>Shop</li>
                 </a>
-                <a routerLink="/become-supplier" class="ms-4">
+                <a routerLink="/become-supplier" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
                     <li>Become a Supplier</li>
                 </a>
             </ul>
         </div>
-        <div class="nav-btns" *ngIf="!show_header">
+        <div class="nav-btns" *ngIf="!appService._is_current_user && !show_header">
             <a routerLink="/signin"><button class="button secondary-btn me-4">Sign in</button></a>
             <a routerLink="/signup"><button class="button primary-btn">Sign up</button></a>
         </div>
-        <div class="nav-btns" *ngIf="show_header">
+        <div class="nav-btns" *ngIf="show_header || appService._is_current_user">
             <button class="button secondary-btn" (click)="logout()">Logout</button>
         </div>
     </div>

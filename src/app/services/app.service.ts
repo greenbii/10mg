@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -32,9 +34,21 @@ export class AppService {
 
   is_request_in_progress: boolean = false;
 
+  _is_current_user: boolean = false;
+  current_business_details: any = null;
+
   requests: Observable<responseObject>[] = [];
 
-  constructor(private httpClient: HttpClient) { 
+  constructor(private httpClient: HttpClient, public auth: AngularFireAuth, private router: Router) { 
+    this.auth.onAuthStateChanged(u=>{
+      if(u && u !== null) {
+        this._is_current_user = true;
+      }
+      else {
+        this._is_current_user = false;
+        this.current_business_details = null;
+      }
+    })
   }
 
 
@@ -69,4 +83,53 @@ export class AppService {
       )*/
       return req;
   }
+
+  async getCurrentUser() {
+    try {
+      const u = await this.auth.currentUser
+      if(u !== null) return u;
+
+      throw "No signed in user";
+    }
+    catch(er) {
+      //console.log(er)
+      //return null;
+      throw er;
+    }  
+  }
+
+  async getCurrentUserClaims() {
+    try {
+      const u = await this.auth.currentUser;
+      if(u !== null) {
+        return await u.getIdTokenResult()
+      }
+      throw "No signed in user is available";
+
+    }
+    catch(er){
+      //console.log(er);
+      throw er;
+    }
+  }
+
+  async getCurrentUserToken() {
+    try {
+      const u = await this.auth.currentUser
+      if(u !== null) return await u.getIdToken();
+
+      throw "No signed in user";
+    }
+    catch(er) {
+      //console.log(er)
+      //return null;
+      throw er;
+    }  
+  }
+
+  redirect(path: string) {
+    this.router.navigate([path]);
+  }
+
+  
 }

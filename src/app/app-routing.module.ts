@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './admin.guard';
+import { AuthGuard } from './auth/auth.guard';
 import { AboutComponent } from './components/aboutComponent/about/about.component';
 import { BecomeSupplierLandingComponent } from './components/becomeSupplier/become-supplier-landing/become-supplier-landing.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: ()=>import('./auth/auth.module').then(a=> a.AuthModule)
+    loadChildren: ()=>import('./auth/auth.module').then(a=> a.AuthModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'about',
@@ -64,6 +66,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AdminGuard]
+  providers: [AdminGuard, AuthGuard]
 })
 export class AppRoutingModule { }

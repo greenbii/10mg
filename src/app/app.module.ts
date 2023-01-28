@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,12 +22,14 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
 
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
+import { InitappService } from './services/initapp.service';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -40,6 +42,10 @@ const firebaseConfig = {
   appId: "1:507588601673:web:af709ac803984bacfbdc98",
   measurementId: "G-86W5RJG89H"
 };
+
+export function app_init(appService: InitappService) {
+  return () => appService.initializeApp();
+}
 
 @NgModule({
   declarations: [
@@ -70,10 +76,20 @@ const firebaseConfig = {
     SwiperModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [
+    InitappService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: app_init,
+      deps: [InitappService],
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
