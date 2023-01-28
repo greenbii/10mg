@@ -34,9 +34,21 @@ export class AppService {
 
   is_request_in_progress: boolean = false;
 
+  _is_current_user: boolean = false;
+  current_business_details: any = null;
+
   requests: Observable<responseObject>[] = [];
 
   constructor(private httpClient: HttpClient, public auth: AngularFireAuth, private router: Router) { 
+    this.auth.onAuthStateChanged(u=>{
+      if(u && u !== null) {
+        this._is_current_user = true;
+      }
+      else {
+        this._is_current_user = false;
+        this.current_business_details = null;
+      }
+    })
   }
 
 

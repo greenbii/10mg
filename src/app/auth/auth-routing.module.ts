@@ -10,6 +10,7 @@ import { TrackProductComponent } from './components/track-product/track-product.
 import { ProductStatusCompletedComponent } from './components/product-status-completed/product-status-completed.component';
 import { ProductStatusCancelledComponent } from './components/product-status-cancelled/product-status-cancelled.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { AccountOverviewResolver } from './resolvers/account-overview-resolver';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: AccountComponent
+        component: AccountComponent,
+        resolve: {details: AccountOverviewResolver}
       },
       {
         path: 'orders',
@@ -60,6 +62,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AccountOverviewResolver]
 })
 export class AuthRoutingModule {}

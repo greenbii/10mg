@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
   licenceFile!: File;
   cacFile!: File;
 
-  code_fields: string[] = new Array(6).fill(null);
+  code_fields: any[] = new Array(6).fill(null);
 
   bRegForm: FormGroup = new FormGroup({
     address: new FormControl(null, [Validators.required]),
@@ -82,15 +82,25 @@ export class SignupComponent implements OnInit {
   }
 
   async verifyToken(){
-    const token = await this.appService.getCurrentUserToken();
-    //use the token to verify the code
-    const response = await this.appService.initiateHttpRequest("post", "/auth/verify-user-email", {code: this.code_fields.join()}, token || undefined).toPromise();
-    if(response?.status === true) {
-      //move to the next step
-      this.steps += 1;
+    try {
+      this.is_registering = true;
+      const token = await this.appService.getCurrentUserToken();
+      //use the token to verify the code
+      const response = await this.appService.initiateHttpRequest("post", "/verify-user-email", {code: this.code_fields.join("")}, token || undefined).toPromise();
+      if(response?.status === true) {
+        //move to the next step
+        alert(response.message);
+        this.steps += 1;
+      }
+      else {
+        alert(response?.message)
+      }
+      this.is_registering = false;
     }
-    else {
-      alert(response?.message)
+    catch(e){
+      console.log(e);
+      alert(e);
+      this.is_registering = false;
     }
   }
 
@@ -165,7 +175,7 @@ export class SignupComponent implements OnInit {
       const uFiles = await this.uploadFiles()
       const dt = this.current_tab === 'supplier' ? {...this.supRegForm.value, shipment_mode: this.supplier_shipment_mode} : {...this.pharmForm.value, ...this.bRegForm.value}
       const token = await this.appService.getCurrentUserToken();
-      const resp = await this.appService.initiateHttpRequest('post', '/10mg/complete-registration', {...dt, cac: uFiles.cac, licence: uFiles.licence}, token).toPromise();
+      const resp = await this.appService.initiateHttpRequest('post', '/complete-registration', {...dt, cac: uFiles.cac, licence: uFiles.licence}, token).toPromise();
       if(resp?.status !== true) {
         alert(resp?.message);
         this.is_registering = false;

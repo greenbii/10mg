@@ -35,7 +35,7 @@ export class SigninComponent implements OnInit {
           this.appService.redirect("/suppliers")
         }
         else {
-          this.appService.redirect("/shop");
+          this.appService.redirect("/auth/shop");
         }
         
       }

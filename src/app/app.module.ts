@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
+import { InitappService } from './services/initapp.service';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -41,6 +42,10 @@ const firebaseConfig = {
   appId: "1:507588601673:web:af709ac803984bacfbdc98",
   measurementId: "G-86W5RJG89H"
 };
+
+export function app_init(appService: InitappService) {
+  return () => appService.initializeApp();
+}
 
 @NgModule({
   declarations: [
@@ -76,7 +81,15 @@ const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireStorageModule
   ],
-  providers: [],
+  providers: [
+    InitappService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: app_init,
+      deps: [InitappService],
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

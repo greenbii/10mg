@@ -43,7 +43,7 @@
                     <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="confirm_password" placeholder="Confirm Password" required>
                     <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
                 </div>
-                <button class="button primary-btn my-4" type="button" [disabled]="!regForm.valid || is_registering" (click)="register()">{{is_registering ? '...Please wait' : 'Join Waiting List'}}</button>
+                <button class="button primary-btn my-4" type="button" [disabled]="!regForm.valid || is_registering" (click)="register()">{{is_registering ? '...Please wait' : 'Register'}}</button>
                 <p *ngIf="reg_error !== null" class="border border-danger d-block text-center bg-danger p-2 rounded text-white mb-2 small">{{reg_error}}</p>
                 <p class="mb-5">I have an account? <a routerLink="/signin">Login</a></p>
                 <a href="#">Forgot Password</a>
@@ -57,14 +57,14 @@
                     your
                     account set up.</p>
                 <div class="code-input mt-4">
-                    <input type="text" [(ngModel)]="code_fields[1]" inputmode="numeric" name="code1" class="textfield">
-                    <input type="text" [(ngModel)]="code_fields[2]" inputmode="numeric" name="code2" class="textfield">
-                    <input type="text" [(ngModel)]="code_fields[3]" inputmode="numeric" name="code3" class="textfield">
-                    <input type="text" [(ngModel)]="code_fields[4]" inputmode="numeric" name="code4" class="textfield">
-                    <input type="text" [(ngModel)]="code_fields[5]" inputmode="numeric" name="code5" class="textfield">
-                    <input type="text" [(ngModel)]="code_fields[6]" inputmode="numeric" name="code6" class="textfield">
+                    <input type="text" [(ngModel)]="code_fields[0]" inputmode="numeric" name="code1" class="textfield">
+                    <input type="text" [(ngModel)]="code_fields[1]" inputmode="numeric" name="code2" class="textfield">
+                    <input type="text" [(ngModel)]="code_fields[2]" inputmode="numeric" name="code3" class="textfield">
+                    <input type="text" [(ngModel)]="code_fields[3]" inputmode="numeric" name="code4" class="textfield">
+                    <input type="text" [(ngModel)]="code_fields[4]" inputmode="numeric" name="code5" class="textfield">
+                    <input type="text" [(ngModel)]="code_fields[5]" inputmode="numeric" name="code6" class="textfield">
                 </div>
-                <button class="button primary-btn my-4" [disabled]="checkValidCodeInput()" type="button" (click)="steps = 3">Verify Email</button>
+                <button class="button primary-btn my-4" [disabled]="checkValidCodeInput() || is_registering" type="button" (click)="verifyToken()">{{is_registering ? 'Verifying...' : 'Verify Email'}}</button>
                 <a role="button" (click)="requestVerificationCode()" >Get a new code</a>
             </form>
         </div>
