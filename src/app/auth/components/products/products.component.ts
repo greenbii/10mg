@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-products',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
-  products = [
+  /*products = [
     {
       id: 1,
       productPercentage: '-30%',
@@ -78,11 +80,22 @@ export class ProductsComponent implements OnInit {
       price: 700,
       oldPrice: 1700,
     },
-  ]
+  ]*/
 
-  constructor() { }
+  products: any[] = [];
+
+  constructor(private route: ActivatedRoute, private appService: AppService) { }
 
   ngOnInit(): void {
+    const rt: any = this.route.snapshot.data;
+
+    if(rt.products) {
+      this.products = rt.products
+    }
+  }
+
+  getPercentage(product: any) {
+    return Math.round((product.actual_price - product.discount_price) / 100)
   }
 
 }

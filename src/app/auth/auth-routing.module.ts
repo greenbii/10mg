@@ -14,6 +14,7 @@ import { AccountOverviewResolver } from './resolvers/account-overview-resolver';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
+import { ShopResolver } from './resolvers/shop-resolver';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
       },
       {
         path:'shop',
-        component: ShopScreenComponent
+        component: ShopScreenComponent,
+        resolve: {products: ShopResolver}
       },
       {
         path: 'account',
@@ -79,6 +81,9 @@ const routes: Routes = [
   declarations: [],
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [AccountOverviewResolver]
+  providers: [
+    AccountOverviewResolver,
+    ShopResolver
+  ]
 })
 export class AuthRoutingModule {}
