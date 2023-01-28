@@ -138,7 +138,7 @@ export class SignupComponent implements OnInit {
     }
     else {
       //navigate to shop
-      this.appService.redirect("/shop")
+      this.appService.redirect("/auth/shop")
     }
   }
 

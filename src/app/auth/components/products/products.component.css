@@ -45,7 +45,12 @@
     box-shadow: 0 0 10px #00000012;
     border-radius: 50%;
     color: red;
+    cursor: pointer;
 }
+
+/* .favorite-product i:hover {
+    background-color: red;
+} */
 
 .product-details {
     position: relative;
