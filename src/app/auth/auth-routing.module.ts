@@ -15,6 +15,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { ShopResolver } from './resolvers/shop-resolver';
+import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
+import { ProductDetailResolver } from './resolvers/product-details-resolver';
 
 
 const routes: Routes = [
@@ -70,6 +72,11 @@ const routes: Routes = [
         component: DbproductComponent,
       },
       {
+        path: 'products/:id',
+        component: ProductdetailsComponent,
+        resolve: {details: ProductDetailResolver}
+      },
+      {
         path: 'add-products',
         component: AddproductComponent
       },
@@ -83,7 +90,8 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     AccountOverviewResolver,
-    ShopResolver
+    ShopResolver,
+    ProductDetailResolver
   ]
 })
 export class AuthRoutingModule {}

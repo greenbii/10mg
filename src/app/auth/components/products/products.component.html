@@ -1,6 +1,6 @@
 <div class="product-container">
     <div class="product-flex">
-        <div class="products" *ngFor="let product of products">
+        <div class="products" *ngFor="let product of products" [routerLink]="['/', 'auth', 'products', product.product_id]">
             <div class="product">
                 <p class="product-percentage small">-{{getPercentage(product)}}%</p>
                 <div class="favorite-product"><i class="fa-regular fa-heart"></i></div>
