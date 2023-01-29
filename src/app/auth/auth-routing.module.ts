@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AuthlandingComponent } from './components/authlanding/authlanding.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ShopScreenComponent } from './components/shop-screen/shop-screen.component';
@@ -17,6 +16,8 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
 import { ShopResolver } from './resolvers/shop-resolver';
 import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 import { ProductDetailResolver } from './resolvers/product-details-resolver';
+import { CartComponent } from './components/cart/cart.component';
+import { CartResolver } from './resolvers/cart-resolver';
 
 
 const routes: Routes = [
@@ -80,6 +81,11 @@ const routes: Routes = [
         path: 'add-products',
         component: AddproductComponent
       },
+      {
+        path: 'cart',
+        component: CartComponent,
+        resolve: {cart: CartResolver}
+      }
     ],
   },
 ];
@@ -91,7 +97,8 @@ const routes: Routes = [
   providers: [
     AccountOverviewResolver,
     ShopResolver,
-    ProductDetailResolver
+    ProductDetailResolver,
+    CartResolver
   ]
 })
 export class AuthRoutingModule {}

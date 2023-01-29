@@ -14,6 +14,8 @@ export class ProductdetailsComponent implements OnInit {
   current_address: any = null;
   required_quantity: number = 1;
 
+  is_operation_in_progress: boolean = false;
+
   constructor(private route: ActivatedRoute, public appService: AppService) { }
 
   ngOnInit(): void {
@@ -23,6 +25,35 @@ export class ProductdetailsComponent implements OnInit {
 
     if(this.appService.current_business_details !== null && this.appService.current_business_details.addresses) {
       this.current_address = this.appService.current_business_details.addresses[0];
+    }
+  }
+
+  async addToCart() {
+    try {
+      //add the current item to cart
+      if(this.product !== null) {
+        this.is_operation_in_progress = true;
+        const dt = {
+          product_id: this.product.product_id,
+          quantity: this.required_quantity
+        }
+        const token = await this.appService.getCurrentUserToken();
+        const response = await this.appService.initiateHttpRequest('post', '/cart', dt, token).toPromise();
+        if(response?.status === true) {
+          //navigate to the user's cart page
+          this.appService.redirect("/auth/cart");
+        }
+        else {
+          alert(response?.message);
+        }
+        this.is_operation_in_progress = false;
+        //
+      }
+    }
+    catch(e) {
+      //show the error message
+      this.is_operation_in_progress = false;
+      alert(e);
     }
   }
 

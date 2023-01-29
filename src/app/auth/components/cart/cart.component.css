@@ -1,0 +1,35 @@
+.item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.variation-wrapper {
+    border-radius: 5px;
+    background-color: #f2fcfe;
+    min-height: 100px;
+    padding: 10px;
+}
+
+.totals {
+    background-color: #85e5ff;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 30px;
+}
+
+.totals table {
+    font-size: 13px;
+}
+
+.totals table td {
+    border: none;
+}
+
+@media screen and (max-width: 500px) {
+    .item-wrapper {
+        display: block;
+    }
+}
