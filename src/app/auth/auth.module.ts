@@ -17,6 +17,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DbSideNavComponent } from './components/db-side-nav/db-side-nav.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
+import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -37,10 +39,12 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
     DashboardComponent,
     DbSideNavComponent,
     DbproductComponent,
-    AddproductComponent
+    AddproductComponent,
+    ProductdetailsComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     AuthRoutingModule
   ]
 })
