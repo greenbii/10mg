@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let reg of registrations">
+                    <tr *ngFor="let reg of registrations" (click)="selected_user = reg" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">
                         <td>{{reg.name}}</td>
                         <td>{{reg.type}}</td>
                         <td>{{reg.contact_person}}</td>
@@ -35,3 +35,61 @@
         <p class="small text-center p-3" *ngIf="!is_loading_users && registrations.length === 0">No user record is available</p>
     </div>
 </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registration Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="selected_user !== null">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Company/Brand Name</th>
+                        <td>{{selected_user.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>User Type</th>
+                        <td>{{selected_user.type}}</td>
+                    </tr>
+                    <tr>
+                        <th>Contact Person</th>
+                        <td>{{selected_user.contact_person | titlecase}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{selected_user.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>{{selected_user.phone}}</td>
+                    </tr>
+                    <tr *ngIf="selected_user.position !== null">
+                        <th>Position</th>
+                        <td>{{selected_user.position}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date Registered</th>
+                        <td>{{selected_user.date_created | date: "d/M/Y h:m a"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="card card-secondary" *ngIf="selected_user.type === 'Pharmacy'">
+                <div class="card-header">Shipping Address</div>
+                <div class="card-body" *ngIf="selected_user.address">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

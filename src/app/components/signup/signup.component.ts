@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
     pharmacy_name: new FormControl(null, [Validators.required, Validators.minLength(2)]),
     password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
     confirm_password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
-    position: new FormControl(null, Validators.required)
+    position: new FormControl(null)
   })
 
   steps: number = 1

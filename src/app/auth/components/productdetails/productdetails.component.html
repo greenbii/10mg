@@ -55,7 +55,7 @@
                     <div class="text">
                         <p class="small"> <span>Orders within Lagos will be delivered within 48 hours</span>
                             <br>
-                            <span>Click <span>here</span> for shipping dates to your location</span>
+                            <span><span style="text-decoration: underline;" data-bs-toggle="modal" href="#exampleModalToggle" role="button">click here</span> for shipping dates to your location</span>
                         </p>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="form-group d-flex mt-4 justify-content-between">
-                    <button class="btn btn-primary">Add to cart</button>
+                    <button class="btn btn-primary" (click)="addToCart()" [disabled]="product.quantity === 0 || is_operation_in_progress">{{is_operation_in_progress ? 'Addinng...' : 'Add to cart'}}</button>
                     <span>
                         <i class="fa fa-heart text-danger fa-3x"></i>
                     </span>
@@ -89,7 +89,7 @@
                 <div class="description mt-5">
                     <h4>Description</h4>
                     <hr>
-                    <p>{{product?.description}}</p>
+                    <p>{{product?.brand?.description}}</p>
                 </div>
                 
                 <div class="reviews mt-5">
@@ -103,3 +103,21 @@
         </div>
     </div>
 </main>
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-body">
+            <h4>Delivery Options</h4>
+            <h5>Lagos:</h5>
+            <p>Express Delivery: (Within 48 hours)</p>
+            <p>Self Pickup: (Within 48 hours)</p>
+
+            <h5>Outside Lagos</h5>
+            <p>Express Delivery: (Within 72 hours)</p>
+            <p>Normal Delivery: (Within 7 days)</p>
+        </div>
+      </div>
+    </div>
+  </div>

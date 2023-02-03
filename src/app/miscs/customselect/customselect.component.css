@@ -1,0 +1,28 @@
+
+
+.list-container {
+    width: 100%;
+    position: absolute;
+    bottom: -25;
+    border-radius: 5px;
+    border: 1px solid #cfcfcf;
+    min-height: 30px;
+    max-height: 250px;
+    overflow: auto;
+}
+
+.list-container ul {
+    margin-left: -30px;
+}
+
+.list-container ul li {
+    display: block;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 13px;
+    background-color: #ffffff;
+}
+
+.list-container ul li:hover {
+    background-color: #ececec;
+}

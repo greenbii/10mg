@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
         //get the user type to know where to redirect
         const claims = await this.appService.getCurrentUserClaims();
         if(claims.claims["customer_type"] && claims.claims["customer_type"] === "supplier") {
-          this.appService.redirect("/suppliers")
+          this.appService.redirect("/supplier")
         }
         else {
           this.appService.redirect("/auth/shop");
@@ -40,7 +40,10 @@ export class SigninComponent implements OnInit {
         
       }
       catch(ee: any){
-        this.error_message = ee.toString();
+        console.log(ee);
+        this.error_message = "Invalid username and/or password, check and try again"
+        //ee.toString();
+
       }
     }
     
