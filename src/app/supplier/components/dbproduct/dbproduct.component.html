@@ -1,5 +1,5 @@
-<section class="dashboard-container">
-    <div class="heading">
+<section class="dashboard-container mt-3">
+    <!-- <div class="heading">
         <div class="head-title">
             <h4 class="mb-0">Products</h4>
         </div>
@@ -23,7 +23,7 @@
                 <small>#122-8234-0612</small>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="sub-heading p-4">
         <div class="seach-bar">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -40,7 +40,7 @@
                 </ul>
             </div>
         </div>
-        <a routerLink="/auth/add-products"><button class="button primary-btn add-prod">Add poduct</button></a>
+        <a routerLink="/supplier/add-products"><button class="button primary-btn add-prod">Add poduct</button></a>
     </div>
 
     <div class="product-cards p-4">
@@ -54,5 +54,9 @@
                 <h6 class="price">{{productCard.price | currency : 'NGN' : 'symbol-narrow'}}</h6>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-12 mt-2" *ngIf="productCards.length === 0">
+        <p class="text-center text-muted small">You have not added any product yet, click <strong>Add Product</strong> to add new Product</p>
     </div>
 </section>

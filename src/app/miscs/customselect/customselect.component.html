@@ -1,0 +1,16 @@
+<div class="custom-select-input-container">
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" (click)="show_list = true" (keypress.enter)="handleEnterKeypress()" [(ngModel)]="textInput" id="floatingInput" placeholder="{{placeholderText}}">
+        <label for="floatingInput">{{labelText}}</label>
+
+        <div class="list-container" [ngClass]="{'d-none': !show_list}">
+            <ul>
+                <li *ngFor="let item of listItems | customfilter: 'label' : textInput" (click)="handleSelectedItem(item)">{{item.label}}</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+</div>
+

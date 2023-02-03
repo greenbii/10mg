@@ -11,8 +11,7 @@ import { ProductStatusCancelledComponent } from './components/product-status-can
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { AccountOverviewResolver } from './resolvers/account-overview-resolver';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DbproductComponent } from './components/dbproduct/dbproduct.component';
-import { AddproductComponent } from './components/addproduct/addproduct.component';
+//import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { ShopResolver } from './resolvers/shop-resolver';
 import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 import { ProductDetailResolver } from './resolvers/product-details-resolver';
@@ -68,19 +67,19 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
       },
-      {
+      /*{
         path: 'products',
         component: DbproductComponent,
-      },
+      },*/
       {
         path: 'products/:id',
         component: ProductdetailsComponent,
         resolve: {details: ProductDetailResolver}
       },
-      {
-        path: 'add-products',
-        component: AddproductComponent
-      },
+      // {
+      //   path: 'add-products',
+      //   component: AddproductComponent
+      // },
       {
         path: 'cart',
         component: CartComponent,

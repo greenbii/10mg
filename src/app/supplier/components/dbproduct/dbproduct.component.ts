@@ -49,10 +49,12 @@ export class DbproductComponent implements OnInit {
       price: '200'
     },
   ]
+  
 
   constructor() { }
 
   ngOnInit(): void {
+    this.productCards = [];
   }
 
 }

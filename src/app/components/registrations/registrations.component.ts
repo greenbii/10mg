@@ -18,6 +18,8 @@ logout() {
   registrations: any[] = [];
   is_loading_users: boolean = false;
 
+  selected_user: any = null;
+
   constructor(private appService: AppService, private router: Router) { }
 
   ngOnInit(): void {

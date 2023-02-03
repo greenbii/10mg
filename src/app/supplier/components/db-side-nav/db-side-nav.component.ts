@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-db-side-nav',
@@ -9,9 +10,19 @@ export class DbSideNavComponent implements OnInit {
 
   openSideNav: boolean = true;
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
+  }
+
+  async logout() {
+    try {
+      await this.appService.auth.signOut();
+      this.appService.redirect("/signin");
+    }
+    catch(er) {
+      alert(er)
+    }
   }
 
 }

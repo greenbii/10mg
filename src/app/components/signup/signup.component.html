@@ -16,7 +16,7 @@
             <!-- For Pharmacy -->
             <div class=""></div>
             <form action="" [formGroup]="regForm">
-                <input type="text" name="name" required formControlName="pharmacy_name" placeholder="Name of Pharmacy" class="textfield mt-3">
+                <input type="text" name="name" required formControlName="pharmacy_name" placeholder="{{ current_tab === 'supplier' ? 'Name of Brand' : 'Name of Pharmacy'}}" class="textfield mt-3">
                 <input type="text" name="contact" formControlName="contact_person" placeholder="Name of contact person" class="textfield mt-3">
                 <!-- <select class="form-select textfield mt-3" aria-label="Default select example">
                     <option selected>Position</option>
@@ -24,7 +24,7 @@
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                 </select> -->
-                <input type="text" name="contact" *ngIf="current_tab !== 'supplier'" placeholder="Position" formControlName="position" required class="textfield mt-3">
+                <input type="text" name="position" *ngIf="current_tab !== 'supplier'" placeholder="Position" formControlName="position" class="textfield mt-3">
                 <input type="email" name="email" placeholder="Email" formControlName="email" class="textfield mt-3">
                 <input type="tel" name="telephone" placeholder="Phone number" formControlName="phone" required class="textfield mt-3">
                 <div class="password-container textfield mt-3">
@@ -96,7 +96,7 @@
             <form action="" [formGroup]="supRegForm">
                 <h2>Let's get you verified</h2>
                 <p class="mt-3">Supplier's Information</p>
-                <input type="number" name="licenseNo" formControlName="licennse_number" class="textfield mt-3" placeholder="License number">
+                <input type="number" name="licenseNo" formControlName="licence_number" class="textfield mt-3" placeholder="License number">
                 <input type="date" name="city" formControlName="expiry_date" class="textfield mt-3" placeholder="Expiry date [dd/mm/yyyy]" title="Expiry date">
                 <input type="text" name="bank" formControlName="bank" id="bank" class="textfield mt-3" placeholder="Name of Bank">
                 <input type="number" name="account-num" formControlName="account_number" id="account-num" class="textfield mt-3" placeholder="Account Number">
@@ -182,10 +182,10 @@
     </div>
 
 
-    <!-- SUPPLIER FLOW -->
+    <!-- SUPPLIER FLOW
     <div class="pharmacist" *ngIf="current_tab === 'suppliers'">
         <div class="form-contents" *ngIf="steps === 1">
-            <!-- For Pharmacy -->
+            
             <div class=""></div>
             <form action="">
                 <input type="text" name="name" placeholder="Name of brand" class="textfield mt-3">
@@ -234,7 +234,7 @@
                 <div class="cac-doc mt-4">
                     <label for="cac-doc">CAC Document</label>
                     <div class="sel-file">
-                        <!-- <p>Select file</p> -->
+                        <!-- <p>Select file</p>
                         <input type="file" name="file" class="file-input">
                         <p class="details">File Size must be less than 10megabytes</p>
                     </div>
@@ -242,7 +242,7 @@
                 <div class="business-license mt-4">
                     <label for="bl">Business Approval License</label>
                     <div class="sel-file">
-                        <!-- <p>Select file</p> -->
+                        <!-- <p>Select file</p>
                         <input type="file" name="file" class="file-input">
                         <p class="details">File Size must be less than 10megabytes</p>
                     </div>
@@ -263,6 +263,6 @@
             <p>We will review your information and get back to you</p>
             <button class="button primary-btn my-4" type="button" (click)="steps = 6">Proceed to dashoard</button>
         </div>
-    </div>
+    </div>-->
 
 </section>

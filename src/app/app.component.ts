@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Event, NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 
 
@@ -11,5 +12,21 @@ import { Component, ViewEncapsulation } from '@angular/core';
 export class AppComponent {
 
   title = '10mg';
+
+  show_nav_bar: boolean = true;
+
+  constructor(private router: Router) {
+      this.router.events.subscribe((e: Event)=>{
+        if(e instanceof NavigationEnd || e instanceof NavigationStart)  {
+          const test = /\/supplier/
+          if(test.test(this.router.url)) {
+            this.show_nav_bar = false;
+          }
+          else {
+            this.show_nav_bar = true;
+          }
+        }
+      })
+  }
   
 }

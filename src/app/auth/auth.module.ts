@@ -14,9 +14,7 @@ import { ProductStatusCancelledComponent } from './components/product-status-can
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CartComponent } from './components/cart/cart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DbSideNavComponent } from './components/db-side-nav/db-side-nav.component';
-import { DbproductComponent } from './components/dbproduct/dbproduct.component';
-import { AddproductComponent } from './components/addproduct/addproduct.component';
+//import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 import { FormsModule } from '@angular/forms';
 
@@ -37,9 +35,6 @@ import { FormsModule } from '@angular/forms';
     WishlistComponent,
     CartComponent,
     DashboardComponent,
-    DbSideNavComponent,
-    DbproductComponent,
-    AddproductComponent,
     ProductdetailsComponent
   ],
   imports: [

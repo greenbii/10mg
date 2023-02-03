@@ -1,42 +1,18 @@
-<section class="dashboard-container">
-    <div class="heading">
-        <div class="head-title">
-            <h4 class="mb-0">Products</h4>
-        </div>
-        <div class="head-actions">
-            <i class="fa-solid fa-user" role="button" data-bs-toggle="dropdown"></i>
-            <div class="dropdown">
-                <ul class="dropdown-menu">
-                    <li class="dropdown-item">Uyi Vincent</li>
-                    <li><a class="dropdown-item" href="#">View Profile</a></li>
-                </ul>
-            </div>
-            <div class="dropdown">
-                <i class="fa-solid fa-bell" role="button" data-bs-toggle="dropdown"></i>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">You have no message</a></li>
-                </ul>
-            </div>
-            <div class="vr"></div>
-            <div class="user-name">
-                <p>Nordic Naturals</p>
-                <small>#122-8234-0612</small>
-            </div>
-        </div>
-    </div>
+<section class="">
     <div class="sub-heading p-4">
         <div class="left-content">
             <i class="fa-solid fa-arrow-left" role="button" onclick="history.back()"></i>
-            <p>Add Product</p>
+            <p>Products</p>
         </div>
-        <button class="button primary-btn">Add Product</button>
+        <!-- <button class="button primary-btn">Add Product</button> -->
     </div>
 
     <div class="add-product-container p-4">
-        <div class="name div-container">
+        <!--<div class="name div-container">
             <label for="name">Name of Product</label>
             <input type="text" name="name">
-        </div>
+        </div>-->
+        <app-customselect></app-customselect>
         <div class="brand-name div-container">
             <div class="brand-name-label">
                 <label for="brandName">Brand Name</label>
@@ -101,9 +77,9 @@
             <label for="presentation">Presentation</label>
             <select class="form-select" aria-label="Default select example">
                 <option selected>Open this select menu</option>
-                <option value="1">Presentation 1</option>
-                <option value="2">Presentation 2</option>
-                <option value="3">Presentation 3</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Capsule">Capsule</option>
+                <option value="Injection">Injection</option>
             </select>
         </div>
         <div class="product-sku div-container">
