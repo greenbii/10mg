@@ -7,7 +7,7 @@
             <i class="fa-solid fa-user" role="button" data-bs-toggle="dropdown"></i>
             <div class="dropdown">
                 <ul class="dropdown-menu">
-                    <li class="dropdown-item">Uyi Vincent</li>
+                    <li class="dropdown-item">{{appService.current_user.displayName}}</li>
                     <li><a class="dropdown-item" href="#">View Profile</a></li>
                 </ul>
             </div>
@@ -19,8 +19,8 @@
             </div>
             <div class="vr"></div>
             <div class="user-name">
-                <p>Nordic Naturals</p>
-                <small>#122-8234-0612</small>
+                <p>{{appService.current_business_details.business.name}}</p>
+                <small>#{{appService.current_business_details.business.id.toUpperCase()}}</small>
             </div>
         </div>
     </div>

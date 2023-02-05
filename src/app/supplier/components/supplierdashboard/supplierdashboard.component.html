@@ -1,12 +1,41 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
-            <!-- <div class="border border-secondary rounded">
-                <i class="fa fa-money fa-3x"></i>
-                <p class="text-muted">Income</p>
-                <h5>{{123456789 | currency}}</h5>
-            </div> -->
-            <h4 class="text-center text-muted mt-5">Coming Soon!</h4>
+            <div class="border dash-border rounded p-3">
+                <i class="fa fa-sack-dollar mt-2"></i>
+                <p class="text-muted" style="padding: 0; margin: 0">Income</p>
+                <h5 style="font-size: 16px; margin: 0; padding: 0; margin-top: 2px;">{{supplier.income| currency}}</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="border dash-border rounded p-3">
+                <i class="fa fa-cart mt-2"></i>
+                <p class="text-muted" style="padding: 0; margin: 0">Quantity Sold</p>
+                <h5 style="font-size: 16px; margin: 0; padding: 0; margin-top: 2px;">{{supplier.quantity_sold}}</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="border dash-border rounded p-3">
+                <i class="fa fa-table mt-2"></i>
+                <p class="text-muted" style="padding: 0; margin: 0">Orders</p>
+                <h5 style="font-size: 16px; margin: 0; padding: 0; margin-top: 2px;">{{supplier.orders}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between">
+                <h6>Recent Orders</h6>
+                <small class="small text-primary">See all</small>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="d-flex justify-content-between">
+                <h6>Recent Transactions</h6>
+                <small class="small text-primary">See all</small>
+            </div>
         </div>
     </div>
 </div>

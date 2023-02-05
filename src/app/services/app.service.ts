@@ -36,6 +36,7 @@ export class AppService {
 
   _is_current_user: boolean = false;
   current_business_details: any = null;
+  current_user: any = null;
 
   requests: Observable<responseObject>[] = [];
 
@@ -43,10 +44,12 @@ export class AppService {
     this.auth.onAuthStateChanged(u=>{
       if(u && u !== null) {
         this._is_current_user = true;
+        this.current_user = u
       }
       else {
         this._is_current_user = false;
         this.current_business_details = null;
+        this.current_user = null
       }
     })
   }

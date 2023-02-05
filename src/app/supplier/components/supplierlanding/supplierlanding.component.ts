@@ -8,7 +8,7 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class SupplierlandingComponent implements OnInit {
 
-  constructor(private appService: AppService) { }
+  constructor(public appService: AppService) { }
 
   ngOnInit(): void {
   }

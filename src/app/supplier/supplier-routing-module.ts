@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountOverviewResolver } from '../auth/resolvers/account-overview-resolver';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { SupplierdashboardComponent } from './components/supplierdashboard/supplierdashboard.component';
@@ -14,7 +15,8 @@ const routes: Routes = [
       children: [
         {
           path: '',
-          component: SupplierdashboardComponent
+          component: SupplierdashboardComponent,
+          resolve: {details: AccountOverviewResolver}
         },
         {
           path: 'products',
@@ -33,6 +35,7 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [
+    AccountOverviewResolver
   ]
 })
 export class SupplierRoutingModule {}
