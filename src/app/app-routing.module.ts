@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './admin.guard';
 import { AuthGuard } from './auth/auth.guard';
+import { AccountOverviewResolver } from './auth/resolvers/account-overview-resolver';
 import { AboutComponent } from './components/aboutComponent/about/about.component';
 import { BecomeSupplierLandingComponent } from './components/becomeSupplier/become-supplier-landing/become-supplier-landing.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
@@ -27,7 +28,8 @@ const routes: Routes = [
   {
     path: 'supplier',
     loadChildren: ()=>import('./supplier/supplier.module').then(a=> a.SupplierModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    resolve: {u: AccountOverviewResolver}
   },
   {
     path: 'about',
@@ -71,6 +73,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AdminGuard, AuthGuard]
+  providers: [AdminGuard, AuthGuard, AccountOverviewResolver]
 })
 export class AppRoutingModule { }
