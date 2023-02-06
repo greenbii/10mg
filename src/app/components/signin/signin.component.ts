@@ -15,9 +15,12 @@ export class SigninComponent implements OnInit {
   })
 
   error_message: string | null = null;
+  is_signing_in: boolean = false;
 
   async signin() {
     //throw new Error('Method not implemented.');
+    this.error_message = null;
+    this.is_signing_in = true;
     if(this.regForm.value.email === "admin@10mg.co.uk" && this.regForm.value.password === "asdfghjkl") {
       localStorage.setItem("logged_10mg_user", "admin@10mg.co.uk");
       this.router.navigate(["/registrations"]);
@@ -30,6 +33,7 @@ export class SigninComponent implements OnInit {
       try {
         const u = await this.appService.auth.signInWithEmailAndPassword(this.regForm.value.email, this.regForm.value.password);
         //get the user type to know where to redirect
+        
         const claims = await this.appService.getCurrentUserClaims();
         if(claims.claims["customer_type"] && claims.claims["customer_type"] === "supplier") {
           this.appService.redirect("/supplier")
@@ -37,12 +41,15 @@ export class SigninComponent implements OnInit {
         else {
           this.appService.redirect("/auth/shop");
         }
+
+        this.is_signing_in = false;
         
       }
       catch(ee: any){
         console.log(ee);
         this.error_message = "Invalid username and/or password, check and try again"
         //ee.toString();
+        this.is_signing_in = false;
 
       }
     }

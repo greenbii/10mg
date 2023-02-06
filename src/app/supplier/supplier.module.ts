@@ -8,6 +8,7 @@ import { SupplierdashboardComponent } from './components/supplierdashboard/suppl
 import { SupplierlandingComponent } from './components/supplierlanding/supplierlanding.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { MiscsModule } from '../miscs/miscs.module';
+//import { ChartModule } from 'angular2-chartjs';
 
 
 
@@ -25,6 +26,7 @@ import { MiscsModule } from '../miscs/miscs.module';
     ReactiveFormsModule,
     SupplierRoutingModule,
     MiscsModule
+    //ChartModule
   ]
 })
 export class SupplierModule { }

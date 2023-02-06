@@ -9,7 +9,7 @@
                 <small class="small text-white">{{error_message}}</small>
             </div>
         </div>
-        <button class="button primary-btn mt-4" [disabled]="!regForm.valid" type="submit" (click)="signin()">Sign in</button>
+        <button class="button primary-btn mt-4" [disabled]="!regForm.valid || is_signing_in" type="submit" (click)="signin()">{{is_signing_in ? 'Signing in...' : 'Sign in'}}</button>
         <p class="my-3">Don't have an account? <a routerLink="/signup">Sign up</a></p>
         <a href="#" class="black-link">Forgot Password?</a>
     </form>

@@ -9,6 +9,7 @@
     min-height: 30px;
     max-height: 250px;
     overflow: auto;
+    z-index: 9999;
 }
 
 .list-container ul {
