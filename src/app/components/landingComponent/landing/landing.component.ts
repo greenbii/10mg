@@ -35,6 +35,10 @@ export class LandingComponent implements OnInit {
     }
   ]
 
+  transactions: number = 25;
+  wholesale: number = 80;
+  healthcare: number = 25;
+
   constructor() { }
 
   ngOnInit(): void {
