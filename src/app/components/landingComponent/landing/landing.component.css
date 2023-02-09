@@ -115,6 +115,14 @@ img {
         flex-direction: column;
         gap: 3rem;
     }
+
+    .hiw-contents {
+        margin-bottom: 5rem;
+        /*display: inline-block;*/
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
 }
 
 @media screen and (max-width: 500px) {
@@ -130,7 +138,10 @@ img {
 
     .hiw-contents {
         margin-bottom: 5rem;
-        display: inline-block;
+        /*display: inline-block;*/
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
     
     .hiw-contents img {
