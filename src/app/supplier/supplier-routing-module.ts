@@ -5,6 +5,7 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { SupplierdashboardComponent } from './components/supplierdashboard/supplierdashboard.component';
 import { SupplierlandingComponent } from './components/supplierlanding/supplierlanding.component';
+import { SupplierProducts } from './resolvers/product-details-resolver';
 
 
 
@@ -20,7 +21,8 @@ const routes: Routes = [
         },
         {
           path: 'products',
-          component: DbproductComponent
+          component: DbproductComponent,
+          resolve: {pd: SupplierProducts}
         },
         {
           path: 'add-products',
@@ -35,7 +37,8 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [
-    AccountOverviewResolver
+    AccountOverviewResolver,
+    SupplierProducts
   ]
 })
 export class SupplierRoutingModule {}

@@ -11,7 +11,7 @@
         <!--For drug details on one side-->
         <div class="col-md-6">
             <div class="form-group">
-                <app-customselect [allowCreateNew]="true" [labelText]="'Select Medication'" [listItems]="drugs"></app-customselect>
+                <app-customselect [(textInput)]="product.name" [allowCreateNew]="true" (selectedItemChange)="handleDrugSelection($event)" [(selectedItem)]="selectedDrug" [labelText]="'Select Medication'" [listItems]="drugs"></app-customselect>
             </div>
 
             <fieldset style="border: 1px solid #b4b4b4; border-radius: 5px; padding: 10px;">
@@ -21,7 +21,7 @@
                         <div class="form-group form-floating">
                             <!--<input type="email" class="form-control" id="floatingInput" placeholder="E.g 50mg">
                             <label for="floatingInput" class="text-muted small">Strength</label>-->
-                            <app-customselect [allowCreateNew]="true" [labelText]="'Strength'"></app-customselect>
+                            <app-customselect [(textInput)]="product.strength" [(selectedItem)]="selectedStrength" [(listItems)]="drug_details.strengths" (selectedItemChange)="handleStrengthSelection($event)" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Strength'"></app-customselect>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
 
                     <div class="col-md-12 mt-2">
                         <div class="form-floating form-group">
-                            <textarea class="form-control" [(ngModel)]="product.description" placeholder="Enter description for this variation" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <textarea class="form-control" [disabled]="selectedDrug === null || (selectedDrug !== null && selectedDrug['added_by'] && selectedDrug['added_by'] !== current_user_id)" [(ngModel)]="product.description" placeholder="Enter description for this variation" id="floatingTextarea2" style="height: 100px"></textarea>
                             <label for="floatingTextarea2">Description</label>
                         </div>
                     </div>
@@ -49,11 +49,11 @@
                 <legend class="small" style="padding-left: 15px;">Packaging</legend>
                 <div class="row">
                     <div class="col-md-6">
-                        <app-customselect [allowCreateNew]="true" [labelText]="'Package per roll'"></app-customselect>
+                        <app-customselect [(textInput)]="product.package_per_roll" (selectedItemChange)="handlePackagingSelection($event)" [(selectedItem)]="selectedPackage" [(listItems)]="drug_details.packagings" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Package per roll'"></app-customselect>
                     </div>
 
                     <div class="col-md-6">
-                        <app-customselect [allowCreateNew]="true" [labelText]="'Weight(kg)'"></app-customselect>
+                        <app-customselect [(textInput)]="product.weight" [(selectedItem)]="selectedWeight" (selectedItemChange)="handleWeightSelection($event)" [(listItems)]="drug_details.weights" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Weight(kg)'"></app-customselect>
                     </div>
                 </div>
             </fieldset>
@@ -63,7 +63,7 @@
         <!--For Sales and Quantity at the other-->
         <div class="col-md-6">
             <div class="form-group">
-                <app-customselect [allowCreateNew]="true" [labelText]="'Brand'"></app-customselect>
+                <app-customselect [(textInput)]="product.brand" [(selectedItem)]="selectedBrand" (selectedItemChange)="handleBrandSelection($event)" [(listItems)]="drug_details.brands" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Brand'"></app-customselect>
             </div>
 
             <div class="form-group form-floating">
@@ -81,17 +81,26 @@
                 <label for="floatingInput" class="text-muted small">Discount Price</label>
             </div>
 
-            <div class="form-group image-upload div-container">
-                <label for="image">Image</label>
+            <div class="form-group image-upload div-container mt-2">
+                <!-- <label for="image">Image</label> -->
+                <div class="d-flex justify-content-between p-2 bg-light rounded mt-1 mb-1" *ngFor="let f of uploadFiles; let i=index">
+                    <label class="small">{{f.name}}</label>
+                    <label class="small text-danger" role="button" (click)="removeUploadFile(i)"><i class="fa fa-trash text-danger"></i></label>
+                </div>
+                <input type="file" name="file" class="d-none" #file accept="png,jpg,svg,jpeg" (change)="getFile($event)">
                 <div class="img-up">
                     <div class="upload-img">Click to upload or drag and drop SVG, PNG, JPG, or Gif (max: 800px x 400px)
                     </div>
-                    <button class="button primary--btn">Add more</button>
+                    <button class="button primary--btn" (click)="file.click()">Add more</button>
                 </div>
             </div>
 
             <div class="form-group mt-2">
-                <button class="button primary-btn w-100">Add Product</button>
+                <button class="button primary-btn w-100" (click)="addProduct()" [disabled]="!isFormValid() || is_operation_in_progress">{{is_operation_in_progress ? (is_uploading ? '...Uploading' : '...Adding Product') : 'Add Product'}}</button>
+            </div>
+
+            <div class="form-group mt-2">
+                <button class="btn btn-primary" (click)="resetForm()">Clear Form</button>
             </div>
         </div>
     </div>

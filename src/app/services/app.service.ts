@@ -134,5 +134,29 @@ export class AppService {
     this.router.navigate([path]);
   }
 
+
+  states: string[] = [
+    "lagos",
+    "abuja",
+    "delta",
+    "ondo",
+    "bauchi",
+    "edo",
+    "cross river",
+    "enugu",
+    "gombe",
+    "kwara",
+    "kano",
+    "kaduna",
+    "plateau",
+    "borno",
+    "imo",
+    "rivers",
+    "sokoto",
+    "adamawa",
+    "akwa ibom",
+    "kebbi"
+  ]
+
   
 }

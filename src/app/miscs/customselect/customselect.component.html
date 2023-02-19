@@ -1,13 +1,13 @@
 <div class="custom-select-input-container">
     <div class="form-floating mb-3">
-        <input type="{{inputType}}" (blur)="show_list != show_list" class="form-control" (click)="show_list = true" (keyup.enter)="handleEnterKeypress()" [(ngModel)]="textInput" id="floatingInput" placeholder="{{placeholderText}}">
+        <input type="{{inputType}}" (blur)="show_list != show_list" class="form-control" (blur)="handleHideList()" (click)="show_list = true" (keyup.enter)="handleEnterKeypress()" [(ngModel)]="textInput" id="floatingInput" placeholder="{{placeholderText}}">
         <label for="floatingInput" class="text-muted small">{{labelText}}</label>
 
         <div class="list-container" [ngClass]="{'d-none': !show_list}">
             <ul>
                 <li *ngFor="let item of listItems | customfilter: 'label' : textInput" (click)="handleSelectedItem(item)">{{item.label}}</li>
             </ul>
-            <span role="button" class="p-2 small text-muted" (click)="handleEnterKeypress()" *ngIf="allowCreateNew && textInput !== null && textInput.trim() !== '' && !checkItemExistsInList()">Create {{textInput}}</span>
+            <span role="button" class="p-2 small text-muted" (click)="handleEnterKeypress()" *ngIf="allowCreateNew && textInput !== null && textInput.toString().trim() !== '' && !checkItemExistsInList()">Create {{textInput}}</span>
         </div>
     </div>
 </div>

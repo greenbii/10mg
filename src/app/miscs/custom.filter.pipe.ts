@@ -16,9 +16,15 @@ export class FilterPipe implements PipeTransform {
     return items.filter(singleItem => {
         for(let ff of iArray) {
           if(singleItem[ff]) {
-            
-            if(singleItem[ff].toLowerCase().includes(value.toLowerCase())) {
-              return true;
+            try{
+              if(singleItem[ff].toString().toLowerCase().includes(value.toLowerCase())) {
+                return true;
+              }
+            }
+            catch(e){
+              if(singleItem[ff].toString().includes(value)) {
+                return true;
+              }
             }
           }
         }

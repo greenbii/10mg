@@ -48,11 +48,12 @@
             <div class="prod-img"></div>
             <div class="prod-details pt-4">
                 <div class="prod-stat-name">
-                    <p class="available">{{productCard.status}}</p>
-                    <h6 class="prod-name">{{productCard.name}}</h6>
+                    <p class="available">{{productCard.quantity > 0 ? 'Available' : 'Out of Stock'}}</p>
+                    <h6 class="prod-name">{{productCard.drug.name | titlecase}}</h6>
                 </div>
-                <h6 class="price">{{productCard.price | currency : 'NGN' : 'symbol-narrow'}}</h6>
+                <h6 class="price">{{productCard.discount_price | currency : 'NGN' : 'symbol-narrow'}}</h6>
             </div>
+            <span class="small text-muted">{{productCard.brand.name | titlecase}}</span>
         </div>
     </div>
 

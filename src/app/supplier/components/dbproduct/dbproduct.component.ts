@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dbproduct',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DbproductComponent implements OnInit {
 
-  productCards = [
+  productCards: any = [
     {
       status: 'Available',
       name: 'Pentazocine',
@@ -51,10 +52,15 @@ export class DbproductComponent implements OnInit {
   ]
   
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.productCards = [];
+
+    const d:any = this.route.snapshot.data;
+    if(d.pd) {
+      this.productCards = d.pd;
+    }
   }
 
 }

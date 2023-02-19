@@ -74,18 +74,20 @@
                 <h2>Let's get you verified</h2>
                 <p class="mt-3">Delivery Information</p>
                 <input type="text" name="street" formControlName="address" class="textfield mt-3" placeholder="Street name">
-                <input type="text" name="city" formControlName="city" class="textfield mt-3" placeholder="City">
-                <select class="form-select mt-3" formControlName="state" aria-label="Default select example">
+                <!-- <input type="text" name="city" formControlName="city" class="textfield mt-3" placeholder="City"> -->
+                <select class="form-select mt-3" formControlName="state" (change)="loadStateCities()" aria-label="Default select example">
                     <option value="" selected>State/Region</option>
-                    <option value="abuja">Abuja</option>
-                    <option value="lagos">Lagos</option>
-                    <option value="ondo">Ondo</option>
+                    <option value="{{state}}" *ngFor="let state of states">{{state | titlecase}}</option>
+                </select>
+                <select class="form-select mt-3" formControlName="city" aria-label="Default select example">
+                    <option value="" selected>City</option>
+                    <option value="{{city}}" *ngFor="let city of cities">{{city | titlecase}}</option>
                 </select>
                 <select class="form-select mt-3" formControlName="country" aria-label="Default select example">
                     <option value="" selected>Country</option>
                     <option value="nigeria">Nigeria</option>
-                    <option value="united states of america">United States of America</option>
-                    <option value="united kingdom">United Kingdom</option>
+                    <!--<option value="united states of america">United States of America</option>
+                    <option value="united kingdom">United Kingdom</option>-->
                 </select>
                 <button class="button primary-btn my-4" [disabled]="!bRegForm.valid" type="button" (click)="steps = 4">Next</button>
                 <p class="pag">Page 1 <span>of 2</span></p>
