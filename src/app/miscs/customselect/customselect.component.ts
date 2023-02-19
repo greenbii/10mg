@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+
 @Component({
   selector: 'app-customselect',
   templateUrl: './customselect.component.html',
@@ -14,11 +15,13 @@ export class CustomselectComponent implements OnInit {
   @Input() allowCreateNew: boolean = false;
   @Output() selectedItemChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() listItemsChange: EventEmitter<any[]> = new EventEmitter<any[]>();
+  @Output() allowCreateNewChange: EventEmitter<boolean> = new EventEmitter<boolean>(false)
   @Input() inputType: string = 'text';
 
   show_list: boolean = false;
 
-  textInput: any = null;
+  @Input() textInput: any = null;
+  @Output() textInputChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -33,7 +36,7 @@ export class CustomselectComponent implements OnInit {
   handleEnterKeypress() {
     if(this.allowCreateNew) {
       //add the newly entered item to the list
-      if(this.textInput !== null && this.textInput.trim().length !== 0) {
+      if(this.textInput !== null && this.textInput.toString().trim().length !== 0) {
         //add the item
         if(this.checkItemExistsInList()) {
           this.show_list = false;
@@ -43,12 +46,13 @@ export class CustomselectComponent implements OnInit {
         this.listItems.push(JSON.parse(JSON.stringify(new_item)))
         this.listItemsChange.emit(this.listItems);
         this.handleSelectedItem(new_item)
+        this.allowCreateNewChange.emit(true);
       }
     }
   }
 
   checkItemExistsInList(): boolean {
-    return this.textInput !== null && this.textInput.trim().length !== 0 && this.listItems.findIndex((ff)=> ff.label.toLowerCase().trim() === this.textInput.toLowerCase().trim()) !== -1
+    return this.textInput !== null && this.textInput.toString().trim().length !== 0 && this.listItems.findIndex((ff)=> ff.label.toString().toLowerCase().trim() === this.textInput.toString().toLowerCase().trim()) !== -1
   }
 
   triggerSelected() {
@@ -57,6 +61,14 @@ export class CustomselectComponent implements OnInit {
     //this.listItemsChange.emit(this.listItems);
     this.show_list = false;
   }
+
+  handleHideList() {
+    setTimeout((
+    )=>{
+      this.show_list = false
+    }, 300)
+  }
   
+
 
 }

@@ -10,6 +10,9 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+requestVerificationCode() {
+throw new Error('Method not implemented.');
+}
 
   regForm: FormGroup = new FormGroup({
     contact_person: new FormControl(null, [Validators.required, Validators.minLength(3)]),
@@ -21,7 +24,7 @@ export class SignupComponent implements OnInit {
     position: new FormControl(null)
   })
 
-  steps: number = 1
+  steps: number = 1;
 
   current_tab: string = 'pharmacist'
   reg_error: string | null = null;
@@ -38,15 +41,18 @@ export class SignupComponent implements OnInit {
 
   bRegForm: FormGroup = new FormGroup({
     address: new FormControl(null, [Validators.required]),
-    city: new FormControl(null),
-    state: new FormControl(null, [Validators.required]),
-    country: new FormControl(null, [Validators.required])
+    city: new FormControl(""),
+    state: new FormControl("", [Validators.required]),
+    country: new FormControl("", [Validators.required])
   })
 
   pharmForm: FormGroup = new FormGroup({
     licence_number: new FormControl(null, [Validators.required]),
     expiry_date: new FormControl(null, [Validators.required]),
   })
+
+  states: string[] = [];
+  cities: string[] = [];
 
   supRegForm: FormGroup = new FormGroup({
     licence_number: new FormControl(null, [Validators.required]),
@@ -59,14 +65,34 @@ export class SignupComponent implements OnInit {
   constructor(private appService: AppService, private auth: AngularFireAuth, private fStorage: AngularFireStorage) { }
 
   ngOnInit(): void {
+    this.states = this.appService.states.sort((a: any, b:any)=>{
+      if(a > b) return 1;
+      if(a < b) return -1;
+
+      return 0;
+    })
   }
 
   checkValidCodeInput() {
     return this.code_fields.some(s=> s === null)
   }
 
-  requestVerificationCode() {
-
+  async loadStateCities() {
+    try {
+    //load the available cities for the selected state
+      if(this.bRegForm.value.state !== null && this.bRegForm.value.state.trim() !== "") {
+        //load the cities available for this state
+        const rs = await this.appService.initiateHttpRequest("get", "/available-cities/"+this.bRegForm.value.state).toPromise();
+        if(rs?.status === true) {
+          this.cities = [];
+          this.bRegForm.patchValue({city: ""});
+          this.cities = rs.data.map((d: any)=> d.destination_area)
+        }
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
   }
 
   handleFileSelection($event: any, type: string) {
