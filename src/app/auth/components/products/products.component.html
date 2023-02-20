@@ -10,10 +10,10 @@
                     <p>{{product.drug.name}}</p>
                 </div>
                 <div class="product-price">
-                    <p>{{product.actual_price | currency}}</p>
+                    <p>{{product.actual_price | currency:"₦"}}</p>
                 </div>
                 <div class="product-old-price">
-                    <small>{{product.discount_price | currency}}</small>
+                    <small>{{product.discount_price | currency: "₦"}}</small>
                 </div>
                 <button class="button primary-btn add-to-cart-btn">Add to cart</button>
             </div>
