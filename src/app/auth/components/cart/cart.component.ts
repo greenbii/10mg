@@ -33,6 +33,7 @@ export class CartComponent implements OnInit {
 
 
     if(dt.cart) {
+      if(!dt.cart.items) return;
       this.cart_items = dt.cart?.items;
       this.business_address = dt.cart?.business_address;
       this.address_delivery = dt.cart?.address_delivery;
@@ -172,7 +173,7 @@ export class CartComponent implements OnInit {
   
         //alert('Payment complete! Reference: ' + reference);
         const token = await this.appService.getCurrentUserToken(); //().getIdToken().getJwtToken();
-        const resp = await this.appService.initiateHttpRequest('/post', '/order' ,{reference: reference}, token).toPromise();
+        const resp = await this.appService.initiateHttpRequest('post', '/order' ,{reference: reference}, token).toPromise();
         if(resp?.status === true) {
           //notify the user that the payment method has been added
           //or rather display the payment methods for the user
@@ -199,6 +200,37 @@ export class CartComponent implements OnInit {
     });
   
     handler.openIframe();
+  }
+
+  async proceedCheckout() {
+    //proceed to checkout
+    const data = {
+      items: this.cart_items,
+      delivery_address: this.business_address,
+      total_weight: this.getTotalWeight(),
+      amount: this.getSubtotal(),
+      delivery_amount: this.getDeliveryFee(),
+      delivery_type: this.delivery
+    }
+
+    try {
+      this.is_operation_in_progress = true;
+      const token = await this.appService.getCurrentUserToken();
+      const resposne = await this.appService.initiateHttpRequest('post', '/order', data, token).toPromise();
+      if(resposne?.status === true) {
+        //navigate to the order page
+        this.appService.redirect("/auth/order/"+resposne?.data.order_id)
+      }
+      else {
+        alert(resposne?.message);
+      }
+
+      this.is_operation_in_progress = false;
+    }
+    catch(e){
+      console.log(e);
+      this.is_operation_in_progress = false;
+    }
   }
 
 }
