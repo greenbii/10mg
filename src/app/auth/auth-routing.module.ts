@@ -17,6 +17,8 @@ import { ProductdetailsComponent } from './components/productdetails/productdeta
 import { ProductDetailResolver } from './resolvers/product-details-resolver';
 import { CartComponent } from './components/cart/cart.component';
 import { CartResolver } from './resolvers/cart-resolver';
+import { OrderComponent } from './components/order/order.component';
+import { OrderResolver } from './resolvers/order-resolver';
 
 
 const routes: Routes = [
@@ -42,6 +44,11 @@ const routes: Routes = [
       {
         path: 'orders',
         component: OrdersComponent
+      },
+      {
+        path: 'order/:id',
+        component: OrderComponent,
+        resolve: {dt: OrderResolver}
       },
       {
         path: 'product-status',
@@ -97,7 +104,8 @@ const routes: Routes = [
     AccountOverviewResolver,
     ShopResolver,
     ProductDetailResolver,
-    CartResolver
+    CartResolver,
+    OrderResolver
   ]
 })
 export class AuthRoutingModule {}

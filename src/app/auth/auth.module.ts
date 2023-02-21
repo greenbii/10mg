@@ -17,6 +17,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 //import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 import { FormsModule } from '@angular/forms';
+import { OrderComponent } from './components/order/order.component';
 
 
 
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     WishlistComponent,
     CartComponent,
     DashboardComponent,
-    ProductdetailsComponent
+    ProductdetailsComponent,
+    OrderComponent
   ],
   imports: [
     CommonModule,
