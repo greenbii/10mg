@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountOverviewResolver } from '../auth/resolvers/account-overview-resolver';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
+import { DrugsComponent } from './components/drugs/drugs.component';
 import { SupplierdashboardComponent } from './components/supplierdashboard/supplierdashboard.component';
 import { SupplierlandingComponent } from './components/supplierlanding/supplierlanding.component';
 import { SupplierProducts } from './resolvers/product-details-resolver';
@@ -27,6 +28,10 @@ const routes: Routes = [
         {
           path: 'add-products',
           component: AddproductComponent
+        },
+        {
+          path: 'add-drugs',
+          component: DrugsComponent
         }
       ]
     }
