@@ -40,12 +40,13 @@
                 </ul>
             </div>
         </div>
-        <a routerLink="/supplier/add-products"><button class="button primary-btn add-prod">Add poduct</button></a>
+        <a routerLink="/supplier/add-products" class="mr-2"><button class="button primary-btn add-prod">Add product</button></a>
+        <!-- <a routerLink="/supplier/add-drugs"><button class="button primary-btn add-prod">Add Drugs</button></a> -->
     </div>
 
     <div class="product-cards p-4">
         <div class="product-card" *ngFor="let productCard of productCards">
-            <div class="prod-img"></div>
+            <div class="prod-img" [ngStyle]="{'background-image': 'url(' + (productCard.images[0] ? productCard.images[0] : '../../../.../../../assets/images/pills-img.png') + ')'}"></div>
             <div class="prod-details pt-4">
                 <div class="prod-stat-name">
                     <p class="available">{{productCard.quantity > 0 ? 'Available' : 'Out of Stock'}}</p>

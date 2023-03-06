@@ -3,6 +3,7 @@
 .list-container {
     width: 100%;
     position: absolute;
+    background-color: #ffffff;
     bottom: -25;
     border-radius: 5px;
     border: 1px solid #cfcfcf;
@@ -26,4 +27,12 @@
 
 .list-container ul li:hover {
     background-color: #ececec;
+}
+
+.drop {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    top: 1rem;
+    cursor: pointer;
 }

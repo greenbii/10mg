@@ -3,17 +3,17 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AppService } from 'src/app/services/app.service';
 
 @Component({
-  selector: 'app-addproduct',
-  templateUrl: './addproduct.component.html',
-  styleUrls: ['./addproduct.component.css']
+  selector: 'app-drugs',
+  templateUrl: './drugs.component.html',
+  styleUrls: ['./drugs.component.css']
 })
-export class AddproductComponent implements OnInit {
+export class DrugsComponent implements OnInit {
 
   drugs: any[] = [];
 
-  drugs_strength_value: number[] = [
-    0.5, 1, 1.5, 2, 2.5, 5, 10, 20, 30, 40, 50, 100, 200
-  ]
+  drugs_strength_value: number[] = Array(100).fill(0).map((v, i)=> {
+    return i+1
+  });
 
   drug_details: any = {
     weights: [],
@@ -29,8 +29,8 @@ export class AddproductComponent implements OnInit {
     weight: null,
     presentation: null,
     strength: null,
+    strength_value: null,
     quantity: null,
-    stregth_value: null,
     discount_price: null,
     actual_price: null,
     description: null,
@@ -136,20 +136,18 @@ export class AddproductComponent implements OnInit {
           if(response.data.brands && response.data.brands.length !== 0) {
             //list all the brands for this product
             this.drug_details.brands = response.data.brands.map((b: any)=>{
-              return {...b, label: b.name.toUpperCase(), value: b.brand_id}
+              return {...b, label: b.name, value: b.brand_id}
             });
           }
 
           //get the available strengths for this drug
           if(response.data.variations && response.data.variations.length !== 0) {
-            this.product_details.variations = response.data.variations;
             this.drug_details.strengths = response.data.variations.map((b: any)=>{
               return {...b, label: b.strength, value: b.id}
             });
           }
 
           if(response.data.packaging && response.data.packaging.length !== 0) {
-            this.product_details.packaging = response.data.packaging;
             this.drug_details.weights  = response.data.packaging.map((b: any)=>{
               return {...b, label: b.weight, value: b.package_id}
             });
@@ -234,29 +232,6 @@ export class AddproductComponent implements OnInit {
       
     }catch(er){
       console.log(er);
-    }
-  }
-
-  loadDrugDescription() {
-    
-    if(this.product.strength !== null && this.product.presentation !== null) {
-      console.log(this.product.strength, this.product.presentation);
-      //load the description
-      if(this.product_details.variations.length !== 0) {
-        const desc = this.product_details.variations.find((f:any)=> {
-          return f.presentation === this.product.presentation && f.strength === this.product.strength
-        });
-
-
-        //this.product.description = this.product_details.variations[0].description;
-
-        if(desc) {
-          this.product.description = desc.description;
-        }
-        else {
-          this.product.description = null;
-        }
-      }
     }
   }
 

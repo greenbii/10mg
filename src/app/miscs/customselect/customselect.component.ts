@@ -68,6 +68,22 @@ export class CustomselectComponent implements OnInit {
       this.show_list = false
     }, 300)
   }
+
+  capitalize(s: string | number) {
+    const ss = s.toString();
+    const first_letter = ss.charAt(0);
+    let rt = s;
+    if(parseInt(first_letter+"") !== 0) {
+      //means its a number
+      //return value as it is
+      rt = s;
+    }
+    else {
+      rt = ss.charAt(0).toUpperCase()+ss.substring(1).toLowerCase()
+    }
+
+    return rt;
+  }
   
 
 
