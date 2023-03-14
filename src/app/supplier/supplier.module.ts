@@ -9,6 +9,11 @@ import { SupplierlandingComponent } from './components/supplierlanding/supplierl
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { MiscsModule } from '../miscs/miscs.module';
 import { DrugsComponent } from './components/drugs/drugs.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ProfileComponent } from './components/settings/profile/profile.component';
+import { ChangepasswordComponent } from './components/settings/changepassword/changepassword.component';
+import { NotificationsettingsComponent } from './components/settings/notificationsettings/notificationsettings.component';
+import { AccountstatusComponent } from './components/settings/accountstatus/accountstatus.component';
 //import { ChartModule } from 'angular2-chartjs';
 
 
@@ -20,7 +25,12 @@ import { DrugsComponent } from './components/drugs/drugs.component';
     DbSideNavComponent,
     SupplierdashboardComponent,
     SupplierlandingComponent,
-    DrugsComponent
+    DrugsComponent,
+    SettingsComponent,
+    ProfileComponent,
+    ChangepasswordComponent,
+    NotificationsettingsComponent,
+    AccountstatusComponent
   ],
   imports: [
     CommonModule,

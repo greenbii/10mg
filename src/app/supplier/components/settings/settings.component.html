@@ -1,0 +1,33 @@
+<div class="">
+    <h4>Settings</h4>
+</div>
+
+<div class="main">
+    <div class="container">
+        <h4><i class="fa fa-arrow-left" role="button" *ngIf="current_tab !== null" (click)="showTab(null)"></i>  {{current_tab | titlecase}}</h4>
+        <div class="row" *ngIf="current_tab === null">
+            <div class="col-md-6 mt-2 mb-2" role="button" (click)="showTab(item)" *ngFor="let item of settings">
+                <div class="d-flex justify-content-between bg-light rounded">
+                    <div class="d-flex">
+                        <div class="bg-info p-2" style="width: 50px; border-radius: 50%;">
+                            <i class="{{item.icon}} fa-2x text-primary"></i>
+                        </div>
+                        <div class="ml-2" style="margin-left: 10px;">
+                            <span>{{item.title}}</span>
+                            <p class="text-muted p-0 m-0 small">{{item.description}}</p>
+                        </div>
+                    </div>
+
+                    <div class="" role="button">
+                        <i class="fa fa-arrow-right fa-2x text-muted"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <app-profile *ngIf="current_tab === 'profile'"></app-profile>
+        <app-changepassword *ngIf="current_tab === 'password'"></app-changepassword>
+        <app-notificationsettings *ngIf="current_tab === 'notifications'"></app-notificationsettings>
+        <app-accountstatus *ngIf="current_tab === 'health'"></app-accountstatus>
+    </div>
+</div>
