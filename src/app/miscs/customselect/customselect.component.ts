@@ -17,6 +17,7 @@ export class CustomselectComponent implements OnInit {
   @Output() listItemsChange: EventEmitter<any[]> = new EventEmitter<any[]>();
   @Output() allowCreateNewChange: EventEmitter<boolean> = new EventEmitter<boolean>(false)
   @Input() inputType: string = 'text';
+  @Input() removeDuplicates: boolean = false;
 
   show_list: boolean = false;
 
@@ -26,6 +27,7 @@ export class CustomselectComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //this.listItemsChange.asObservable().subscribe()
   }
 
   handleSelectedItem(item: any) {
