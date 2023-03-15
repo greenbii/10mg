@@ -14,6 +14,11 @@ import { ProfileComponent } from './components/settings/profile/profile.componen
 import { ChangepasswordComponent } from './components/settings/changepassword/changepassword.component';
 import { NotificationsettingsComponent } from './components/settings/notificationsettings/notificationsettings.component';
 import { AccountstatusComponent } from './components/settings/accountstatus/accountstatus.component';
+import { ReviewsComponent } from './components/settings/reviews/reviews.component';
+import { CustomersupportComponent } from './components/settings/customersupport/customersupport.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { WalletComponent } from './components/wallet/wallet.component';
+import { OrdersComponent } from './components/orders/orders.component';
 //import { ChartModule } from 'angular2-chartjs';
 
 
@@ -30,7 +35,12 @@ import { AccountstatusComponent } from './components/settings/accountstatus/acco
     ProfileComponent,
     ChangepasswordComponent,
     NotificationsettingsComponent,
-    AccountstatusComponent
+    AccountstatusComponent,
+    ReviewsComponent,
+    CustomersupportComponent,
+    MessagesComponent,
+    WalletComponent,
+    OrdersComponent
   ],
   imports: [
     CommonModule,

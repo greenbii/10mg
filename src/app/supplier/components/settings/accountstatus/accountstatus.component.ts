@@ -12,4 +12,11 @@ export class AccountstatusComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  account_status = {
+    status: "normal",
+    rating: 5,
+    cancellation_rate: 0,
+    shipment_performance: "Good"
+  }
+
 }
