@@ -4,7 +4,7 @@
 
 <div class="main">
     <div class="container">
-        <h4><i class="fa fa-arrow-left" role="button" *ngIf="current_tab !== null" (click)="showTab(null)"></i>  {{current_tab | titlecase}}</h4>
+        <h4><i class="fa fa-arrow-left" role="button" *ngIf="current_tab !== null" (click)="showTab(null)"></i>  {{currently_selelected_tab !== null ? currently_selelected_tab.title : current_tab | titlecase}}</h4>
         <div class="row" *ngIf="current_tab === null">
             <div class="col-md-6 mt-2 mb-2" role="button" (click)="showTab(item)" *ngFor="let item of settings">
                 <div class="d-flex justify-content-between bg-light rounded">
@@ -29,5 +29,7 @@
         <app-changepassword *ngIf="current_tab === 'password'"></app-changepassword>
         <app-notificationsettings *ngIf="current_tab === 'notifications'"></app-notificationsettings>
         <app-accountstatus *ngIf="current_tab === 'health'"></app-accountstatus>
+        <app-reviews *ngIf="current_tab === 'reviews'"></app-reviews>
+        <app-customersupport *ngIf="current_tab === 'support'"></app-customersupport>
     </div>
 </div>

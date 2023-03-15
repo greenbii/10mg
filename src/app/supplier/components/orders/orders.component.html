@@ -1,0 +1,18 @@
+<div class="main">
+    <div class="container">
+        <h4>Orders</h4>
+
+        <div class="">
+            <ul class="s-items">
+                <li [ngClass]="{'active': current_tab === 'pending'}" (click)="current_tab = 'pending'">Pending</li>
+                <li [ngClass]="{'active': current_tab === 'unshipped'}" (click)="current_tab = 'unshipped'">Unshipped</li>
+                <li [ngClass]="{'active': current_tab === 'shipped'}" (click)="current_tab = 'shipped'">Shipped</li>
+                <li [ngClass]="{'active': current_tab === 'cancelled'}" (click)="current_tab = 'cancelled'">Cancelled</li>
+            </ul>
+        </div>
+
+        <div class="text-center mt-5" *ngIf="transactions.length === 0">
+            <span>No recent order is available for this account</span>
+        </div>
+    </div>
+</div>

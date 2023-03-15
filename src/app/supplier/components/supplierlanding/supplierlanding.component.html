@@ -8,7 +8,7 @@
             <div class="dropdown">
                 <ul class="dropdown-menu">
                     <li class="dropdown-item">{{appService.current_user.displayName}}</li>
-                    <li><a class="dropdown-item" href="#">View Profile</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['/', 'supplier', 'settings']" [queryParams]="{tab:'profile'}">View Profile</a></li>
                 </ul>
             </div>
             <div class="dropdown">

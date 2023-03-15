@@ -1,6 +1,28 @@
 <div class="container">
-    <div class="profile-details">
-        <p class="profile-title text-muted">Name of Brand</p>
-        <p class="profile-item mb-2">{{profile.name | titlecase}}</p>
+    <div class="profile-details" *ngIf="business !== null">
+        <div class="mt-2">
+            <p class="profile-title text-muted">Name of Brand</p>
+            <p class="profile-item p-0 m-0">{{business.name | titlecase}}</p>
+        </div>
+        <div class="mt-2">
+            <p class="profile-title text-muted">ID Number</p>
+            <p class="profile-item p-0 m-0">{{business.id.toUpperCase()}}</p>
+        </div>
+        <div class="mt-2">
+            <p class="profile-title text-muted">Email</p>
+            <p class="profile-item p-0 m-0">{{business.email | titlecase}}</p>
+        </div>
+        <div class="mt-2">
+            <p class="profile-title text-muted">Phone</p>
+            <p class="profile-item p-0 m-0">{{business.phone}}</p>
+        </div>
+        <div class="mt-2">
+            <p class="profile-title text-muted">Licence</p>
+            <p class="profile-item p-0 m-0">NA</p>
+        </div>
+        <div class="mt-2">
+            <p class="profile-title text-muted">Expiry Date</p>
+            <p class="profile-item p-0 m-0">NA</p>
+        </div>
     </div>
 </div>

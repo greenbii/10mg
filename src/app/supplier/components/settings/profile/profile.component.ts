@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,13 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileComponent implements OnInit {
 
   profile: any = {
-    name: null,
+    name: "Nordic Normal",
     
   }
 
-  constructor() { }
+  business: any = null;
+
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
+    //console.log(this.appService.current_business_details);
+
+    this.business = this.appService.current_business_details.business;
   }
 
 }

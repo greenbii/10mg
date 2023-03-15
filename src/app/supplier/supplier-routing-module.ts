@@ -4,9 +4,12 @@ import { AccountOverviewResolver } from '../auth/resolvers/account-overview-reso
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { DrugsComponent } from './components/drugs/drugs.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { OrdersComponent } from './components/orders/orders.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SupplierdashboardComponent } from './components/supplierdashboard/supplierdashboard.component';
 import { SupplierlandingComponent } from './components/supplierlanding/supplierlanding.component';
+import { WalletComponent } from './components/wallet/wallet.component';
 import { SupplierProducts } from './resolvers/product-details-resolver';
 
 
@@ -37,6 +40,18 @@ const routes: Routes = [
         {
           path: 'settings',
           component: SettingsComponent
+        },
+        {
+          path: 'messages',
+          component: MessagesComponent
+        },
+        {
+          path: 'wallet',
+          component: WalletComponent
+        },
+        {
+          path: 'orders',
+          component: OrdersComponent
         }
       ]
     }

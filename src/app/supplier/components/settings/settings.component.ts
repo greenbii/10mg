@@ -15,6 +15,7 @@ export type Settings = {
 })
 export class SettingsComponent implements OnInit {
   current_tab: string | null = null;
+  currently_selelected_tab: Settings | null = null;
   settings: Settings[] = [
     {
       title: "Profile",
@@ -22,12 +23,12 @@ export class SettingsComponent implements OnInit {
       icon: "fa fa-user",
       tab: "profile"
     },
-    {
+    /*{
       title: "Verify Account",
       description: "Complete your accout KYC",
       icon: "fa fa-key",
       tab: "verify"
-    },
+    },*/
     {
       title: "Account Health",
       description: "Know you accout health status",
@@ -55,7 +56,7 @@ export class SettingsComponent implements OnInit {
     {
       title: "Support",
       description: "Speak to our customer service",
-      icon: "fa fa-help",
+      icon: "fa fa-question",
       tab: "support"
     }
   ]
@@ -74,6 +75,7 @@ export class SettingsComponent implements OnInit {
   }
 
   showTab(i: Settings | null) {
+    this.currently_selelected_tab = i;
     if(i !== null) {
       this.router.navigate(["/supplier/settings"], {queryParams: {tab: i.tab}})
     }

@@ -1,0 +1,40 @@
+<div class="content">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <p class="p-2 small text-muted">Drop a message to our support team</p>
+            <form [formGroup]="uForm">
+                <div class="form-group mt-3">
+                    <label class="small">Title/Subject</label>
+                    <input type="text" formControlName="subject" class="form-control" placeholder="Subject">
+                </div>
+    
+                <div class="form-group mt-3">
+                    <label class="small">Message</label>
+                    <textarea formControlName="message" rows="5" placeholder="Enter a description..." class="form-control" name="subject"></textarea>
+                </div>
+
+                <div class="form-group mt-3">
+                    <button class="btn btn-secondary" [disabled]="is_operation_in_progress" style="margin-right: 20px;" (click)="uForm.reset()">Cancel</button>
+                    <button class="btn btn-primary" [disabled]="!uForm.valid || is_operation_in_progress" (click)="sendSupportTicket()">{{is_operation_in_progress ? 'Processing...' : 'Submit'}}</button>
+                </div>
+            </form>
+
+            <div class="mt-5">
+                <p class="small text-muted"><strong>Other ways to contact us</strong></p>
+                <div class="d-flex justify-content-between">
+                    <div class="mb-3">
+                        <p class="p-0 m-0 small"><strong>Our office phone number</strong></p>
+                        <p class="text-muted small">+234(0)812345</p>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="mb-3">
+                        <p class="p-0 m-0 small"><strong>Email Address</strong></p>
+                        <p class="text-muted small"><a href="mailto:info@10mg.co.uk">info@10mg.co.uk</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

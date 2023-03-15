@@ -1,0 +1,14 @@
+<div class="main">
+    <div class="container">
+        <h4>Wallet</h4>
+
+        <div class="alert alert-info text-center p-5">
+            <h3 class="p-0 m-0">{{total_received | currency}}</h3>
+            <p class="p-0 m-0">Total cash received</p>
+        </div>
+
+        <div class="text-center" *ngIf="transactions.length === 0">
+            <span>No recent transaction is available for this account</span>
+        </div>
+    </div>
+</div>
