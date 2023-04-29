@@ -6,9 +6,15 @@ img {
     width: 80px;
 }
 
-form input {
+/*form input {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
+}*/
+
+.form-control {
+    border-radius: 3px;
+    border: 1px solid #cfcfcf;
+    padding: 5px;
 }
 
 .button {
@@ -19,7 +25,6 @@ form input {
 form {
     width: 30%;
     margin: auto;
-    text-align: center;
     margin-top: 3rem;
 }
 

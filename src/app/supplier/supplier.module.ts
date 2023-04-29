@@ -19,6 +19,11 @@ import { CustomersupportComponent } from './components/settings/customersupport/
 import { MessagesComponent } from './components/messages/messages.component';
 import { WalletComponent } from './components/wallet/wallet.component';
 import { OrdersComponent } from './components/orders/orders.component';
+
+import { ProductStatusComponent } from './components/product-status/product-status.component';
+import { OrderComponent } from './components/order/order.component';
+import { BankupdateComponent } from './components/wallet/bankupdate/bankupdate.component';
+import { WithdrawalsComponent } from './components/wallet/withdrawals/withdrawals.component';
 //import { ChartModule } from 'angular2-chartjs';
 
 
@@ -40,7 +45,11 @@ import { OrdersComponent } from './components/orders/orders.component';
     CustomersupportComponent,
     MessagesComponent,
     WalletComponent,
-    OrdersComponent
+    OrdersComponent,
+    ProductStatusComponent,
+    OrderComponent,
+    BankupdateComponent,
+    WithdrawalsComponent
   ],
   imports: [
     CommonModule,
@@ -52,3 +61,8 @@ import { OrdersComponent } from './components/orders/orders.component';
   ]
 })
 export class SupplierModule { }
+
+
+//FLWPUBK-360db2cc6ffa30f5a23b3ec2ee759918-X
+//FLWSECK-e33c917838a75e35142ac1c6f075413a-187c5c6c142vt-X
+//e33c917838a72b1e21b14a53

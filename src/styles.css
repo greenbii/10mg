@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 * {
     padding: 0;
@@ -12,6 +12,7 @@
     --secondary-color: #EF8A89;
     --white: #FFF;
     --fade-black: #ddd;
+    --fade-blue: rgb(130, 200, 254);
     --order-placed-color: #2FBD6A;
     --delivered-color: #F2C422;
     --pending-color: #FFF0DB;
@@ -30,12 +31,12 @@ h2,
 h3,
 h4,
 h5 {
-    font-family: "Cabin", sans-serif;
+    font-family: "Poppins", sans-serif;
     line-height: 64px;
 }
 
 p {
-    font-family: "Roboto", sans-serif;
+    font-family: "Poppins", sans-serif;
     line-height: 24px;
     margin-bottom: 0;
 }
@@ -82,8 +83,9 @@ li {
 .button {
     width: max-content;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: 2px;
     padding: 5px 15px;
+    font-weight: 300;
 }
 
 .primary-btn {
@@ -93,7 +95,7 @@ li {
 }
 
 .primary-btn:disabled {
-    background: var(--fade-black);
+    background: var(--fade-blue);
 }
 
 .primary-btn:disabled:hover {

@@ -14,8 +14,15 @@ export class SigninComponent implements OnInit {
     password: new FormControl(null, [Validators.required, Validators.minLength(4)])
   })
 
+  cForm: FormGroup = new FormGroup({
+    email: new FormControl(null, [Validators.email, Validators.required]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(4)]),
+    confirmation_code: new FormControl(null, [Validators.required])
+  })
+
   error_message: string | null = null;
   is_signing_in: boolean = false;
+  is_operation_in_progress: boolean = false;
 
   async signin() {
     //throw new Error('Method not implemented.');
@@ -33,6 +40,10 @@ export class SigninComponent implements OnInit {
       try {
         const u = await this.appService.auth.signInWithEmailAndPassword(this.regForm.value.email, this.regForm.value.password);
         //get the user type to know where to redirect
+        if(u.user?.email === "admin@10mg.co.uk") {
+          this.appService.redirect("/backend");
+          return;
+        }
         
         const claims = await this.appService.getCurrentUserClaims();
         if(claims.claims["customer_type"] && claims.claims["customer_type"] === "supplier") {
@@ -59,6 +70,11 @@ export class SigninComponent implements OnInit {
   constructor(private router: Router, private appService: AppService) { }
 
   ngOnInit(): void {
+  }
+
+  initiateForgotPassword() {
+    //send code to the user to enable them reset their password
+
   }
 
 }

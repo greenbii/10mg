@@ -1,16 +1,65 @@
 <section class="signin">
     <!-- <img src="./assets/images/10mgVert.png" alt="logo"> -->
+    <h3>Login</h3>
     <form [formGroup]="regForm">
-        <h3>Welcome Back</h3>
-        <input type="email" formControlName="email" name="email" id="email" placeholder="Email" required class="mt-3">
-        <input type="password" formControlName="password" name="password" id="password" (keyup.enter)="signin()" placeholder="********" class="mt-3">
+        <div class="form-group mt-3">
+          <label>Username or Email</label>
+          <input type="email" formControlName="email" name="email" id="email" required class="mt-3 form-control">
+        </div>
+        <div class="form-group mt-3">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control" name="password" id="password" (keyup.enter)="signin()">
+        </div>
+
+        <div class="form-group mb-3 mt-2">
+          <label><input type="checkbox"> Keep me signed in</label>
+        </div>
+        
         <div class="form-group mt-2 mb-2" *ngIf="error_message !== null">
             <div class="alert alert-danger">
                 <small class="small text-white">{{error_message}}</small>
             </div>
         </div>
-        <button class="button primary-btn mt-4" [disabled]="!regForm.valid || is_signing_in" type="submit" (click)="signin()">{{is_signing_in ? 'Signing in...' : 'Sign in'}}</button>
-        <p class="my-3">Don't have an account? <a routerLink="/signup">Sign up</a></p>
-        <a href="#" class="black-link">Forgot Password?</a>
+        <div class="row">
+          <div class="col-md-6">
+            <button class="button primary-btn mb-2" [disabled]="!regForm.valid || is_signing_in" type="submit" (click)="signin()">{{is_signing_in ? 'Signing in...' : 'Login'}}</button>
+          </div>
+          
+          <div class="col-md-6">
+            <button class="button btn-secondary" type="button" routerLink="/signup">Register</button>
+          </div>
+          
+        </div>
+        
+        <!-- <p class="my-3">Don't have an account? <a routerLink="/signup">Sign up</a></p> -->
+        <div class="text-center mt-2">
+          <a href="#" class="black-link">Forgot Password?</a>
+        </div>
+        
     </form>
 </section>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Change Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p class="text-muted small mt-2 mb-2 text-center">We have sent a verification code to your email, please provide the code to complete password change</p>
+          <form [formGroup]="cForm">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="confirmation_code" placeholder="Confirmation Code">
+            </div>
+
+            <div class="form-group mt-3 mb-3">
+                <button class="btn btn-primary w-100" (click)="initiateForgotPassword()" data-bs-dismiss="modal" [disabled]="!cForm.valid || is_operation_in_progress">{{is_operation_in_progress ? '..Processing' : 'Done'}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,27 +1,27 @@
 <section class="body-container">
     <div class="top-items">
         <i class="fa-solid fa-arrow-left" role="button" onclick="history.back()"></i>
-        <h3>Pentazocine</h3>
-        <p>Pending</p>
+        <h3>{{order.order_details[0].drug_name | titlecase}}</h3>
+        <p>{{order.status}}</p>
     </div>
-    <div class="status-details" *ngFor="let status of statuses">
+    <div class="status-details" *ngFor="let status of order_log">
         <div class="status-icons">
             <i class="fa-solid fa-check" ></i>
             <div class="vr mt-1"></div>
         </div>
         <div class="status-lead-texts">
-            <p>{{status.status}}</p>
-            <small>{{status.date}}</small>
+            <p>{{status.action | titlecase}}</p>
+            <small>{{status.date_created | date: "dd, MMMM, yyyy"}}</small>
         </div>
     </div>
 
-    <div class="delivered">
+    <div class="delivered" *ngIf="order.status === 'delivered'">
         <div class="delivered-icons mt-2">
             <div class="uncheck"></div>
         </div>
         <div class="delivered-lead-texts mt-2">
             <p>Delivered</p>
-            <small>17th November 2022</small>
+            <small></small>
         </div>
 
     </div>

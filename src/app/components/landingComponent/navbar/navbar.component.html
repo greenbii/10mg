@@ -1,28 +1,34 @@
-<nav>
+<nav style="background-color: white; padding: 30px;" *ngIf="!appService._is_current_user">
     <a routerLink="/" class="nav-brand">
-        <img src="./assets/images/10mg-logo-vert.png" class="img-fluid" alt="logo">
+        <img src="./assets/images/logo-new.png" class="img-fluid" alt="logo">
     </a>
-    <div class="nav-contents" [ngClass]="openNav ? 'nav-contents-open' : 'nav-contents'">
+    <div class="nav-contents nav-btns" [ngClass]="openNav ? 'nav-contents-open' : 'nav-contents'">
         <div class="nav-links">
             <ul class="mb-0 ps-0">
-                <a routerLink="/" class="me-4">
+                <a href="https://10mg.co.uk" class="me-4">
                     <li>Home</li>
                 </a>
-                <a routerLink="/about" class="mx-4">
-                    <li>About Us</li>
+                <a href="https://10mg.co.uk/about" class="mx-4">
+                    <li>About</li>
                 </a>
                 <a routerLink="/auth/shop" class="mx-4" [ngClass]="{'d-none': !appService._is_current_user}">
                     <li>Shop</li>
                 </a>
-                <a routerLink="/become-supplier" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
+                <a href="https://10mg.co.uk/become-supplier" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
                     <li>Become a Supplier</li>
+                </a>
+                <a routerLink="/signup" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
+                    <li>Register</li>
+                </a>
+                <a routerLink="/" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
+                    <li>Login</li>
                 </a>
             </ul>
         </div>
-        <div class="nav-btns" *ngIf="!appService._is_current_user && !show_header">
+        <!--<div class="nav-btns" *ngIf="!appService._is_current_user && !show_header">
             <a routerLink="/signin"><button class="button secondary-btn me-4">Sign in</button></a>
             <a routerLink="/signup"><button class="button primary-btn">Sign up</button></a>
-        </div>
+        </div>-->
         <div class="nav-btns" *ngIf="show_header || appService._is_current_user">
             <button class="button secondary-btn" (click)="logout()">Logout</button>
         </div>

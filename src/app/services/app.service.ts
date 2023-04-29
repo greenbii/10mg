@@ -134,6 +134,14 @@ export class AppService {
     this.router.navigate([path]);
   }
 
+  getCurrencySymbol(cur: string) {
+    if(cur === "NGN") return "₦";
+
+    if(cur === "USD") return "$";
+
+    return '£';
+  }
+
 
   states: string[] = [
     "lagos",

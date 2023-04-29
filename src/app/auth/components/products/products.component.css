@@ -59,11 +59,11 @@
 .product-price {
     font-weight: 600;
     margin-top: 10px;
-    font-size: 21px;
+    font-size: 18px;
 }
 
 .product-old-price {
-    font-size: 14px;
+    font-size: 12px;
     position: absolute;
     top: 35px;
     left: 90px;

@@ -1,0 +1,64 @@
+<section class="dashboard-container mt-3">
+    <!-- <div class="heading">
+        <div class="head-title">
+            <h4 class="mb-0">Products</h4>
+        </div>
+        <div class="head-actions">
+            <i class="fa-solid fa-user" role="button" data-bs-toggle="dropdown"></i>
+            <div class="dropdown">
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item">Uyi Vincent</li>
+                    <li><a class="dropdown-item" href="#">View Profile</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <i class="fa-solid fa-bell" role="button" data-bs-toggle="dropdown"></i>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">You have no message</a></li>
+                </ul>
+            </div>
+            <div class="vr"></div>
+            <div class="user-name">
+                <p>Nordic Naturals</p>
+                <small>#122-8234-0612</small>
+            </div>
+        </div>
+    </div> -->
+    <div class="sub-heading p-4">
+        <div class="seach-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" name="seach" placeholder="Search product">
+        </div>
+        <div class="filter">
+            <span class="filter-dropdown dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filter
+                by <i class="fa-solid fa-chevron-down"></i></span>
+            <div class="dropdown">
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">New - Old</a></li>
+                    <li><a class="dropdown-item" href="#">Old - New</a></li>
+                    <li><a class="dropdown-item" href="#">Price range</a></li>
+                </ul>
+            </div>
+        </div>
+        <a routerLink="/backend/add-products" class="mr-2"><button class="button primary-btn add-prod">Add product</button></a>
+        <!-- <a routerLink="/supplier/add-drugs"><button class="button primary-btn add-prod">Add Drugs</button></a> -->
+    </div>
+
+    <div class="product-cards p-4">
+        <div class="product-card" *ngFor="let productCard of productCards">
+            <div class="prod-img" [ngStyle]="{'background-image': 'url(' + (productCard.images[0] ? productCard.images[0] : '../../../.../../../assets/images/pills-img.png') + ')'}"></div>
+            <div class="prod-details pt-4">
+                <div class="prod-stat-name">
+                    <p class="available">{{productCard.quantity > 0 ? 'Available' : 'Out of Stock'}}</p>
+                    <h6 class="prod-name">{{productCard.drug.name | titlecase}}</h6>
+                </div>
+                <h6 class="price">{{productCard.discount_price | currency : 'NGN' : 'symbol-narrow'}}</h6>
+            </div>
+            <span class="small text-muted">{{productCard.brand.name | titlecase}}</span>
+        </div>
+    </div>
+
+    <div class="col-md-12 mt-2" *ngIf="productCards.length === 0">
+        <p class="text-center text-muted small">You have not added any product yet, click <strong>Add Product</strong> to add new Product</p>
+    </div>
+</section>

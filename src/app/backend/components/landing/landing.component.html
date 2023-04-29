@@ -1,0 +1,31 @@
+<div class="main">
+    <section class="side-nav" [ngClass]="openSideNav ? 'side-nav-open' : 'side-nav' ">
+        <div class="brand">
+            <img src="../../../../assets/images/10mg-logo.png" alt="10mg logo">
+        </div>
+        <div class="side-nav-routes">
+            <a routerLink="/backend"><i class="fa-solid fa-burger"></i> Dashboard</a>
+            <a routerLink="/backend/products"><i class="fa-solid fa-basket-shopping"></i> Products</a>
+            <a routerLink="/backend/orders"><i class="fa-solid fa-cart-shopping"></i> Orders</a>
+            <a routerLink="/backend/users"><i class="fa-solid fa-users"></i> Users</a>
+            <a routerLink="/backend/wallet"><i class="fa-solid fa-wallet"></i> Wallet</a>
+            <a routerLink="/backend/messages"><i class="fa-solid fa-message"></i> Message</a>
+            <a routerLink="/backend/settings"><i class="fa-solid fa-gear"></i> Settings</a>
+        </div>
+        <div class="logout">
+            <a (click)="logout()" role="button"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </div>
+    </section>
+    
+    
+    <div class="open-icon" *ngIf="openSideNav" (click)="openSideNav = false">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="close-icon" *ngIf="!openSideNav" (click)="openSideNav = true">
+        <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

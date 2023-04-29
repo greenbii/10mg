@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './admin.guard';
 import { AuthGuard } from './auth/auth.guard';
 import { AccountOverviewResolver } from './auth/resolvers/account-overview-resolver';
+import { BackendGuard } from './backend/backend.guard';
 import { AboutComponent } from './components/aboutComponent/about/about.component';
 import { BecomeSupplierLandingComponent } from './components/becomeSupplier/become-supplier-landing/become-supplier-landing.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
@@ -18,7 +19,8 @@ import { TermsandconditionComponent } from './components/terms/termsandcondition
 const routes: Routes = [
   {
     path: '',
-    component: LandingComponent,
+    redirectTo: 'signin',
+    pathMatch: 'full'
   },
   {
     path: 'auth',
@@ -30,6 +32,11 @@ const routes: Routes = [
     loadChildren: ()=>import('./supplier/supplier.module').then(a=> a.SupplierModule),
     canActivate: [AuthGuard],
     resolve: {u: AccountOverviewResolver}
+  },
+  {
+    path: 'backend',
+    loadChildren: ()=>import('./backend/backend.module').then(a=> a.BackendModule),
+    canActivate: [BackendGuard]
   },
   {
     path: 'about',

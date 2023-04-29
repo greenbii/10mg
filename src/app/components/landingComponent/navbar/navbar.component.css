@@ -35,7 +35,7 @@ nav {
 
 .nav-links a {
     color: var(--text-color);
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .nav-links a:hover {

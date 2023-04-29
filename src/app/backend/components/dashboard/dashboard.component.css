@@ -1,0 +1,8 @@
+ul.order-items {
+    list-style: none;
+}
+
+ul.order-items li {
+    display: inline-block;
+    margin-right: 30px;
+}

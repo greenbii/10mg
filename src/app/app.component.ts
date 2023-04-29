@@ -19,12 +19,14 @@ export class AppComponent {
       this.router.events.subscribe((e: Event)=>{
         if(e instanceof NavigationEnd || e instanceof NavigationStart)  {
           const test = /\/supplier/
-          if(test.test(this.router.url)) {
+          const test2 = /\/backend/
+          if(test.test(this.router.url) || test2.test(this.router.url)) {
             this.show_nav_bar = false;
           }
           else {
             this.show_nav_bar = true;
           }
+          
         }
       })
   }

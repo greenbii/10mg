@@ -2,13 +2,66 @@
     <div class="container">
         <h4>Wallet</h4>
 
-        <div class="alert alert-info text-center p-5">
-            <h3 class="p-0 m-0">{{total_received | currency}}</h3>
-            <p class="p-0 m-0">Total cash received</p>
+        <div class="tabs">
+            <div class="pending-delivery">
+                <a class="tab-title" role="button" [routerLink]="['/', 'supplier', 'wallet']" [queryParams]="{tab: 'wallet'}"
+                    [ngClass]="{active: current_tab === 'wallet'}">Wallet</a>
+            </div>
+            <div class="pending-delivery">
+                <a class="tab-title" role="button" [routerLink]="['/', 'supplier', 'wallet']" [queryParams]="{tab: 'withdrawal'}"
+                    [ngClass]="{active: current_tab === 'withdrawal'}">Withdrawals</a>
+            </div>
+            <div class="completed">
+                <a class="tab-title" role="button" [routerLink]="['/', 'supplier', 'wallet']" [queryParams]="{tab: 'account'}"
+                    [ngClass]="{active: current_tab === 'account'}">Bank Account</a>
+            </div>
+        </div>
+        <div class="divider my-2"></div>
+
+        <div class="mt-2" *ngIf="current_tab === 'wallet'">
+            <div class="alert alert-info text-center p-5">
+                <h3 class="p-0 m-0" style="margin:0; padding:0;">{{total_received | currency : "₦"}}</h3>
+                <span class="badge bg-info rounded" style="font-size: 10px; margin-top: -10px;">Pending</span>
+                <p class="p-0 m-0">Total wallet balance</p>
+                
+            </div>
+
+            <div class="text-center" *ngIf="transactions.length === 0">
+                <span>No recent transaction is available for this account</span>
+            </div>
+
+            <div class="table-responsive" *ngIf="transactions.length !== 0">
+                <table class="table table-striped" style="font-size: small;">
+                    <thead>
+                        <tr class="small">
+                            <th>CUSTOMER</th>
+                            <th>PRODUCT NAME</th>
+                            <th>COST</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transaction of transactions" class="small" role="button" [routerLink]="['/', 'supplier', 'orders']" [queryParams]="{order: transaction.order_id}">
+                            <td>{{transaction.customer.name}}</td>
+                            <td>
+                                <div class="d-flex">
+                                    <div class="img-box">
+                                        <img src="{{transaction.product.image ? transaction.product.image : '../../../../../../assets/images/pills-img.png'}}" style="height: 30px; width: auto;" class="img-fluid rounded-circle border border-secondary">
+                                    </div>
+                                    <p class="mt-1" style="padding-left: 5px;">{{transaction.product.drug_name | titlecase}}</p>
+                                </div>
+                                
+                            </td>
+                            <td>{{transaction.amount | currency: "₦"}}</td> 
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="text-center" *ngIf="transactions.length === 0">
-            <span>No recent transaction is available for this account</span>
-        </div>
+
+        <app-bankupdate *ngIf="current_tab === 'account'"></app-bankupdate>
+
+        <app-withdrawals *ngIf="current_tab === 'withdrawal'"></app-withdrawals>
+
     </div>
 </div>

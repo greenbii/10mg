@@ -1,5 +1,5 @@
-<div class="shop-top-nav mt-5 p-2">
-    <!-- <img src="../../../../assets/images/10mgVert.png" alt="logo"> -->
+<div class="shop-top-nav mt-1 p-2">
+    <img src="../../../../assets/images/logo-new.png" alt="logo" role="button" routerLink="/auth/shop">
     <span></span>
     <div class="search-container">
         <div class="search textfield">
@@ -38,8 +38,13 @@
                     </a>
                 </li>
                 <div class="divider mt-2"></div>
-                <li><a class="dropdown-item" href="#">
+                <li><a class="dropdown-item" role="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                         <i class="fa-solid fa-phone me-2"></i> Support
+                    </a>
+                </li>
+                <div class="divider mt-2"></div>
+                <li><a class="dropdown-item" role="button" (click)="logout()">
+                        <i class="fa-solid fa-phone me-2"></i> Logout
                     </a>
                 </li>
             </ul>
@@ -71,3 +76,21 @@
         <i class="fa-solid fa-xmark"></i>
     </div>
 </div>
+
+
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-body">
+            <h4>Contact 10mg Support</h4>
+            <strong>Email:</strong> info@10mg.co.uk
+            <br><strong>Phone</strong>: 09053909815, 09053920913
+
+            <h5>Address:</h5>
+            <p>34 Akande Street, 102001, <br>
+                Lagos, Nigeria</p>
+        </div>
+      </div>
+    </div>
+  </div>

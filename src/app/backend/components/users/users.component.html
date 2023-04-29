@@ -1,0 +1,214 @@
+<div class="main">
+    <div class="container">
+        <h4>Users</h4>
+
+        <div class="">
+            <ul class="s-items">
+                <li [ngClass]="{'active': current_tab === 'supplier'}" (click)="current_tab = 'supplier'; switchUser('supplier')">Suppliers</li>
+                <li [ngClass]="{'active': current_tab === 'pharmacy'}" (click)="current_tab = 'pharmacy'; switchUser('pharmacy')">Pharmacies</li>
+            </ul>
+        </div>
+
+        <div class="">
+            <table class="table table-striped" *ngIf="!is_loading_users && users.length !== 0 && current_tab === 'supplier'">
+                <thead>
+                    <tr style="cursor: pointer;">
+                    <th>Customer</th>
+                    <th>Supplier ID</th>
+                    <th>Brand</th>
+                    <th>Shipment Method</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reg of users" data-bs-toggle="modal" (click)="selected_user = reg" data-bs-target="#exampleModal" role="button">
+                        <td>{{reg.contact_person}}</td>
+                        <td>{{reg.id.toUpperCase()}}</td>
+                        <td>{{reg.name}}</td>
+                        <td>&nbsp;</td>
+                        <td><span class="d-block p-1 small rounded text-white" [ngClass]="{'bg-danger': reg.status === 'Pending', 'bg-success': reg.status === 'Active'}">{{reg.status}}</span></td>
+                        <td><button class="btn btn-sm" [ngClass]="{'btn-success': reg.status=== 'Pending', 'btn-danger': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status === 'Active' ? 'Suspend' : (reg.status === 'Pending' ? 'Approve' : 'Unsuspend')}}</button></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <table class="table table-striped" *ngIf="!is_loading_users && users.length !== 0 && current_tab === 'pharmacy'">
+                <thead>
+                    <tr style="cursor: pointer;">
+                    <th>Customer</th>
+                    <th>Pharmacy ID</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let reg of users" (click)="selected_user = reg" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">
+                        <td>{{reg.contact_person}}</td>
+                        <td>{{reg.id.toUpperCase()}}</td>
+                        <td>{{reg.name}}</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-5" *ngIf="users.length === 0 && !is_operation_in_progress && !is_loading_users">
+            <span>No user is available for this account</span>
+        </div>
+
+        <div class="text-center mt-5" *ngIf="is_loading_users">
+            <span class="text-muted small">...Loading</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registration Details</h5>
+          <button type="button" class="btn-close" id="close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="selected_user !== null">
+            <table class="table table-striped mb-2">
+                <tbody>
+                    <tr>
+                        <th>Company/Brand Name</th>
+                        <td>{{selected_user.name}}</td>
+                    </tr>
+                    <tr>
+                        <th>User Type</th>
+                        <td>{{selected_user.type}}</td>
+                    </tr>
+                    <tr>
+                        <th>Contact Person</th>
+                        <td>{{selected_user.contact_person | titlecase}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{selected_user.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>{{selected_user.phone}}</td>
+                    </tr>
+                    <tr *ngIf="selected_user.position !== null">
+                        <th>Position</th>
+                        <td>{{selected_user.position}}</td>
+                    </tr>
+                    <tr>
+                        <th>Date Registered</th>
+                        <td>{{selected_user.date_created | date: "d/M/Y h:m a"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end mb-2 mt-1">
+                <span class="small">Account Status: <strong>{{selected_user.status}}</strong></span>
+                <button class="btn btn-sm" [disabled]="is_operation_in_progress" (click)="changeUserStatus()" style="margin-left: 10px;" [ngClass]="{'btn-success': selected_user.status=== 'Pending', 'btn-danger': selected_user.status === 'Active', 'btn-warning': selected_user.status === 'Suspended'}">{{selected_user.status === 'Active' ? 'Suspend' : (selected_user.status === 'Pending' ? 'Approve' : 'Unsuspend')}}</button>
+            </div>
+
+            <div class="card card-secondary mb-2">
+                <div class="card-header">Business Licence Info</div>
+                <div class="card-body" *ngIf="selected_user.verifications && selected_user.verifications.length !== 0">
+                    <div class="" *ngFor="let address of selected_user.verifications; let i=index">
+                        <h5 class="text-center">Address #{{i+1}}</h5>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Licence</th>
+                                    <td>{{address.licence_number}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Expiry Date</th>
+                                    <td>{{address.expiry_date | date: "dd/MM/YY"}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Licence File</th>
+                                    <td><a href="{{address.licence}}" target="_blank">Open File</a></td>
+                                </tr>
+                                <!--<tr>
+                                    <th>CAC Document</th>
+                                    <td><a href="{{address.cac}}" target="_blank">Open File</a></td>
+                                </tr>-->
+                                <tr>
+                                    <th>Date Added</th>
+                                    <td>{{address.date_created | date: "dd/MM/YY h:m a"}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-secondary mb-2" *ngIf="selected_user.type === 'Pharmacy'">
+                <div class="card-header">Shipping Address</div>
+                <div class="card-body" *ngIf="selected_user.addresses && selected_user.addresses.length !== 0">
+                    <div class="" *ngFor="let address of selected_user.addresses; let i=index">
+                        <h5 class="text-center">Address #{{i+1}}</h5>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Address</th>
+                                    <td>{{address.address}}</td>
+                                </tr>
+                                <tr>
+                                    <th>State</th>
+                                    <td>{{address.state}}</td>
+                                </tr>
+                                <tr>
+                                    <th>City</th>
+                                    <td>{{address.city}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country</th>
+                                    <td>{{address.country}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date Added</th>
+                                    <td>{{address.date_created | date: "d/M/Y h:m a"}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-secondary mb-2" *ngIf="selected_user.type === 'Supplier'">
+                <div class="card-header">Accounts</div>
+                <div class="card-body" *ngIf="selected_user.supplier_info && selected_user.supplier_info.length !== 0">
+                    <div class="" *ngFor="let address of selected_user.supplier_info let i=index">
+                        <h5 class="text-center">Account #{{i+1}}</h5>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Bank</th>
+                                    <td>{{address.bank}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Account Number</th>
+                                    <td>{{address.account_number}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date Added</th>
+                                    <td>{{address.date_created | date: "d/M/Y h:m a"}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+</div>
