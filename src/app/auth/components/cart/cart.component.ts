@@ -71,7 +71,8 @@ export class CartComponent implements OnInit {
   getSubtotal() {
     let total = 0;
     this.cart_items.forEach(f=>{
-      total += f.quantity * f.discount_price
+      const tt = f.discount_price !== 0 ? f.discount_price : f.actual_price;
+      total += f.quantity * (tt + f.tenmg_amount)
     })
 
     return total;
@@ -80,7 +81,10 @@ export class CartComponent implements OnInit {
   getTotalWeight() {
     let total_weight = 0;
 
+    
+
     this.cart_items.forEach((item: any)=>{
+      //console.log(item.brand.packaging.weight);
       total_weight = total_weight + (item.brand.packaging.weight * parseFloat(item.quantity))
     })
 
@@ -95,10 +99,10 @@ export class CartComponent implements OnInit {
 
     if(!cur_del) return 0;
 
-    const total_weight = this.getTotalWeight();
+    const total_weight = parseFloat(""+this.getTotalWeight());
     let amount = 0;
 
-    if(this.business_address.state === "lagos") {
+    if(this.business_address.state.toLowerCase() === "lagos") {
       if(total_weight <= 50) {
         //
         amount = cur_del["zero_to_50"];
@@ -107,7 +111,7 @@ export class CartComponent implements OnInit {
         amount = cur_del["51_to_149"];
       }
       else if(total_weight > 149 && total_weight <= 249) {
-        amount = cur_del["150_to_249"]
+        amount = cur_del["151_to_249"]
       }
       else if(total_weight > 249 && total_weight <= 500) {
         amount = cur_del["250_to_500"];
@@ -115,6 +119,8 @@ export class CartComponent implements OnInit {
       else {
         amount = cur_del["501_to_1500"];
       }
+
+
 
       return amount;
     }
@@ -230,6 +236,29 @@ export class CartComponent implements OnInit {
     catch(e){
       console.log(e);
       this.is_operation_in_progress = false;
+    }
+  }
+
+
+  async removeCartItem(item_id: any) {
+    //remove item from cart
+    try {
+      if(!confirm("Are you sure you want to remove this item from cart?")) return;
+
+      const token = await this.appService.getCurrentUserToken();
+      const resp = await this.appService.initiateHttpRequest('delete', '/cart/'+item_id, undefined, token).toPromise();
+      if(resp?.status === true) {
+        const it = this.cart_items.findIndex(ff=> ff.cart_id === item_id)
+        if(it !== -1) {
+          this.cart_items.splice(it, 1);
+        }
+      }
+      else {
+        throw resp?.message;
+      }
+    }
+    catch(e: any) {
+      alert(e.toString());
     }
   }
 

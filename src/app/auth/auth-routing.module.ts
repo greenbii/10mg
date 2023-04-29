@@ -19,6 +19,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CartResolver } from './resolvers/cart-resolver';
 import { OrderComponent } from './components/order/order.component';
 import { OrderResolver } from './resolvers/order-resolver';
+import { OrderLogResolver } from './resolvers/log-history-resolver';
 
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
       },
       {
         path: 'orders',
-        component: OrdersComponent
+        component: OrdersComponent,
+        resolve: {dt: OrderResolver}
       },
       {
         path: 'order/:id',
@@ -55,8 +57,9 @@ const routes: Routes = [
         component: ProductStatusComponent
       },
       {
-        path: 'track-order',
-        component: TrackProductComponent
+        path: 'track-order/:id',
+        component: TrackProductComponent,
+        resolve: {log: OrderLogResolver}
       },
       {
         path: 'product-status-completed',
@@ -105,7 +108,8 @@ const routes: Routes = [
     ShopResolver,
     ProductDetailResolver,
     CartResolver,
-    OrderResolver
+    OrderResolver,
+    OrderLogResolver
   ]
 })
 export class AuthRoutingModule {}

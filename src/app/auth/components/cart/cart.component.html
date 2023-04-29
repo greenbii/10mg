@@ -30,7 +30,7 @@
                             <button class="btn btn-primary" (click)="increaseQuantity(i)"><i class="fa fa-plus"></i></button>
                         </div>
                         <div class="d-flex justify-content-end mt-3">
-                            <span class="small" role="button"><i class="fa fa-trash"></i> Remove</span>
+                            <span class="small" role="button" (click)="removeCartItem(item.cart_id)"><i class="fa fa-trash"></i> Remove</span>
                         </div>
                     </div>
                 </div>

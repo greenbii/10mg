@@ -1,0 +1,13 @@
+<div class="row justify-content-center">
+    <div class="col-md-6 bg-light rounded p-3">
+        <form [formGroup]="bForm">
+            <select class="form-select textfield mt-3" (change)="resolveAccountNumber()" formControlName="bank" aria-label="Default select example">
+                <option *ngFor="let bank of banks" value="{{bank.code}}">{{bank.name}}</option>
+            </select>
+            <input type="text" name="account_num" formControlName="account_number" (keyup)="resolveAccountNumber()" id="account_num" class="form-control textfield mt-3" placeholder="Account Number">
+            <input type="text" name="bank" formControlName="account_name" id="bank" class="form-control textfield mt-3" placeholder="Name of account" readonly>
+            <small class="text-info" *ngIf="is_ver_in_progress">...verifying account number, please wait</small>
+            <button class="button primary-btn mt-3 w-100" type="button" (click)="saveAccountDetails()" [disabled]="!bForm.valid || is_operation_in_progress">{{is_operation_in_progress ? '...Saving' : 'Update Bank Data'}}</button>
+        </form>
+    </div>
+</div>

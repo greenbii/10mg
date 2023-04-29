@@ -40,7 +40,7 @@ export class ChangepasswordComponent implements OnInit {
       }
       this.is_operation_in_progress = true;
       const token = await this.appService.getCurrentUserToken();
-      const resp = await this.appService.initiateHttpRequest('get', '/auth/reset-password', undefined, token).toPromise();
+      const resp = await this.appService.initiateHttpRequest('get', '/reset-password', undefined, token).toPromise();
       if(resp?.status === true) {
         const s = document.getElementById("btnLaunch")?.click();
       }
@@ -60,8 +60,9 @@ export class ChangepasswordComponent implements OnInit {
   async completeChangePassword() {
     try {
       //try to change the password here
+      this.is_operation_in_progress = true;
       const token = await this.appService.getCurrentUserToken();
-      const resp = await this.appService.initiateHttpRequest('post', '/auth/reset-password', {...this.uForm.value, ...this.cForm.value}, token).toPromise();
+      const resp = await this.appService.initiateHttpRequest('post', '/reset-password', {...this.uForm.value, ...this.cForm.value}, token).toPromise();
       if(resp?.status === true) {
         alert("You have successfully reset your password, you will be signed out now, please login again");
         await this.auth.signOut();

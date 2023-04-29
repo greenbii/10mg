@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-supplierdashboard',
@@ -31,9 +32,20 @@ export class SupplierdashboardComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: false
   };
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
+
+  account_details: any = null;
+  user_details: any = null;
 
   ngOnInit(): void {
+    const dt : any = this.route.snapshot.data;
+    //console.log(dt);
+    if(dt.details) {
+      this.account_details = dt.details.business
+      this.user_details = dt.details.u;
+    }
+
+    if(this.account_details.wallet_balance) this.supplier.income = this.account_details.wallet_balance;
   }
 
 }

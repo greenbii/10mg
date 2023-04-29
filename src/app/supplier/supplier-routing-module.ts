@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountOverviewResolver } from '../auth/resolvers/account-overview-resolver';
+import { OrderResolver } from '../auth/resolvers/order-resolver';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { DrugsComponent } from './components/drugs/drugs.component';
@@ -10,7 +11,9 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SupplierdashboardComponent } from './components/supplierdashboard/supplierdashboard.component';
 import { SupplierlandingComponent } from './components/supplierlanding/supplierlanding.component';
 import { WalletComponent } from './components/wallet/wallet.component';
+import { BankDetailsResolver } from './resolvers/bank-details-resolver';
 import { SupplierProducts } from './resolvers/product-details-resolver';
+import { SupplierWalletResolver } from './resolvers/wallet-resolver';
 
 
 
@@ -47,11 +50,13 @@ const routes: Routes = [
         },
         {
           path: 'wallet',
-          component: WalletComponent
+          component: WalletComponent,
+          resolve: {wallet: SupplierWalletResolver, bank: BankDetailsResolver}
         },
         {
           path: 'orders',
-          component: OrdersComponent
+          component: OrdersComponent,
+          resolve: {orders: OrderResolver}
         }
       ]
     }
@@ -63,7 +68,10 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     AccountOverviewResolver,
-    SupplierProducts
+    SupplierProducts,
+    OrderResolver,
+    SupplierWalletResolver,
+    BankDetailsResolver
   ]
 })
 export class SupplierRoutingModule {}

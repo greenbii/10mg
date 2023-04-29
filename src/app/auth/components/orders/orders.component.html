@@ -1,53 +1,61 @@
-<section class="body-container order-container">
+<section class="body-container order-container" *ngIf="!selected_order || selected_order === null">
     <div class="breadcrumb">
-        <a href="#">Previous</a>
+        <a routerLink="/auth">Previous</a>
         <i class="fa-solid fa-chevron-right mx-4"></i>
         <p>Orders</p>
     </div>
     <div class="tabs">
         <div class="pending-delivery">
-            <a class="tab-title" role="button" (click)="current_tab = 'pending' "
-                [ngClass]="{active: current_tab === 'pending'}">Pending Delivery</a>
+            <a class="tab-title" role="button" (click)="current_tab = 'pending'; getOrders('pending') "
+                [ngClass]="{active: current_tab === 'pending'}">Unpaid <span class="badge bg-secondary rounded-circle">{{getTotalOrderTypeCount('pending')}}</span></a>
+        </div>
+        <div class="pending-delivery">
+            <a class="tab-title" role="button" (click)="current_tab = 'paid'; getOrders('paid') "
+                [ngClass]="{active: current_tab === 'paid'}">Pending Delivery <span class="badge bg-secondary rounded-circle">{{getTotalOrderTypeCount('paid')}}</span></a>
         </div>
         <div class="completed">
-            <a class="tab-title" role="button" (click)="current_tab = 'completed' "
-                [ngClass]="{active: current_tab === 'completed'}">Completed</a>
+            <a class="tab-title" role="button" (click)="current_tab = 'completed'; getOrders('completed')"
+                [ngClass]="{active: current_tab === 'completed'}">Completed <span class="badge bg-secondary rounded-circle">{{getTotalOrderTypeCount('completed')}}</span></a>
         </div>
         <div class="cancelled">
-            <a class="tab-title" role="button" (click)="current_tab = 'cancelled' "
-                [ngClass]="{active: current_tab === 'cancelled'}">Cancelled</a>
+            <a class="tab-title" role="button" (click)="current_tab = 'cancelled'; getOrders('cancelled') "
+                [ngClass]="{active: current_tab === 'cancelled'}">Cancelled <span class="badge bg-secondary rounded-circle">{{getTotalOrderTypeCount('cancelled')}}</span></a>
         </div>
     </div>
     <div class="divider my-2"></div>
 
 
     <!-- Pending delivery -->
-    <a routerLink="/auth/product-status" *ngIf="current_tab === 'pending' ">
+    <!-- <a routerLink="/auth/product-status" *ngIf="current_tab === 'pending' "> -->
         <div class="orders mt-5" *ngFor="let order of orders">
             <div class="order-items-type">
                 <div class="order-type">
-                    <div class="order-item"></div>
+                    <div class="order-item" [ngStyle]="{'background-image': 'url('+order.order_details[0].image+')'}"></div>
                     <div class="order-item-details">
-                        <div class="order-name">{{order.productName}}</div>
-                        <p class="order-size">{{order.size}}</p>
-                        <p class="order-brand">{{order.brand}}</p>
-                        <p class="order-date">{{order.deliveryDate}}</p>
+                        <div class="order-name">{{order.order_details[0].drug_name | titlecase}} <span><small class="text-muted">{{(order.order_details.length > 1) ? 'and '+(order.order_details.length-1)+' other(s)': ''}}</small></span></div>
+                        <p class="order-size">{{order.order_details[0].brand.variation.strength}}</p>
+                        <p class="order-brand">{{order.order_details[0].brand.name | titlecase}}</p>
+                        <p class="order-date">{{order.date_created | date: "MMM d, y, h:mm a"}}</p>
                     </div>
                 </div>
                 <div class="order-details">
                     <div class="order-cost">
-                        <div class="order-current-price">{{order.currentPrice | currency}}</div>
-                        <small class="order-old-price">{{order.oldPrice | currency}}</small>
+                        <div class="order-current-price">{{order.grand_total | currency: "₦"}}</div>
+                        <!-- <small class="order-old-price">{{order.grand_total | currency}}</small> -->
                     </div>
-                    <a routerLink="/auth/product-status">Details</a>
+                    <a [routerLink]="['/', 'auth', 'orders']" [queryParams]="{order: order.order_id}">Details</a>
                 </div>
             </div>
             <div class="divider my-4"></div>
         </div>
-    </a>
+
+        <div class="bg-light p-3 rounded" *ngIf="orders.length === 0">
+            <p class="text-center">No {{current_tab}} order is available for this account</p>
+        </div>
+    <!-- </a> -->
 
     <!-- Completed delivery -->
-    <a routerLink="/auth/product-status-completed" *ngIf="current_tab === 'completed' ">
+    <!--<a routerLink="/auth/product-status-completed" *ngIf="current_tab === 'completed' ">
         <div class="orders mt-5" *ngFor="let orderCompleted of ordersCompleted">
             <div class="order-items-type">
                 <div class="order-type">
@@ -69,10 +77,10 @@
             </div>
             <div class="divider my-4"></div>
         </div>
-    </a>
+    </a>-->
 
     <!-- Cancelled delivery -->
-    <a routerLink="/auth/product-status-cancelled" *ngIf="current_tab === 'cancelled' ">
+    <!--<a routerLink="/auth/product-status-cancelled" *ngIf="current_tab === 'cancelled' ">
         <div class="orders mt-5" *ngFor="let orderCancelled of ordersCancelled">
             <div class="order-items-type">
                 <div class="order-type">
@@ -94,5 +102,7 @@
             </div>
             <div class="divider my-4"></div>
         </div>
-    </a>
+    </a>-->
 </section>
+
+<app-product-status [order]="selected_order" *ngIf="selected_order && selected_order !== null"></app-product-status>

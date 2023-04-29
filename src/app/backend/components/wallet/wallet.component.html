@@ -1,0 +1,76 @@
+<div class="main">
+    <div class="container">
+        <h4>Wallet</h4>
+
+        <div class="tabs">
+            <div class="pending-delivery">
+                <a class="tab-title" role="button" [routerLink]="['/', 'backend', 'wallet']" [queryParams]="{tab: 'wallet'}"
+                    [ngClass]="{active: current_tab === 'wallet'}">Wallet</a>
+            </div>
+            <div class="pending-delivery">
+                <a class="tab-title" role="button" [routerLink]="['/', 'backend', 'wallet']" [queryParams]="{tab: 'withdrawal'}"
+                    [ngClass]="{active: current_tab === 'withdrawal'}">Payouts</a>
+            </div>
+        </div>
+        <div class="divider my-2"></div>
+
+        <div class="mt-2" *ngIf="current_tab === 'wallet'">
+            <div class="alert alert-info text-center p-5">
+                <h3 class="p-0 m-0">{{total_received | currency : "₦"}}</h3>
+                <p class="p-0 m-0">Total Pending Payouts</p>
+            </div>
+
+            <div class="text-center" *ngIf="transactions.length === 0">
+                <span>No recent transaction is available for this account</span>
+            </div>
+
+            <div class="table-responsive" *ngIf="transactions.length !== 0">
+                <table class="table table-striped" style="font-size: small;">
+                    <thead>
+                        <tr class="small">
+                            <th>SUPPLIER</th>
+                            <th>BALANCE</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let transaction of transactions" class="small">
+                            <td>{{transaction.name}}</td>
+                            <td>{{transaction.wallet_balance | currency: "₦"}}</td>
+                            <td>
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary" *ngIf="transaction.wallet_balance > 0" (click)="current_supplier = transaction">Payout</button>
+                                <span class="text-muted" *ngIf="transaction.wallet_balance === 0">None</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <app-withdrawals *ngIf="current_tab === 'withdrawal'"></app-withdrawals>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form [formGroup]="cForm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Payout to Suppliers</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" *ngIf="current_supplier !== null">
+                  <p class="text-muted mb-2">Initate payout to <strong>{{current_supplier.name}}</strong></p>
+                  <p class="mt-2 mb-2">Balance: <strong>{{current_supplier.wallet_balance | currency: "₦"}}</strong></p>
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Enter Amount" formControlName="payout_amount">
+                  </div>
+              </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" [disabled]="is_operation_in_progress || !cForm.valid" (click)="completePayout()">{{is_operation_in_progress ? 'Paying...' : 'Payout'}}</button>
+        </div>
+      </div>
+    </div>
+</div>

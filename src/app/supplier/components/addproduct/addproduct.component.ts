@@ -30,7 +30,7 @@ export class AddproductComponent implements OnInit {
     presentation: null,
     strength: null,
     quantity: null,
-    stregth_value: null,
+    strength_value: null,
     discount_price: null,
     actual_price: null,
     description: null,
@@ -55,6 +55,8 @@ export class AddproductComponent implements OnInit {
 
   uploadFiles: File[] = [];
 
+  selling_currency: string = "";
+
 
 
 
@@ -64,6 +66,8 @@ export class AddproductComponent implements OnInit {
     this.current_user_id = this.appService.current_user.uid;
 
     this.loadDrugs();
+
+    this.selling_currency = this.appService.getCurrencySymbol(this.appService.current_business_details.business.selling_currency);
   }
 
   checkAllowDrugEditing() {
@@ -76,7 +80,6 @@ export class AddproductComponent implements OnInit {
     if(this.selectedWeight === null || 
       this.selectedDrug === null || 
       this.selectedPackage === null
-      || this.selectedStrength === null
       || this.selectedBrand === null) return false;
 
     return true;
@@ -239,12 +242,12 @@ export class AddproductComponent implements OnInit {
 
   loadDrugDescription() {
     
-    if(this.product.strength !== null && this.product.presentation !== null) {
+    if(this.product.strength !== null && this.product.strength_value !== null && this.product.presentation !== null) {
       console.log(this.product.strength, this.product.presentation);
       //load the description
       if(this.product_details.variations.length !== 0) {
         const desc = this.product_details.variations.find((f:any)=> {
-          return f.presentation === this.product.presentation && f.strength === this.product.strength
+          return f.presentation === this.product.presentation && f.strength === this.product.strength_value+""+this.product.strength
         });
 
 

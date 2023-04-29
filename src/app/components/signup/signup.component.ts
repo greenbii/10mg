@@ -177,10 +177,10 @@ throw new Error('Method not implemented.');
     }
     else {
       //handle for the supplier here
-      if(this.steps === 5) {
+      if(this.steps === 4) {
         //handle the submission here
         this.submitRegistration().then(d=>{
-          if(d) this.steps = 6;
+          if(d) this.steps = 5;
         })
       }
       else {
@@ -201,7 +201,7 @@ throw new Error('Method not implemented.');
       const uFiles = await this.uploadFiles()
       const dt = this.current_tab === 'supplier' ? {...this.supRegForm.value, shipment_mode: this.supplier_shipment_mode} : {...this.pharmForm.value, ...this.bRegForm.value}
       const token = await this.appService.getCurrentUserToken();
-      const resp = await this.appService.initiateHttpRequest('post', '/complete-registration', {...dt, cac: uFiles.cac, licence: uFiles.licence}, token).toPromise();
+      const resp = await this.appService.initiateHttpRequest('post', '/complete-registration', {...dt, cac: null, licence: uFiles.licence}, token).toPromise();
       if(resp?.status !== true) {
         alert(resp?.message);
         this.is_registering = false;
@@ -220,25 +220,26 @@ throw new Error('Method not implemented.');
 
   async uploadFiles() {
     try {
-      if(!this.cacFile || !this.licenceFile) throw "You must select both CAC ad Licence file to proceed";
+      if(!this.licenceFile) throw "You must select and operating Licence file to proceed";
 
       this.is_uploading = true;
       const random = Math.random().toString().split(".")[1];
-      const ext1 = this.cacFile.name.toLowerCase().split(".").pop();
+      //const ext1 = this.cacFile.name.toLowerCase().split(".").pop();
       const ext2 = this.licenceFile.name.toLowerCase().split(".").pop();
 
 
       const ee = await Promise.all([
-        this.fStorage.upload("/documents/"+"cac_"+random+"."+ext1, this.cacFile).then(async a=>{
-          return await a.ref.getDownloadURL()
-        }),
+        //this.fStorage.upload("/documents/"+"cac_"+random+"."+ext1, this.cacFile).then(async a=>{
+          //return await a.ref.getDownloadURL()
+        //}),
         this.fStorage.upload("/documents/"+"licence_"+random+"."+ext2, this.licenceFile).then(async a=>{
           return await a.ref.getDownloadURL()
         })
       ]
       )
       this.is_uploading = false;
-      return {cac: ee[0], licence: ee[1]}
+      //return {cac: ee[0], licence: ee[1]}
+      return {cac: null, licence: ee[0]}
     }
     catch(ee) {
       this.is_uploading = false;
