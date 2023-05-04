@@ -40,6 +40,15 @@ export class AppService {
 
   requests: Observable<responseObject>[] = [];
 
+  dialogDetails: any = {
+    title: null,
+    prompt: null
+  }
+
+  dialogResponse: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+
+
   constructor(private httpClient: HttpClient, public auth: AngularFireAuth, private router: Router) { 
     this.auth.onAuthStateChanged(u=>{
       if(u && u !== null) {
@@ -142,20 +151,34 @@ export class AppService {
     return '£';
   }
 
+  showConfirmDialog(title: string, msg_prompt: string): Observable<boolean> {
+    this.dialogDetails.title = title;
+    this.dialogDetails.prompt = msg_prompt;
+    const tt = document.getElementById("open-confirm-dialog")?.click();
+    return this.dialogResponse;
+  }
+
 
   states: string[] = [
     "lagos",
+    "anambra",
     "abuja",
     "delta",
     "ondo",
     "bauchi",
+    "borno",
     "edo",
     "cross river",
     "enugu",
+    "ekiti",
     "gombe",
     "kwara",
     "kano",
     "kaduna",
+    "ogun",
+    "oyo",
+    "osun",
+    "ondo",
     "plateau",
     "borno",
     "imo",

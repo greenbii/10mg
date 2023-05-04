@@ -45,12 +45,12 @@
                     <p>{{business_address?.state+", "+business_address?.country | titlecase}}</p>
 
                     <div class="mt-3 mb-3">
-                        <span class="text-primary small mt-3" role="button">Change delivery address</span>
+                        <span class="text-primary small mt-3" role="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle2">Change delivery address</span>
                     </div>
                     
 
                     <div class="delivery-box">
-                        <div class="form-group d-flex" *ngIf="business_address.state && business_address.state !== 'lagos'">
+                        <div class="form-group d-flex" *ngIf="is_express_delivery_available">
                             <label style="margin-top: 10px;">
                                 <input type="radio" [(ngModel)]="delivery" value="express">
                             </label>
@@ -121,3 +121,67 @@
     </div>
 
 </main>
+
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Change Delivery Address</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="border border-secondary rounded p-2 mb-3">
+                <p>{{business_address?.address | titlecase}}</p>
+                <p>{{business_address?.city | titlecase}}</p>
+                <p>{{business_address?.state+", "+business_address?.country | titlecase}}</p>
+            </div>
+
+            <label><input type="checkbox" [(ngModel)]="is_add_address"> Add another delivery address</label>
+            <div class="border border-secondary rounded p-2 mt-2">
+                <fieldset [disabled]="!is_add_address">
+                    <form [formGroup]="bRegForm">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label>Address</label>
+                                <input type="text" name="street" formControlName="address" class="textfield form-control" placeholder="Street name">
+                            </div>
+    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="small text-muted">State/Region</label>
+                                    <select class="form-select mt-3" formControlName="state" (change)="loadStateCities()" aria-label="Default select example">
+                                        <option value="{{state}}" *ngFor="let state of states">{{state | titlecase}}</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="small text-muted">City/Town</label>
+                                    <select class="form-select mt-3" formControlName="city" aria-label="Default select example">
+                                        <option value="{{city}}" *ngFor="let city of cities">{{city | titlecase}}</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="small text-muted">Country</label>
+                                    <select class="form-select mt-3" formControlName="country" aria-label="Default select example">
+                                        <option value="nigeria">Nigeria</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mt-2">
+                            <button class="btn primary-btn my-4" [disabled]="!bRegForm.valid" type="button">Add Address</button>
+                        </div>
+                        
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>

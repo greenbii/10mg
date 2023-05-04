@@ -1,2 +1,22 @@
 <app-navbar *ngIf="show_nav_bar"></app-navbar>
 <router-outlet></router-outlet>
+
+<button class="d-none" id="open-confirm-dialog" data-bs-toggle="modal" data-bs-target="#dialog-modal"></button>
+<div class="modal" tabindex="-1" id="dialog-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{appService.dialogDetails.title}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="small">{{appService.dialogDetails.prompt}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" (click)="handleDialogResponse('n')" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" (click)="handleDialogResponse('y')">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Event, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { AppService } from './services/app.service';
 
 
 
@@ -15,7 +16,7 @@ export class AppComponent {
 
   show_nav_bar: boolean = true;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public appService: AppService) {
       this.router.events.subscribe((e: Event)=>{
         if(e instanceof NavigationEnd || e instanceof NavigationStart)  {
           const test = /\/supplier/
@@ -29,6 +30,15 @@ export class AppComponent {
           
         }
       })
+  }
+
+  handleDialogResponse(t: string) {
+    if(t === 'y') {
+      this.appService.dialogResponse.next(true)
+    }
+    else {
+      this.appService.dialogResponse.next(false);
+    }
   }
   
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 
@@ -13,7 +14,15 @@ export class CartComponent implements OnInit {
 
   cart_items: any[] = [];
 
+  states: string[] = [];
+  cities: string[] = [];
+
   delivery: string = "express";
+
+  is_normal_delivery_available: boolean = false;
+  is_express_delivery_available: boolean = false;
+
+  available_delivery_options: string[] = [];
 
   business_address: any = null;
   address_delivery: any = null;
@@ -22,13 +31,26 @@ export class CartComponent implements OnInit {
 
   is_operation_in_progress: boolean = false;
 
+  bRegForm: FormGroup = new FormGroup({
+    address: new FormControl(null, [Validators.required]),
+    city: new FormControl(""),
+    state: new FormControl("", [Validators.required]),
+    country: new FormControl("", [Validators.required])
+  })
+  is_add_address: boolean = false;
+
 
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const dt: any = this.route.snapshot.data;
 
-    
+    this.states = this.appService.states.sort((a: any, b:any)=>{
+      if(a > b) return 1;
+      if(a < b) return -1;
+
+      return 0;
+    })
 
 
 
@@ -40,6 +62,17 @@ export class CartComponent implements OnInit {
 
       if(this.business_address.state === "lagos") {
         this.delivery = "normal"
+        this.is_normal_delivery_available = true;
+      }
+      else {
+        if(this.address_delivery.length > 1) {
+          this.is_express_delivery_available = true;
+          this.is_normal_delivery_available = true;
+        }
+        else {
+          this.is_normal_delivery_available = true;
+          this.delivery = "normal"
+        }
       }
 
       let total_weight = 0;
@@ -71,8 +104,8 @@ export class CartComponent implements OnInit {
   getSubtotal() {
     let total = 0;
     this.cart_items.forEach(f=>{
-      const tt = f.discount_price !== 0 ? f.discount_price : f.actual_price;
-      total += f.quantity * (tt + f.tenmg_amount)
+      //const tt = f.discount_price !== 0 ? f.discount_price : f.actual_price;
+      total += f.quantity * f.discount_price; //(tt + f.tenmg_amount)
     })
 
     return total;
@@ -93,6 +126,7 @@ export class CartComponent implements OnInit {
 
   getDeliveryFee() {
     //calculate the delivery fee here
+    //console.log(this.address_delivery);
     if(this.address_delivery === null) return 0;
 
     const cur_del = this.address_delivery.find((v: any)=> v.delivery_type === this.delivery);
@@ -125,24 +159,45 @@ export class CartComponent implements OnInit {
       return amount;
     }
     else {
-      //handle for other state here
-      //get the total item weight
-      if(total_weight <= 30) {
-        //
-        amount = cur_del["zero_to_30"];
-      }
-      else if(total_weight > 30 && total_weight <= 50) {
-        amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["31_to_50"];
-      }
-      else if(total_weight > 50 && total_weight <= 250) {
-        amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["51_to_250"];
-      }
-      else if(total_weight > 251 && total_weight <= 1000) {
-        amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["251_to_500"];
+      console.log("Address is not in Lagos")
+      if(cur_del["zero_to_50"]) {
+        if(total_weight <= 50) {
+          //
+          amount = cur_del["zero_to_50"] * total_weight;
+        }
+        else if(total_weight > 50 && total_weight <= 150) {
+          amount = cur_del["51_to_149"] * total_weight;
+        }
+        else if(total_weight > 149 && total_weight <= 249) {
+          amount = cur_del["150_to_249"] * total_weight
+        }
+        else if(total_weight > 249 && total_weight <= 500) {
+          amount = cur_del["250_to_500"] * total_weight;
+        }
+        else {
+          amount = cur_del["501_to_1500"] * total_weight;
+        }
       }
       else {
-        amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["1001_to_1500"];
+        if(total_weight <= 30) {
+          //
+          amount = cur_del["zero_to_30"];
+        }
+        else if(total_weight > 30 && total_weight <= 50) {
+          amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["31_to_50"];
+        }
+        else if(total_weight > 50 && total_weight <= 250) {
+          amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["51_to_250"];
+        }
+        else if(total_weight > 251 && total_weight <= 1000) {
+          amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["251_to_500"];
+        }
+        else {
+          amount = cur_del["zero_to_30"] + (total_weight - 30) * cur_del["1001_to_1500"];
+        }
       }
+      //handle for other state here
+      //get the total item weight
 
       return amount;
     }
@@ -259,6 +314,24 @@ export class CartComponent implements OnInit {
     }
     catch(e: any) {
       alert(e.toString());
+    }
+  }
+
+  async loadStateCities() {
+    try {
+    //load the available cities for the selected state
+      if(this.bRegForm.value.state !== null && this.bRegForm.value.state.trim() !== "") {
+        //load the cities available for this state
+        const rs = await this.appService.initiateHttpRequest("get", "/available-cities/"+this.bRegForm.value.state).toPromise();
+        if(rs?.status === true) {
+          this.cities = [];
+          this.bRegForm.patchValue({city: ""});
+          this.cities = rs.data.map((d: any)=> d.destination_area)
+        }
+      }
+    }
+    catch(e){
+      console.log(e);
     }
   }
 
