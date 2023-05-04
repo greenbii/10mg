@@ -16,7 +16,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 //import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderComponent } from './components/order/order.component';
 
 
@@ -42,6 +42,7 @@ import { OrderComponent } from './components/order/order.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AuthRoutingModule
   ]
 })

@@ -15,6 +15,8 @@ export class UsersComponent implements OnInit {
   is_loading_users: boolean = false;
   selected_user: any = null;
 
+  action: string = "";
+
   constructor(private appService: AppService, private router: Router) { }
   ngOnInit(): void {
     this.loadRegistrations()
@@ -54,7 +56,7 @@ export class UsersComponent implements OnInit {
       try {
         this.is_operation_in_progress = true;
         const token = await this.appService.getCurrentUserToken();
-        const resp = await this.appService.initiateHttpRequest('post', '/admin/change-supplier-status', {business_id: this.selected_user.id}, token).toPromise();
+        const resp = await this.appService.initiateHttpRequest('post', '/admin/change-supplier-status', {business_id: this.selected_user.id, action: this.action}, token).toPromise();
         if(resp?.status === true) {
           const ff = this.users.findIndex(f=> f.id === this.selected_user.id);
           if(ff !== -1) this.users[ff].status === resp.data;
@@ -76,6 +78,23 @@ export class UsersComponent implements OnInit {
         alert(ee.toString());
       }
     }
+  }
+
+  approveUser() {
+    if(confirm("Are you sure you want to "+this.action+" this user account?")) return;
+    this.appService.showConfirmDialog("Approve User", "Are you sure you want to approved this user account?").subscribe(s=>{
+      if(s) {
+        console.log("User selected Yes")
+      }
+      else {
+        console.log("User selected No");
+      }
+    }).unsubscribe();
+  }
+
+  async disapproveUser() {
+    //handle the user operation here
+    this.changeUserStatus()
   }
 
 }

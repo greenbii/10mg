@@ -160,7 +160,7 @@ throw new Error('Method not implemented.');
   proceed() {
     if(this.current_tab === 'supplier') {
       //navigate to dashboard
-      this.appService.redirect("/sup");
+      this.appService.redirect("/supplier");
     }
     else {
       //navigate to shop
