@@ -5,7 +5,9 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { MessagesComponent } from './components/messages/messages.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { TrackProductComponent } from './components/track-product/track-product.component';
 import { UsersComponent } from './components/users/users.component';
 import { WalletComponent } from './components/wallet/wallet.component';
@@ -53,6 +55,19 @@ const routes: Routes = [
           path: 'track-order/:id',
           component: TrackProductComponent,
           resolve: {log: OrderLogResolver}
+        },
+        {
+          path: 'settings',
+          component: SettingsComponent
+        },
+        {
+          path: 'messages',
+          component: MessagesComponent
+        },
+        {
+          path: '**',
+          redirectTo: '',
+          pathMatch: 'full'
         }
       ]
     }

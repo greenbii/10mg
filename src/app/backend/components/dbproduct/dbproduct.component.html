@@ -34,13 +34,13 @@
                 by <i class="fa-solid fa-chevron-down"></i></span>
             <div class="dropdown">
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">New - Old</a></li>
-                    <li><a class="dropdown-item" href="#">Old - New</a></li>
-                    <li><a class="dropdown-item" href="#">Price range</a></li>
+                    <li><a class="dropdown-item" (click)="filterProducts('new')">New - Old</a></li>
+                    <li><a class="dropdown-item" (click)="filterProducts('old')">Old - New</a></li>
+                    <!-- <li><a class="dropdown-item" href="#">Price range</a></li> -->
                 </ul>
             </div>
         </div>
-        <a routerLink="/backend/add-products" class="mr-2"><button class="button primary-btn add-prod">Add product</button></a>
+        <a routerLink="/backend/add-products" class="mr-2"><button class="button primary-btn add-prod">Add Medication</button></a>
         <!-- <a routerLink="/supplier/add-drugs"><button class="button primary-btn add-prod">Add Drugs</button></a> -->
     </div>
 
@@ -59,6 +59,6 @@
     </div>
 
     <div class="col-md-12 mt-2" *ngIf="productCards.length === 0">
-        <p class="text-center text-muted small">You have not added any product yet, click <strong>Add Product</strong> to add new Product</p>
+        <p class="text-center text-muted small">No product is available for display</p>
     </div>
 </section>

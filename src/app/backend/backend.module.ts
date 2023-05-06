@@ -13,6 +13,14 @@ import { WalletComponent } from './components/wallet/wallet.component';
 import { WithdrawalsComponent } from './components/wallet/withdrawals/withdrawals.component';
 import { ProductStatusComponent } from './components/product-status/product-status.component';
 import { TrackProductComponent } from './components/track-product/track-product.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { ProfileComponent } from './components/settings/profile/profile.component';
+import { ChangepasswordComponent } from './components/settings/changepassword/changepassword.component';
+import { NotificationsettingsComponent } from './components/settings/notificationsettings/notificationsettings.component';
+import { ReviewsComponent } from './components/settings/reviews/reviews.component';
+import { CustomersupportComponent } from './components/settings/customersupport/customersupport.component';
+import { AccountstatusComponent } from './components/settings/accountstatus/accountstatus.component';
+import { MessagesComponent } from './components/messages/messages.component';
 
 
 
@@ -27,7 +35,15 @@ import { TrackProductComponent } from './components/track-product/track-product.
     WalletComponent,
     WithdrawalsComponent,
     ProductStatusComponent,
-    TrackProductComponent
+    TrackProductComponent,
+    SettingsComponent,
+    ProfileComponent,
+    ChangepasswordComponent,
+    NotificationsettingsComponent,
+    ReviewsComponent,
+    CustomersupportComponent,
+    AccountstatusComponent,
+    MessagesComponent
   ],
   imports: [
     CommonModule,

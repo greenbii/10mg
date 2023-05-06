@@ -1,13 +1,19 @@
 <section class="container">
     <div class="sub-heading p-4">
         <div class="left-content">
-            <i class="fa-solid fa-arrow-left" role="button" onclick="history.back()"></i>
-            <p>Products</p>
+            <!--<i class="fa-solid fa-arrow-left" role="button" ></i>
+            <p>Products</p>-->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a role="button" onclick="history.back()">Products</a></li>
+                  <li class="breadcrumb-item active" aria-current="page" >Add Medication</li>
+                </ol>
+            </nav>
         </div>
         <!-- <button class="button primary-btn">Add Product</button> -->
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
         <!--For drug details on one side-->
         <div class="col-md-6">
             <div class="form-group">
@@ -107,46 +113,15 @@
                     </div>
                 </div>
             </fieldset>
-        </div>
 
-
-        <!--For Sales and Quantity at the other-->
-        <div class="col-md-6">
-            <div class="form-group form-floating">
-                <input type="number" class="form-control" [(ngModel)]="product.quantity" id="floatingInput" placeholder="Quantity">
-                <label for="floatingInput" class="text-muted small">Quantity</label>
-            </div>
-
-            <div class="form-group form-floating">
-                <input type="number" class="form-control" [(ngModel)]="product.actual_price" id="floatingInput" placeholder="Actual Price">
-                <label for="floatingInput" class="text-muted small">Actual Price</label>
-            </div>
-
-            <div class="form-group form-floating">
-                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="product.discount_price" placeholder="Discount Price">
-                <label for="floatingInput" class="text-muted small">Discount Price</label>
-            </div>
-
-            <div class="form-group image-upload div-container mt-2">
-                <!-- <label for="image">Image</label> -->
-                <div class="d-flex justify-content-between p-2 bg-light rounded mt-1 mb-1" *ngFor="let f of uploadFiles; let i=index">
-                    <label class="small">{{f.name}}</label>
-                    <label class="small text-danger" role="button" (click)="removeUploadFile(i)"><i class="fa fa-trash text-danger"></i></label>
+            <div class="form-group">
+                <div class="form-group mt-2">
+                    <button class="button primary-btn w-100" (click)="addProduct()" [disabled]="!isFormValid() || is_operation_in_progress">{{is_operation_in_progress ? (is_uploading ? '...Uploading' : '...Adding Medication') : 'Add Medication'}}</button>
                 </div>
-                <input type="file" name="file" class="d-none" #file accept="png,jpg,svg,jpeg" (change)="getFile($event)">
-                <div class="img-up">
-                    <div class="upload-img">Click to upload or drag and drop SVG, PNG, JPG, or Gif (max: 800px x 400px)
-                    </div>
-                    <button class="button primary--btn" (click)="file.click()">Add more</button>
+    
+                <div class="form-group mt-2">
+                    <button class="btn btn-primary" (click)="resetForm()">Clear Form</button>
                 </div>
-            </div>
-
-            <div class="form-group mt-2">
-                <button class="button primary-btn w-100" (click)="addProduct()" [disabled]="!isFormValid() || is_operation_in_progress">{{is_operation_in_progress ? (is_uploading ? '...Uploading' : '...Adding Product') : 'Add Product'}}</button>
-            </div>
-
-            <div class="form-group mt-2">
-                <button class="btn btn-primary" (click)="resetForm()">Clear Form</button>
             </div>
         </div>
     </div>

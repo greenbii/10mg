@@ -1,0 +1,18 @@
+<div class="main">
+    <div class="container">
+        <h4>Messages</h4>
+        <div class="table-resposive">
+            <table class="table table-striped" *ngIf="messages.length !== 0">
+                <tr *ngFor="let message of messages">
+                    <td><input type="checkbox"></td>
+                    <td>{{message.subject}}</td>
+                    <td>{{message.date | date: "d.m.Y"}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="border border-primary rounded p-5" *ngIf="messages.length === 0">
+            <p class="text-center">Your inbox is empty</p>
+        </div>
+    </div>
+</div>

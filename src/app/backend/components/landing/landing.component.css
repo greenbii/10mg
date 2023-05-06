@@ -10,6 +10,10 @@
     overflow: auto;
 }
 
+a.active-link {
+    color: blue;
+}
+
 .side-nav a {
     color: var(--grey);
 }

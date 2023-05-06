@@ -29,12 +29,8 @@ export class AddproductComponent implements OnInit {
     weight: null,
     presentation: null,
     strength: null,
-    quantity: null,
     stregth_value: null,
-    discount_price: null,
-    actual_price: null,
     description: null,
-    images: []
   }
 
   current_user_id: string = "";
@@ -67,8 +63,9 @@ export class AddproductComponent implements OnInit {
   }
 
   checkAllowDrugEditing() {
-    if(this.selectedDrug === null) return false;
-    return this.selectedDrug !== null && this.selectedDrug['__isNew__'] || (this.selectedDrug['added_by'] && this.selectedDrug['added_by'] === this.current_user_id)
+    return true;
+    //if(this.selectedDrug === null) return false;
+    //return this.selectedDrug !== null && this.selectedDrug['__isNew__'] || (this.selectedDrug['added_by'] && this.selectedDrug['added_by'] === this.current_user_id)
   }
 
   isFormValid() {
@@ -118,11 +115,6 @@ export class AddproductComponent implements OnInit {
     }
   }
 
-  removeUploadFile(index: number) {
-    if(this.uploadFiles[index]) {
-      this.uploadFiles.splice(index, 1);
-    }
-  }
 
   async loadDrugDetails() {
     try {
@@ -169,13 +161,10 @@ export class AddproductComponent implements OnInit {
   async addProduct() {
     try {
       this.is_operation_in_progress = true;
-      if(this.uploadFiles.length !== 0) {
-        this.product.images = await this.uploadImages()
-      }
 
       //handle the remaining aspect of the registration
       const token = await this.appService.getCurrentUserToken()
-      const response = await this.appService.initiateHttpRequest("post", "/products", this.product, token).toPromise();
+      const response = await this.appService.initiateHttpRequest("post", "/medications", this.product, token).toPromise();
       if(response?.status === true) {
         //inform the user that the operation was successful
         alert(response.message);
@@ -194,30 +183,7 @@ export class AddproductComponent implements OnInit {
     }
   }
 
-  async uploadImages() {
-    try {
-      if(this.uploadFiles.length === 0) throw "You must add at least 1 image file to proceed";
 
-      this.is_uploading = true;
-      const random = Math.random().toString().split(".")[1];
-
-
-      const ee = await Promise.all(
-        this.uploadFiles.map(ff=>{
-          const ext = ff.name.toLowerCase().split(".").pop();
-          return this.fStorage.upload("/productimages/"+"_product"+random+"."+ext, ff).then(async a=>{
-            return await a.ref.getDownloadURL()
-          })
-        })
-      )
-      this.is_uploading = false;
-      return ee;
-    }
-    catch(ee) {
-      this.is_uploading = false;
-      throw ee;
-    }
-  }
 
   async loadDrugs() {
     try {
@@ -268,11 +234,7 @@ export class AddproductComponent implements OnInit {
       weight: null,
       presentation: null,
       strength: null,
-      quantity: null,
-      discount_price: null,
-      actual_price: null,
-      description: null,
-      images: []
+      description: null
     }
 
     this.selectedDrug = null;
