@@ -23,6 +23,7 @@ export class UsersComponent implements OnInit {
   }
 
   switchUser(user: string) {
+    if(user === 'pharmacy') { this.users = this.allusers.filter(f=> ((f.type !== null && f.type.toLowerCase() ===  user.toLowerCase()) || f.type === "" || f.type === null)); return; }
     this.users = this.allusers.filter(f=> (f.type !== null && f.type.toLowerCase() ===  user.toLowerCase()));
   }
 
@@ -82,14 +83,8 @@ export class UsersComponent implements OnInit {
 
   approveUser() {
     if(confirm("Are you sure you want to "+this.action+" this user account?")) return;
-    this.appService.showConfirmDialog("Approve User", "Are you sure you want to approved this user account?").subscribe(s=>{
-      if(s) {
-        console.log("User selected Yes")
-      }
-      else {
-        console.log("User selected No");
-      }
-    }).unsubscribe();
+
+    this.changeUserStatus();
   }
 
   async disapproveUser() {
