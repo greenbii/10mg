@@ -82,7 +82,7 @@ export class UsersComponent implements OnInit {
   }
 
   approveUser() {
-    if(confirm("Are you sure you want to "+this.action+" this user account?")) return;
+    if(!confirm("Are you sure you want to "+this.action+" this user account?")) return;
 
     this.changeUserStatus();
   }

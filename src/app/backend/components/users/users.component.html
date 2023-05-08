@@ -38,8 +38,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" (click)="selected_user = reg" data-bs-toggle="modal" data-bs-target="#exampleModal">View Profile</a></li>
                                     <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
-                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="action='disapprove'">Disapprove</a></li>
-                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#exampleModal1" (click)="action='suspend'">Suspend</a></li>
+                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
+                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>
                                     <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Suspended'" (click)="approveUser()">Unsuspend</a></li>
                                 </ul>
                             </div>
@@ -231,7 +231,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+<div class="modal fade" id="eModal1" tabindex="-1" aria-labelledby="eModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

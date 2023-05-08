@@ -18,6 +18,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderComponent } from './components/order/order.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AccountstatusComponent } from './components/settings/accountstatus/accountstatus.component';
+import { ChangepasswordComponent } from './components/settings/changepassword/changepassword.component';
+import { CustomersupportComponent } from './components/settings/customersupport/customersupport.component';
+import { NotificationsettingsComponent } from './components/settings/notificationsettings/notificationsettings.component';
+import { ProfileComponent } from './components/settings/profile/profile.component';
+import { ReviewsComponent } from './components/settings/reviews/reviews.component';
 
 
 
@@ -37,7 +44,14 @@ import { OrderComponent } from './components/order/order.component';
     CartComponent,
     DashboardComponent,
     ProductdetailsComponent,
-    OrderComponent
+    OrderComponent,
+    SettingsComponent,
+    AccountstatusComponent,
+    ChangepasswordComponent,
+    CustomersupportComponent,
+    NotificationsettingsComponent,
+    ProfileComponent,
+    ReviewsComponent
   ],
   imports: [
     CommonModule,

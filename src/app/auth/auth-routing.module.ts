@@ -20,6 +20,7 @@ import { CartResolver } from './resolvers/cart-resolver';
 import { OrderComponent } from './components/order/order.component';
 import { OrderResolver } from './resolvers/order-resolver';
 import { OrderLogResolver } from './resolvers/log-history-resolver';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,10 @@ const routes: Routes = [
         path: 'cart',
         component: CartComponent,
         resolve: {cart: CartResolver}
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent
       }
     ],
   },
