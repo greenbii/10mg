@@ -80,6 +80,9 @@ export class AddproductComponent implements OnInit {
     if(this.selectedWeight === null || 
       this.selectedDrug === null || 
       this.selectedPackage === null
+      || this.product.strength === null
+      || this.product.presentation === null
+      || this.product.strength_value === null
       || this.selectedBrand === null) return false;
 
     return true;
@@ -247,7 +250,7 @@ export class AddproductComponent implements OnInit {
       //load the description
       if(this.product_details.variations.length !== 0) {
         const desc = this.product_details.variations.find((f:any)=> {
-          return f.presentation === this.product.presentation && f.strength === this.product.strength_value+""+this.product.strength
+          return f.presentation === this.product.presentation && f.strength === this.product.strength && this.product.strength_value === f.strength_value
         });
 
 
@@ -271,6 +274,7 @@ export class AddproductComponent implements OnInit {
       weight: null,
       presentation: null,
       strength: null,
+      strength_value: null,
       quantity: null,
       discount_price: null,
       actual_price: null,

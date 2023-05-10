@@ -15,3 +15,7 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+//9QGQzuy122NO5FzQxROYU7UDGMuE1hmK
+//pk_NjQ1MjBlZDc2NzcwNTMyMGMzNmQ5ZTNhOjoxOTg0Mjk=
+
