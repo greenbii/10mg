@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
+import { environment } from 'src/environments/environment';
 declare var PaystackPop: any;
 declare var FlutterwaveCheckout: any;
+declare var Fincra: any;
 
 @Component({
   selector: 'app-order',
@@ -171,6 +173,51 @@ export class OrderComponent implements OnInit {
         // Make an AJAX call to your server with the reference to verify the transaction
         this.is_operation_in_progress = false;
       }
+    });
+  }
+
+  openFincraPopUp() {
+    Fincra.initialize({
+      key: environment.fincra_key,
+      amount: (this.order.order_total + this.order.logistics_total),
+      currency: "NGN",
+      customer: {
+          name: this.appService.current_user.displayName,
+          email: this.appService.current_user.email
+          //phoneNumber: document.getElementById("phoneNumber").value,
+        },
+     //Kindly chose the bearer of the fees
+     feeBearer: "customer",
+
+      onClose: ()=> {
+        alert("Transaction was not completed, window closed.");
+      },
+      onSuccess: async (data: any)=> {
+        const reference = data.reference;
+        console.log(data);
+        //alert("Payment complete! Reference: " + reference);
+        //this happens after the payment is completed successfully
+        this.is_operation_in_progress = true;
+
+  
+        const token = await this.appService.getCurrentUserToken();
+        const resp = await this.appService.initiateHttpRequest('post', '/order' ,{reference: reference}, token).toPromise();
+        if(resp?.status === true) {
+          //notify the user that the payment method has been added
+          //or rather display the payment methods for the user
+          //this.payment_methods.push(resp.data);
+          alert(resp?.message);
+        }
+        else {
+          //this.appService.showErrorNotification(resp.msg);
+          alert(resp?.message)
+        }
+
+        //this.is_adding_in_progress = false;
+  
+        // Make an AJAX call to your server with the reference to verify the transaction
+        this.is_operation_in_progress = false;
+      },
     });
   }
 

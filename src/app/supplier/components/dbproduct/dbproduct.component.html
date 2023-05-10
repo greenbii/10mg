@@ -54,7 +54,16 @@
                 </div>
                 <h6 class="price">{{productCard.discount_price | currency : 'NGN' : 'symbol-narrow'}}</h6>
             </div>
-            <span class="small text-muted">{{productCard.brand.name | titlecase}}</span>
+            <div class="d-flex justify-content-between dropdown">
+                <span class="small text-muted">{{productCard.brand.name | titlecase}}</span>
+                <span class="small text-muted" role="button" data-bs-toggle="dropdown"><i class="fa fa-ellipsis"></i></span>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item small" role="button" data-bs-toggle="modal" data-bs-target="#productModal">Preview</a></li>
+                    <li><a class="dropdown-item small" routerLink="/supplier/edit/{{productCard.product_id}}">Edit</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger small" role="button" (click)="deleteProduct(productCard)">Delete</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -62,3 +71,22 @@
         <p class="text-center text-muted small">You have not added any product yet, click <strong>Add Product</strong> to add new Product</p>
     </div>
 </section>
+
+<div class="modal" id="productModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Product Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Feature is in progress</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

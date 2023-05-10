@@ -246,11 +246,15 @@ export class AddproductComponent implements OnInit {
   loadDrugDescription() {
     
     if(this.product.strength !== null && this.product.strength_value !== null && this.product.presentation !== null) {
-      console.log(this.product.strength, this.product.presentation);
+      //console.log(this.product.strength, this.product.presentation, this.product.strength_value);
       //load the description
       if(this.product_details.variations.length !== 0) {
         const desc = this.product_details.variations.find((f:any)=> {
-          return f.presentation === this.product.presentation && f.strength === this.product.strength && this.product.strength_value === f.strength_value
+          //console.log("Strength Value: ",f.strength_value, "Strength: ", f.strength, "Presentation: ", f.presentation)
+          const t1 = (f.strength_value+""+f.strength+" "+f.presentation).toString().trim();
+          const t2 = (this.product.strength_value+""+this.product.strength+" "+this.product.presentation).toString().trim();
+          return t1 === t2;
+          //return f.presentation === this.product.presentation && f.strength === this.product.strength && f.strength_value === this.product.strength_value
         });
 
 

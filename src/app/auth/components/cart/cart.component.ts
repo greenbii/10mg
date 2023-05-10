@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 
 declare var PaystackPop: any;
+declare var Fincra: any;
 
 @Component({
   selector: 'app-cart',

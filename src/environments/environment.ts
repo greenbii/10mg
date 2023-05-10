@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiURL: "http://localhost:8088/10mg"
+  apiURL: "http://localhost:8088/10mg",
+  fincra_key: "pk_test_NjQ1MjBlZDliZmRmMjg2YmI1OGFhM2U0OjoxMjc5MzI="
 };
 
 /*
@@ -16,6 +17,7 @@ export const environment = {
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
 
+//FCR
 //9QGQzuy122NO5FzQxROYU7UDGMuE1hmK
 //pk_NjQ1MjBlZDc2NzcwNTMyMGMzNmQ5ZTNhOjoxOTg0Mjk=
 

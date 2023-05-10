@@ -57,6 +57,10 @@ const routes: Routes = [
           path: 'orders',
           component: OrdersComponent,
           resolve: {orders: OrderResolver}
+        },
+        {
+          path: 'edit/:id',
+          component: AddproductComponent
         }
       ]
     }

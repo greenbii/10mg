@@ -63,4 +63,8 @@ export class DbproductComponent implements OnInit {
     }
   }
 
+  deleteProduct(p: any) {
+    
+  }
+
 }
