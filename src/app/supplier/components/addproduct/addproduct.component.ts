@@ -72,7 +72,8 @@ export class AddproductComponent implements OnInit {
 
   checkAllowDrugEditing() {
     if(this.selectedDrug === null) return false;
-    return this.selectedDrug !== null && this.selectedDrug['__isNew__'] || (this.selectedDrug['added_by'] && this.selectedDrug['added_by'] === this.current_user_id)
+    //return this.selectedDrug !== null && this.selectedDrug['__isNew__'] || (this.selectedDrug['added_by'] && this.selectedDrug['added_by'] === this.current_user_id)
+    return this.selectedDrug !== null;
   }
 
   isFormValid() {
