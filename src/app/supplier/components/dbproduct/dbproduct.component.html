@@ -58,7 +58,7 @@
                 <span class="small text-muted">{{productCard.brand.name | titlecase}}</span>
                 <span class="small text-muted" role="button" data-bs-toggle="dropdown"><i class="fa fa-ellipsis"></i></span>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item small" role="button" data-bs-toggle="modal" data-bs-target="#productModal">Preview</a></li>
+                    <!-- <li><a class="dropdown-item small" role="button" data-bs-toggle="modal" data-bs-target="#productModal">Preview</a></li> -->
                     <li><a class="dropdown-item small" routerLink="/supplier/edit/{{productCard.product_id}}">Edit</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item text-danger small" role="button" (click)="deleteProduct(productCard)">Delete</a></li>

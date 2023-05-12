@@ -15,7 +15,12 @@ export class ProductDetailResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> {
         if(!route.paramMap.has("id")) {
-            this.appService.redirect("/auth/shop");
+            if(this.appService.current_business_details.business.customer_type === "Pharmacy") {
+                this.appService.redirect("/auth/shop");
+            }
+            else {
+                this.appService.redirect("/supplier/products");
+            }
             return EMPTY;
         }
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountOverviewResolver } from '../auth/resolvers/account-overview-resolver';
 import { OrderResolver } from '../auth/resolvers/order-resolver';
+import { ProductDetailResolver } from '../auth/resolvers/product-details-resolver';
 import { AddproductComponent } from './components/addproduct/addproduct.component';
 import { DbproductComponent } from './components/dbproduct/dbproduct.component';
 import { DrugsComponent } from './components/drugs/drugs.component';
@@ -60,7 +61,8 @@ const routes: Routes = [
         },
         {
           path: 'edit/:id',
-          component: AddproductComponent
+          component: AddproductComponent,
+          resolve: {details: ProductDetailResolver}
         }
       ]
     }
@@ -75,7 +77,8 @@ const routes: Routes = [
     SupplierProducts,
     OrderResolver,
     SupplierWalletResolver,
-    BankDetailsResolver
+    BankDetailsResolver,
+    ProductDetailResolver
   ]
 })
 export class SupplierRoutingModule {}

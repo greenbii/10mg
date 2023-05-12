@@ -65,6 +65,7 @@ export class CustomselectComponent implements OnInit {
   }
 
   handleHideList() {
+    this.handleEnterKeypress();
     setTimeout((
     )=>{
       this.show_list = false

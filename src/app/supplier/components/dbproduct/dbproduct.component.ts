@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-dbproduct',
@@ -52,7 +53,7 @@ export class DbproductComponent implements OnInit {
   ]
   
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private appService: AppService) { }
 
   ngOnInit(): void {
     this.productCards = [];
@@ -63,8 +64,22 @@ export class DbproductComponent implements OnInit {
     }
   }
 
-  deleteProduct(p: any) {
-    
+  async deleteProduct(p: any) {
+    try {
+      if(!confirm("Are you sure you want to delete this product, note all data and information regarding this product will be lost after this operation")) return;
+
+      const token = await this.appService.getCurrentUserToken();
+      const rs = await this.appService.initiateHttpRequest('delete', '/products', {product_id: p.product_id}, token).toPromise();
+      if(rs?.status === true) {
+        alert(rs.message);
+      }
+      else {
+        throw rs?.message;
+      }
+    }
+    catch(e: any) {
+      alert(e.toString());
+    }
   }
 
 }

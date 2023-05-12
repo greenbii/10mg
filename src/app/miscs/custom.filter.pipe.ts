@@ -13,23 +13,31 @@ export class FilterPipe implements PipeTransform {
       return items;
     }
     const iArray = field.split("|");
-    return items.filter(singleItem => {
+    let found_array: any = [];
+    let not_found_array: any = [];
+    items.forEach((singleItem, i) => {
         for(let ff of iArray) {
           if(singleItem[ff]) {
             try{
               if(singleItem[ff].toString().toLowerCase().includes(value.toLowerCase())) {
-                return true;
+                //return true;
+                found_array.push(singleItem); return;
               }
             }
             catch(e){
               if(singleItem[ff].toString().includes(value)) {
-                return true;
+                //return true;
+                found_array.push(singleItem); return;
               }
             }
           }
         }
-        return false;
+        //return false;
+        not_found_array.push(singleItem);
       }
     );
+
+    return [...found_array, ...not_found_array]
+
   }
 }

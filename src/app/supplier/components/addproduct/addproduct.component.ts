@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
 
 @Component({
@@ -57,10 +58,12 @@ export class AddproductComponent implements OnInit {
 
   selling_currency: string = "";
 
+  edit_product: any = null;
 
 
 
-  constructor(private appService: AppService, private fStorage: AngularFireStorage) { }
+
+  constructor(private appService: AppService, private fStorage: AngularFireStorage,  private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.current_user_id = this.appService.current_user.uid;
@@ -68,6 +71,38 @@ export class AddproductComponent implements OnInit {
     this.loadDrugs();
 
     this.selling_currency = this.appService.getCurrencySymbol(this.appService.current_business_details.business.selling_currency);
+
+    if(this.route.snapshot.paramMap.has("id")) {
+      const p: any = this.route.snapshot.data;
+
+      if(p.details) this.edit_product = p.details;
+
+      this.product = {
+        name: this.edit_product.drug.name,
+        brand: this.edit_product.brand.name,
+        package_per_roll: this.edit_product.brand.packaging.package_per_roll,
+        weight: this.edit_product.brand.packaging.weight,
+        presentation: this.edit_product.brand.variation.presentation,
+        strength: this.edit_product.brand.variation.strength,
+        quantity: this.edit_product.quantity,
+        strength_value: this.edit_product.brand.variation.strength_value,
+        discount_price: this.edit_product.discount_price,
+        actual_price: this.edit_product.actual_price,
+        description: this.edit_product.brand.variation.description,
+        images: this.edit_product.images !== null ? this.edit_product.images : []
+      }
+
+      this.loadDrugDetails().then(d=>{
+        this.selectedDrug = {label: this.edit_product.drug.name.toString().toUpperCase(), value: this.edit_product.drug.drug_id}
+        this.selectedBrand = {label: this.edit_product.brand.name.toString().toUpperCase(), value: this.edit_product.brand.id};
+        this.selectedPackage = {label: this.product.package_per_roll, value: this.edit_product.brand.packaging.package_id}
+        this.selectedWeight = {label: this.product.weight, value: this.edit_product.brand.packaging.package_id}
+      })
+
+
+      //load the details of the drug
+
+    }
   }
 
   checkAllowDrugEditing() {
@@ -78,13 +113,11 @@ export class AddproductComponent implements OnInit {
 
   isFormValid() {
 
-    if(this.selectedWeight === null || 
-      this.selectedDrug === null || 
-      this.selectedPackage === null
+    if( 
+      this.selectedDrug === null 
       || this.product.strength === null
       || this.product.presentation === null
-      || this.product.strength_value === null
-      || this.selectedBrand === null) return false;
+      || this.product.strength_value === null) return false;
 
     return true;
   }
@@ -181,12 +214,17 @@ export class AddproductComponent implements OnInit {
       }
 
       //handle the remaining aspect of the registration
+
+      //let dt = {...this.product};
+      //if(this.edit_product !== null) dt.product_id = this.
       const token = await this.appService.getCurrentUserToken()
-      const response = await this.appService.initiateHttpRequest("post", "/products", this.product, token).toPromise();
+      const response = await this.appService.initiateHttpRequest(this.edit_product !== null ? "put" : "post", "/products"+(this.edit_product !== null ? "?p="+this.edit_product.product_id : ""), this.product, token).toPromise();
       if(response?.status === true) {
         //inform the user that the operation was successful
         alert(response.message);
-        this.resetForm();
+        if(this.product_details === null) {
+          this.resetForm();
+        }
       }
       else {
         alert(response?.message);
