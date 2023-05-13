@@ -189,18 +189,27 @@ export class OrderComponent implements OnInit {
      //Kindly chose the bearer of the fees
      feeBearer: "customer",
 
+     metadata: {
+        order_id: this.order.order_id,
+        customer_id: this.appService.current_user.uid
+     },
+
       onClose: ()=> {
         alert("Transaction was not completed, window closed.");
       },
       onSuccess: async (data: any)=> {
         const reference = data.reference;
-        console.log(data);
+        //console.log(data);
         //alert("Payment complete! Reference: " + reference);
         //this happens after the payment is completed successfully
-        this.is_operation_in_progress = true;
+        //this.is_operation_in_progress = true;
+        this.is_paid_order = true;
+        //console.log(this.order);
 
-  
-        const token = await this.appService.getCurrentUserToken();
+        alert("Payment received, we are proceesing your payment, you will be notitied when payment is confirmed, Click OK to proceed")
+
+        this.appService.redirect("/auth/shop");
+        /*const token = await this.appService.getCurrentUserToken();
         const resp = await this.appService.initiateHttpRequest('post', '/order' ,{reference: reference}, token).toPromise();
         if(resp?.status === true) {
           //notify the user that the payment method has been added
@@ -211,12 +220,12 @@ export class OrderComponent implements OnInit {
         else {
           //this.appService.showErrorNotification(resp.msg);
           alert(resp?.message)
-        }
+        }*/
 
         //this.is_adding_in_progress = false;
   
         // Make an AJAX call to your server with the reference to verify the transaction
-        this.is_operation_in_progress = false;
+        //this.is_operation_in_progress = false;
       },
     });
   }
