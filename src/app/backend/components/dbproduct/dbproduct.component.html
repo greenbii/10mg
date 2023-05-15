@@ -44,7 +44,7 @@
         <!-- <a routerLink="/supplier/add-drugs"><button class="button primary-btn add-prod">Add Drugs</button></a> -->
     </div>
 
-    <div class="product-cards p-4">
+    <!--<div class="product-cards p-4">
         <div class="product-card" *ngFor="let productCard of productCards">
             <div class="prod-img" [ngStyle]="{'background-image': 'url(' + (productCard.images[0] ? productCard.images[0] : '../../../.../../../assets/images/pills-img.png') + ')'}"></div>
             <div class="prod-details pt-4">
@@ -54,11 +54,48 @@
                 </div>
                 <h6 class="price">{{productCard.discount_price | currency : 'NGN' : 'symbol-narrow'}}</h6>
             </div>
-            <span class="small text-muted">{{productCard.brand.name | titlecase}}</span>
+            <span class="small text-muted" *ngIf="productCard.brand !== null">{{productCard.brand.name | titlecase}}</span>
         </div>
-    </div>
+    </div>-->
 
-    <div class="col-md-12 mt-2" *ngIf="productCards.length === 0">
+    <div class="col-md-12 mt-2" *ngIf="productCards.length === 0 && !is_loading">
         <p class="text-center text-muted small">No product is available for display</p>
     </div>
+
+    <div class="col-md-12 mt-2" *ngIf="is_loading">
+        <p class="text-center text-muted small"><i class="fa fa-spinner"></i>...Loading products</p>
+    </div>
+
+    <div class="p-2" *ngIf="!is_loading">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Qty Available</th>
+                    <th>Supplier</th>
+                    <th>Date Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of productCards; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>
+                        {{p.drug.name | titlecase}}<br>
+                        <span class="small text-muted">{{(p.brand !==  null ? p.brand.name :  "") | titlecase}}</span>
+
+                    </td>
+                    <td>{{p.brand !== null && p.brand.variation !== null ? (p.brand.variation.strength_value+""+p.brand.variation.strength+" "+p.brand.variation.presentation) : ""}}</td>
+                    <td>{{(p.discount_price !== 0 ? p.discount_price : p.actual_price) | currency : "₦"}}</td>
+                    <td>{{p.quantity}}</td>
+                    <td>{{(p.supplier && p.supplier !== null ? p.supplier.name : "") | titlecase}}</td>
+                    <td>{{p.date_created | date: "d-M-Y"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
 </section>
