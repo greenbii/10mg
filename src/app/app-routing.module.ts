@@ -8,6 +8,7 @@ import { AboutComponent } from './components/aboutComponent/about/about.componen
 import { BecomeSupplierLandingComponent } from './components/becomeSupplier/become-supplier-landing/become-supplier-landing.component';
 import { ComingsoonComponent } from './components/comingsoon/comingsoon.component';
 import { HelpFaqComponent } from './components/FAQ/help-faq/help-faq.component';
+import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 // import { BecomeSupplierComponent } from './components/landingComponent/become-supplier/become-supplier.component';
 import { LandingComponent } from './components/landingComponent/landing/landing.component';
 import { PrivacyPolicyComponent } from './components/privacyPolicy/privacy-policy/privacy-policy.component';
@@ -70,6 +71,10 @@ const routes: Routes = [
     path: 'registrations',
     component: RegistrationsComponent,
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'forgotpassword',
+    component: ForgotpasswordComponent
   },
   {
     path: '**',

@@ -30,6 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { InitappService } from './services/initapp.service';
+import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -67,7 +68,8 @@ export function app_init(appService: InitappService) {
     SignupComponent,
     SigninComponent,
     ComingsoonComponent,
-    RegistrationsComponent
+    RegistrationsComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     CommonModule,
