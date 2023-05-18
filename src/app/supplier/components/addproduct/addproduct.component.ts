@@ -82,13 +82,13 @@ export class AddproductComponent implements OnInit {
         brand: this.edit_product.brand.name,
         package_per_roll: this.edit_product.brand.packaging.package_per_roll,
         weight: this.edit_product.brand.packaging.weight,
-        presentation: this.edit_product.brand.variation.presentation,
-        strength: this.edit_product.brand.variation.strength,
+        presentation: this.edit_product.brand.variation !== null ? this.edit_product.brand.variation.presentation : null,
+        strength: this.edit_product.brand.variation !== null ? this.edit_product.brand.variation.strength : null,
         quantity: this.edit_product.quantity,
-        strength_value: this.edit_product.brand.variation.strength_value,
+        strength_value: this.edit_product.brand.variation !== null ? this.edit_product.brand.variation.strength_value : null,
         discount_price: this.edit_product.discount_price,
         actual_price: this.edit_product.actual_price,
-        description: this.edit_product.brand.variation.description,
+        description: this.edit_product.brand.variation !== null ? this.edit_product.brand.variation.description : null,
         images: this.edit_product.images !== null ? this.edit_product.images : []
       }
 
@@ -209,8 +209,10 @@ export class AddproductComponent implements OnInit {
   async addProduct() {
     try {
       this.is_operation_in_progress = true;
+      let images = []
       if(this.uploadFiles.length !== 0) {
-        this.product.images = await this.uploadImages()
+        images = await this.uploadImages()
+        this.product.images = this.product.images.concat(images)
       }
 
       //handle the remaining aspect of the registration

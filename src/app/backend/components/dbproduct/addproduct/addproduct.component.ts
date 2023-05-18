@@ -209,8 +209,10 @@ export class EditproductComponent implements OnInit {
   async addProduct() {
     try {
       this.is_operation_in_progress = true;
+      let images = []
       if(this.uploadFiles.length !== 0) {
-        this.product.images = await this.uploadImages()
+        images = await this.uploadImages()
+        this.product.images = this.product.images.concat(images)
       }
 
       //handle the remaining aspect of the registration
