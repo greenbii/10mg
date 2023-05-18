@@ -14,6 +14,8 @@ import { WalletComponent } from './components/wallet/wallet.component';
 import { DashboardSummaryResolver } from './resolvers/dashboard-summary';
 import { AdminOrdersResolver } from './resolvers/order-resolver';
 import { AdminWalletResolver } from './resolvers/wallet-resolver';
+import { EditproductComponent } from './components/dbproduct/addproduct/addproduct.component';
+import { ProductDetailResolver } from '../auth/resolvers/product-details-resolver';
 
 
 
@@ -65,6 +67,11 @@ const routes: Routes = [
           component: MessagesComponent
         },
         {
+          path: 'edit/:id',
+          component: EditproductComponent,
+          resolve: {details: ProductDetailResolver}
+        },
+        {
           path: '**',
           redirectTo: '',
           pathMatch: 'full'
@@ -81,7 +88,8 @@ const routes: Routes = [
     AdminWalletResolver,
     AdminOrdersResolver,
     DashboardSummaryResolver,
-    OrderLogResolver
+    OrderLogResolver,
+    ProductDetailResolver
   ]
 })
 export class BackendRoutingModule {}

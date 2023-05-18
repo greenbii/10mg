@@ -80,14 +80,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let p of productCards; let i=index">
+                <tr *ngFor="let p of productCards; let i=index" role="button" routerLink="/backend/edit/{{p.product_id}}">
                     <td>{{i+1}}</td>
                     <td>
-                        {{p.drug.name | titlecase}}<br>
-                        <span class="small text-muted">{{(p.brand !==  null ? p.brand.name :  "") | titlecase}}</span>
+                        <div class="d-flex">
+                            <img src="{{p.images && p.images.length !== 0 ? p.images[0] : '../../../.../../../assets/images/pills-img.png'}}" style="height: 40px; width: 40px; border-radius: 50%; margin-right: 5px;" class="border border-light">
+                            <div>
+                                {{p.drug.name | titlecase}}<br>
+                                <span class="small text-muted">{{(p.brand !==  null ? p.brand.name :  "") | titlecase}}</span>
+                            </div>
+                        </div>
+
 
                     </td>
-                    <td>{{p.brand !== null && p.brand.variation !== null ? (p.brand.variation.strength_value+""+p.brand.variation.strength+" "+p.brand.variation.presentation) : ""}}</td>
+                    <td>
+                        {{p.brand !== null && p.brand.variation !== null ? (p.brand.variation.strength_value+""+p.brand.variation.strength+" "+p.brand.variation.presentation) : ""}}
+                    </td>
                     <td>{{(p.discount_price !== 0 ? p.discount_price : p.actual_price) | currency : "₦"}}</td>
                     <td>{{p.quantity}}</td>
                     <td>{{(p.supplier && p.supplier !== null ? p.supplier.name : "") | titlecase}}</td>

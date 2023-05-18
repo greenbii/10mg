@@ -26,7 +26,8 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: ()=>import('./auth/auth.module').then(a=> a.AuthModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    resolve: {u: AccountOverviewResolver}
   },
   {
     path: 'supplier',

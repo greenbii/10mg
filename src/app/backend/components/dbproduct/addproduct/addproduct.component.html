@@ -1,0 +1,247 @@
+<section class="container">
+    <div class="sub-heading p-4">
+        <div class="left-content">
+            <i class="fa-solid fa-arrow-left" role="button" onclick="history.back()"></i>
+            <p>Products</p>
+        </div>
+        <!-- <button class="button primary-btn">Add Product</button> -->
+    </div>
+
+    <div class="row">
+        <!--For drug details on one side-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <app-customselect [(textInput)]="product.name" [allowCreateNew]="true" (selectedItemChange)="handleDrugSelection($event)" [(selectedItem)]="selectedDrug" [labelText]="'Select Medication'" [listItems]="drugs"></app-customselect>
+                <label class="small text-muted">e.g Tramadol, Tramadol + Paracetamol</label>
+            </div>
+            <div class="form-group">
+                <app-customselect [(textInput)]="product.brand" [(selectedItem)]="selectedBrand" (selectedItemChange)="handleBrandSelection($event)" [(listItems)]="drug_details.brands" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Brand'"></app-customselect>
+                <label class="small text-muted">e.g Vinco Tramadol</label>
+            </div>
+
+            <fieldset class="mt-3" style="border: 1px solid #b4b4b4; border-radius: 5px; padding: 10px;">
+                <legend class="small" style="padding-left: 15px;">Variation</legend>
+                <!--<div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group form-floating">
+                            <app-customselect [(textInput)]="product.strength" [(selectedItem)]="selectedStrength" [(listItems)]="drug_details.strengths" (selectedItemChange)="handleStrengthSelection($event)" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Strength'"></app-customselect>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group form-floating">
+                            <select class="form-select" id="floatingSelect" [(ngModel)]="product.presentation" (change)="loadDrugDescription()" aria-label="Floating label select example">
+                              <option value="Capsule">Capsule</option>
+                              <option value="Injection">Injection</option>
+                              <option value="Tablet">Tablet</option>
+                            </select>
+                            <label for="floatingSelect" class="small text-muted">Presentation</label>
+                          </div>
+                    </div>
+
+                    <div class="col-md-12 mt-2">
+                        <div class="form-floating form-group">
+                            <textarea class="form-control" [disabled]="selectedDrug === null || (selectedDrug !== null && selectedDrug['added_by'] && selectedDrug['added_by'] !== current_user_id)" [(ngModel)]="product.description" placeholder="Enter description for this variation" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Description</label>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-floating">
+                            <div class="form-group form-floating">
+                                <select class="form-select" id="floatingSelect" (change)="loadDrugDescription()" [(ngModel)]="product.strength_value" aria-label="Floating label select example">
+                                  <option value="{{v}}" *ngFor="let v of drugs_strength_value">{{v}}</option>
+                                </select>
+                                <label for="floatingSelect" class="small text-muted">Value</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group form-floating">
+                            <!--<input type="email" class="form-control" id="floatingInput" placeholder="E.g 50mg">
+                            <label for="floatingInput" class="text-muted small">Strength</label>-->
+                            <!-- <app-customselect [(textInput)]="product.strength" [(selectedItem)]="selectedStrength" [(listItems)]="drug_details.strengths" (selectedItemChange)="handleStrengthSelection($event)" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Strength'"></app-customselect> -->
+                            <div class="form-group form-floating">
+                                <select class="form-select" id="floatingSelect" (change)="loadDrugDescription()" [(ngModel)]="product.strength" aria-label="Floating label select example">
+                                  <option value="μg">Microgram(μg)</option>
+                                  <option value="mg">Milligram(mg)</option>
+                                  <option value="g">Gram(g)</option>
+                                </select>
+                                <label for="floatingSelect" class="small text-muted">Strength</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group form-floating">
+                            <select class="form-select" id="floatingSelect" (change)="loadDrugDescription()" [(ngModel)]="product.presentation" aria-label="Floating label select example">
+                              <option value="Capsule">Capsule</option>
+                              <option value="Injection">Injection</option>
+                              <option value="Tablet">Tablet</option>
+                            </select>
+                            <label for="floatingSelect" class="small text-muted">Presentation</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mt-2">
+                        <div class="form-floating form-group">
+                            <textarea class="form-control" [disabled]="selectedDrug === null || (selectedDrug !== null && selectedDrug['added_by'] && selectedDrug['added_by'] !== current_user_id)" [(ngModel)]="product.description" placeholder="Enter description for this variation" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Description</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset style="border: 1px solid #b4b4b4; border-radius: 5px; padding: 10px;" class="mt-3">
+                <legend class="small" style="padding-left: 15px;">Packaging</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <app-customselect [(textInput)]="product.package_per_roll" (selectedItemChange)="handlePackagingSelection($event)" [(selectedItem)]="selectedPackage" [(listItems)]="drug_details.packagings" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Package per roll'"></app-customselect>
+                        <label class="small text-muted">e.g. 1x10's</label>
+                    </div>
+
+                    <div class="col-md-6">
+                        <app-customselect [(textInput)]="product.weight" [(selectedItem)]="selectedWeight" (selectedItemChange)="handleWeightSelection($event)" [(listItems)]="drug_details.weights" [allowCreateNew]="checkAllowDrugEditing()" [labelText]="'Weight(kg)'"></app-customselect>
+                        <label class="small text-muted">e.g. 0.9</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+
+        <!--For Sales and Quantity at the other-->
+        <div class="col-md-6">
+            <div class="form-group form-floating">
+                <input type="number" class="form-control" [(ngModel)]="product.quantity" id="floatingInput" placeholder="Quantity">
+                <label for="floatingInput" class="text-muted small">Quantity</label>
+            </div>
+
+            <div class="form-group form-floating">
+                <input type="number" class="form-control" [(ngModel)]="product.actual_price" id="floatingInput" placeholder="Actual Price {{selling_currency}}">
+                <label for="floatingInput" class="text-muted small">Actual Price ({{selling_currency}})</label>
+            </div>
+
+            <div class="form-group form-floating">
+                <input type="number" class="form-control" id="floatingInput" [(ngModel)]="product.discount_price" placeholder="Discount Price {{selling_currency}}">
+                <label for="floatingInput" class="text-muted small">Discount Price ({{selling_currency}})</label>
+            </div>
+
+            <div class="form-group image-upload div-container mt-2">
+                <!-- <label for="image">Image</label> -->
+                <div class="d-flex justify-content-between p-2 bg-light rounded mt-1 mb-1" *ngFor="let f of uploadFiles; let i=index">
+                    <label class="small">{{f.name}}</label>
+                    <label class="small text-danger" role="button" (click)="removeUploadFile(i)"><i class="fa fa-trash text-danger"></i></label>
+                </div>
+                <input type="file" name="file" class="d-none" #file accept="png,jpg,svg,jpeg" (change)="getFile($event)">
+                <div class="img-up">
+                    <div class="upload-img">Click to upload or drag and drop SVG, PNG, JPG, or Gif (max: 800px x 400px)
+                    </div>
+                    <button class="button primary--btn" (click)="file.click()">Add more</button>
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                <button class="button primary-btn w-100" *ngIf="edit_product === null" (click)="addProduct()" [disabled]="!isFormValid() || is_operation_in_progress">{{is_operation_in_progress ? (is_uploading ? '...Uploading' : '...Adding Product') : 'Add Product'}}</button>
+                <button class="button primary-btn w-100" *ngIf="edit_product !== null" (click)="addProduct()" [disabled]="!isFormValid() || is_operation_in_progress">{{is_operation_in_progress ? (is_uploading ? '...Uploading' : '...Updating Product') : 'Update Product'}}</button>
+            </div>
+
+            <div class="form-group mt-2" *ngIf="edit_product === null">
+                <button class="btn btn-primary" (click)="resetForm()">Clear Form</button>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="add-product-container p-4">
+        <!--<div class="name div-container">
+            <label for="name">Name of Product</label>
+            <input type="text" name="name">
+        </div>
+        
+        <div class="brand-name div-container">
+            <div class="brand-name-label">
+                <label for="brandName">Brand Name</label>
+                <label for="add-new-brand"><i class="fa-solid fa-plus"></i> Add new brand</label>
+            </div>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">Nordic Natural</option>
+                <option value="2">Green Pharma</option>
+                <option value="3">Emzol Enterprise</option>
+            </select>
+        </div>
+        <div class="description div-container">
+            <label for="description">Description</label>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, illum laborum explicabo aut eius cumque
+                ducimus magni quasi sit nam enim officiis impedit labore dicta voluptatibus veniam numquam voluptatem
+                facere.</p>
+        </div>
+        <div class="quantity div-container">
+            <label for="quantity">Quantity</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="actual-price div-container">
+            <label for="price">Actual Price</label>
+            <input type="text" name="act-price">
+        </div>
+        <div class="discount-price div-container">
+            <label for="dPrice">Discount Price</label>
+            <input type="text" name="disc-price">
+        </div>
+        <div class="image-upload div-container">
+            <label for="image">Image</label>
+            <div class="img-up">
+                <div class="upload-img">Click to upload or drag and drop SVG, PNG, JPG, or Gif (max: 800px x 400px)
+                </div>
+                <button class="button primary--btn">Add more</button>
+            </div>
+        </div>
+        <div class="package-per-roll div-container">
+            <label for="ppr">Package Per Roll</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">Package 1</option>
+                <option value="2">Package 2</option>
+                <option value="3">Package 3</option>
+            </select>
+        </div>
+        <div class="weight-per-roll div-container">
+            <label for="wpr">Weight per Roll</label>
+            <input type="text" name="weight">
+        </div>
+        <div class="strength div-container">
+            <label for="strength">Strength</label>
+            <input type="text" name="strength">
+        </div>
+        <div class="presentation div-container">
+            <label for="presentation">Presentation</label>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Capsule">Capsule</option>
+                <option value="Injection">Injection</option>
+            </select>
+        </div>
+        <div class="product-sku div-container">
+            <label for="product-sku-ukc">Product SKU/UPC</label>
+            <input type="text" name="psu">
+        </div>
+        <div class="start-delivery-duration div-container">
+            <label for="sdd">Start Deliver Duration</label>
+            <input type="date" name="sdd">
+        </div>
+        <div class="end-delivery-duration div-container">
+            <label for="edd">End Deliver Duration</label>
+            <input type="date" name="edd">
+        </div>
+        <div class="notify">
+            <input type="checkbox" name="notify">
+            <p class="mb-0">Notify me when product are on low in store</p>
+        </div>
+    </div>-->
+</section>

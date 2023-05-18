@@ -16,13 +16,76 @@
             <p class="profile-title text-muted">Phone</p>
             <p class="profile-item p-0 m-0">{{business.phone}}</p>
         </div>
-        <div class="mt-2">
-            <p class="profile-title text-muted">Licence</p>
-            <p class="profile-item p-0 m-0">NA</p>
+        <fieldset class="mt-2 mb-3">
+            <legend class="small"><strong>Licences</strong></legend>
+            <div class="mb-2">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLicence"><i class="fa fa-plus"></i> Add Licence</button>
+            </div>
+            <div class="border border-light shadow-sm mb-2 p-2" *ngFor="let l of licenses; let i=index">
+                <div class="mt-2">
+                    <p class="profile-title text-muted">Licence Number</p>
+                    <p class="profile-item p-0 m-0">{{l.licence_number}}</p>
+                </div>
+                <div class="mt-2">
+                    <p class="profile-title text-muted">Expiry Date</p>
+                    <p class="profile-item p-0 m-0">{{l.expiry_date | date: "d/M/Y"}}</p>
+                </div>
+
+                <div class="d-flex mt-1">
+                    <a href="{{l.licence}}" target="_blank" style="margin-right: 10px"><i class="fa fa-eye text-warning" title="View Licence File" role="button"></i></a>
+                    <a (click)="removeLicence(l.id, i)" role="button"><i class="fa fa-trash text-danger ml-2" title="remove licence record"></i></a>
+                </div>
+            </div>
+
+            <div class="text-center text-muted mt-2 shadow-sm p-2" *ngIf="licenses.length === 0">
+                No licence record is available for this business account
+            </div>
+            
+        </fieldset>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addLicence" aria-hidden="true" aria-labelledby="addLicenceToggle" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Add New Licence</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="mt-2">
-            <p class="profile-title text-muted">Expiry Date</p>
-            <p class="profile-item p-0 m-0">NA</p>
+        <div class="modal-body">
+            <form action="" [formGroup]="supRegForm">
+                <div class="form-group mt-3">
+                    <label>Licence Number</label>
+                    <input type="number" name="licenseNo" formControlName="licence_number" class="textfield" placeholder="License number">
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label>Expiry Date</label>
+                    <input type="date" name="expiry_date" formControlName="expiry_date" class="textfield" placeholder="Expiry date [dd/mm/yyyy]" title="Expiry date">
+                </div>
+
+                <div class="business-license mt-4">
+                    <!-- <label for="bl">Business Approval License</label> -->
+                    <label for="bl">Retention of premises certificate</label>
+                    <div class="sel-file">
+                        <!-- <p>Select file</p> -->
+                        <input type="file" name="file_license" class="file-input" (change)="handleFileSelection($event, 'licence')">
+                        <p class="details">File Size must be less than 5megabytes</p>
+                    </div>
+                </div>
+                
+                <!--<div class="form-group mt-3">
+                    <label>Selling Currency</label>
+                    <select class="form-select textfield" formControlName="currency" aria-label="Default select example">
+                        <option selected>Selling Currency</option>
+                        <option value="NGN">NGN</option>
+                    </select>
+                </div>-->
+                <button class="button primary-btn my-4" type="button">Add</button>
+            </form>
+
         </div>
+      </div>
     </div>
 </div>
