@@ -177,12 +177,14 @@ export class OrderComponent implements OnInit {
   }
 
   openFincraPopUp() {
+    let nme = this.appService.current_user.displayName.toString().trim().split(" ");
+    let uname = nme[0].trim()+" "+(nme[1] && nme[1].toString().trim().length !== 0 ? nme[1].toString().trim() : nme[0])
     Fincra.initialize({
       key: environment.fincra_key,
       amount: (this.order.order_total + this.order.logistics_total),
       currency: "NGN",
       customer: {
-          name: this.appService.current_user.displayName,
+          name: uname, //this.appService.current_user.displayName,
           email: this.appService.current_user.email
           //phoneNumber: document.getElementById("phoneNumber").value,
         },
