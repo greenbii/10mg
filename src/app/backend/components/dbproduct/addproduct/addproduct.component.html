@@ -131,7 +131,7 @@
                 <!-- <label for="image">Image</label> -->
                 <!--Load any previous image that might have been added for product-->
                 <div class="d-flex mb-1 mt-1">
-                    <img src="{{image}}" *ngFor="let image of product.images" class="c-image">
+                    <img src="{{image}}" *ngFor="let image of product.images; let pindex=index" class="c-image" role="button" (click)="removeProductImage(pindex)">
                 </div>
                 <div class="d-flex justify-content-between p-2 bg-light rounded mt-1 mb-1" *ngFor="let f of uploadFiles; let i=index">
                     <label class="small">{{f.name}}</label>

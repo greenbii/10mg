@@ -94,6 +94,10 @@ input, select {
     margin-right: 10px;
 }
 
+.c-image:hover {
+    border: 1px solid #cfcfcf;
+}
+
 @media screen and (max-width: 1098px) {
     .add-product-container .div-container {
         width: 100%;

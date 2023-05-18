@@ -9,6 +9,14 @@ import { AppService } from 'src/app/services/app.service';
   styleUrls: ['./addproduct.component.css']
 })
 export class AddproductComponent implements OnInit {
+removeProductImage(_t112: number) {
+  if(!confirm("Are you sure you want to remove the selected image?")) return;
+  
+  if(this.product.images[_t112]) {
+    //remove the image
+    this.product.images.splice(_t112, 1);
+  }
+}
 
   drugs: any[] = [];
 

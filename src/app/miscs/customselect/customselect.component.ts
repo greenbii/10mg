@@ -41,6 +41,8 @@ export class CustomselectComponent implements OnInit {
       if(this.textInput !== null && this.textInput.toString().trim().length !== 0) {
         //add the item
         if(this.checkItemExistsInList()) {
+          const iIndex = this.listItems.findIndex((ff)=> ff.label.toString().toLowerCase().trim() === this.textInput.toString().toLowerCase().trim())
+          this.handleSelectedItem(this.listItems[iIndex]);
           this.show_list = false;
           return;
         }

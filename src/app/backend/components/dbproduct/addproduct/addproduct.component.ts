@@ -206,6 +206,15 @@ export class EditproductComponent implements OnInit {
     }
   }
 
+  removeProductImage(_t112: number) {
+    if(!confirm("Are you sure you want to remove the selected image?")) return;
+    
+    if(this.product.images[_t112]) {
+      //remove the image
+      this.product.images.splice(_t112, 1);
+    }
+  }
+
   async addProduct() {
     try {
       this.is_operation_in_progress = true;
