@@ -161,12 +161,16 @@ export class AppService {
 
   states: string[] = [
     "lagos",
+    "abia",
     "anambra",
     "abuja",
     "delta",
     "ondo",
     "bauchi",
+    "bayelsa",
+    "benue",
     "borno",
+    "ebonyi",
     "edo",
     "cross river",
     "enugu",
@@ -177,18 +181,21 @@ export class AppService {
     "kwara",
     "kano",
     "kaduna",
+    "katsina",
     "ogun",
     "oyo",
     "osun",
-    "ondo",
     "plateau",
-    "borno",
     "imo",
     "rivers",
     "sokoto",
     "adamawa",
     "akwa ibom",
-    "kebbi"
+    "kebbi",
+    "nasarawa",
+    "taraba",
+    "yobe",
+    "zamfara"
   ]
 
   
