@@ -171,6 +171,8 @@ export class AppService {
     "cross river",
     "enugu",
     "ekiti",
+    "kogi",
+    "niger",
     "gombe",
     "kwara",
     "kano",

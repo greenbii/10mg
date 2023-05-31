@@ -63,13 +63,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let reg of users; let i=index" (click)="selected_user = reg" data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">
+                    <tr *ngFor="let reg of users; let i=index" (click)="selected_user = reg" role="button">
                         <td>{{i+1}}</td>
                         <td>{{reg.contact_person}}</td>
                         <td>{{reg.id.toUpperCase()}}</td>
                         <td>{{reg.name}}</td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td>
+                            <div class="dropdown">
+                                <!--{{reg.status === 'Active' ? 'Suspend' : (reg.status === 'Pending' ? 'Approve' : 'Unsuspend')}}-->
+                                <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="{'btn-danger': reg.status=== 'Pending', 'btn-success': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status}}</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" (click)="selected_user = reg" data-bs-toggle="modal" data-bs-target="#exampleModal">View Profile</a></li>
+                                    <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
+                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
+                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>
+                                    <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Suspended'" (click)="approveUser()">Unsuspend</a></li>
+                                </ul>
+                            </div>
+                        </td>
                         
                     </tr>
                 </tbody>
