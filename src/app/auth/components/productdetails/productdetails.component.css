@@ -10,3 +10,13 @@
     background-color: #d9d9d9;
     padding: 10px;
 }
+
+.left-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.left-content i {
+    cursor: pointer;
+}

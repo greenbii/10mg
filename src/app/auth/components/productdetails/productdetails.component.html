@@ -1,5 +1,13 @@
 <main>
     <div class="container mt-3">
+        <div class="row mb-3">
+            <div class="back-button">
+                <div class="left-content" role="button" onclick="history.back()">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <p>Back</p>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <!--to show the variations of any give drug-->
             <div class="col-md-3">
@@ -24,7 +32,7 @@
             <div class="col-md-5">
                 <p class="text-muted small mb-2">{{product?.brand?.variation?.presentation}}</p>
                 <p style="padding: 0; margin: 0; font-size: larger;"><strong>{{product?.drug?.name | titlecase}}</strong></p>
-                <span class="text-muted mb-2">{{product?.brand?.name | titlecase}} ({{product?.brand?.variation?.strength}})</span>
+                <span class="text-muted mb-2">{{product?.brand?.name | titlecase}} ({{product?.brand?.variation?.strength_value+""+product?.brand?.variation?.strength}})</span>
                 <div class="d-flex" style="margin-top: 15px;">
                     <i class="fa fa-star" *ngFor="let rating of ratings"></i>
                     <span class="ml-3 text-muted small">(0 Ratings)</span>
@@ -69,8 +77,8 @@
                         <input type="number" [(ngModel)]="required_quantity" [disabled]="product.quantity <= 0" max="{{product?.quantity}}" min="1" style="width: 5rem;" class="form-control">
                     </div>
                     <div class="text" style="margin-left: 20px; margin-top: 7px;">
-                        <label class="text-muted small" *ngIf="product.quantity > 0">{{product?.quantity}} in stock</label>
-                        <label class="text-muted small" *ngIf="product.quantity === 0">Out of Stock</label>
+                        <label class="text-muted small" *ngIf="product.quantity > 0">per roll ({{product?.quantity}} in stock)</label>
+                        <label class="text-muted small" *ngIf="product.quantity === 0">per roll (Out of Stock)</label>
                     </div>
                 </div>
 

@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
 
   business_address: any = null;
   address_delivery: any = null;
+  business_addresses: any = null;
 
   total_weight: number = 0;
 
@@ -58,8 +59,9 @@ export class CartComponent implements OnInit {
     if(dt.cart) {
       if(!dt.cart.items) return;
       this.cart_items = dt.cart?.items;
-      this.business_address = dt.cart?.business_address;
+      this.business_address = dt.cart?.business_address[0];
       this.address_delivery = dt.cart?.address_delivery;
+      this.business_addresses = dt.cart?.business_address;
 
       if(this.business_address.state === "lagos") {
         this.delivery = "normal"
