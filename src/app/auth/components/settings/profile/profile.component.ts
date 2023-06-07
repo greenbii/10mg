@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from 'src/app/services/app.service';
 
@@ -12,8 +13,10 @@ export class ProfileComponent implements OnInit {
 
   profile: any = {
     name: "Nordic Normal",
-    
   }
+
+  is_registering: boolean  = false;
+  is_uploading: boolean = false;
 
   licenceFile!: File;
   cacFile!: File;
@@ -27,7 +30,7 @@ export class ProfileComponent implements OnInit {
 
   business: any = null;
 
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private fStorage: AngularFireStorage) { }
 
   ngOnInit(): void {
     //console.log(this.appService.current_business_details);
@@ -81,6 +84,65 @@ export class ProfileComponent implements OnInit {
       else {
         this.licenceFile = fl;
       }
+    }
+  }
+
+  async submitRegistration() {
+    try {
+      this.is_registering = true;
+      //upload the documents, if thats successful
+
+      //handle upload
+      const uFiles = await this.uploadFiles()
+      const dt =  {...this.supRegForm.value}
+      const token = await this.appService.getCurrentUserToken();
+      const resp = await this.appService.initiateHttpRequest('post', '/licence', {...dt, cac: null, licence: uFiles.licence}, token).toPromise();
+      if(resp?.status !== true) {
+        alert(resp?.message);
+        this.is_registering = false;
+        return;
+      }
+
+      //finish up here
+      this.is_registering = false;
+      //return true;
+      document.getElementById("close-dialog-btn")?.click();
+      this.licenses.push(resp.data);
+      this.supRegForm.reset();
+      
+    }
+    catch {
+      this.is_registering = false;
+      //return false;
+    }
+  }
+
+  async uploadFiles() {
+    try {
+      if(!this.licenceFile) throw "You must select and operating Licence file to proceed";
+
+      this.is_uploading = true;
+      const random = Math.random().toString().split(".")[1];
+      //const ext1 = this.cacFile.name.toLowerCase().split(".").pop();
+      const ext2 = this.licenceFile.name.toLowerCase().split(".").pop();
+
+
+      const ee = await Promise.all([
+        //this.fStorage.upload("/documents/"+"cac_"+random+"."+ext1, this.cacFile).then(async a=>{
+          //return await a.ref.getDownloadURL()
+        //}),
+        this.fStorage.upload("/documents/"+"licence_"+random+"."+ext2, this.licenceFile).then(async a=>{
+          return await a.ref.getDownloadURL()
+        })
+      ]
+      )
+      this.is_uploading = false;
+      //return {cac: ee[0], licence: ee[1]}
+      return {cac: null, licence: ee[0]}
+    }
+    catch(ee) {
+      this.is_uploading = false;
+      throw ee;
     }
   }
 

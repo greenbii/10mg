@@ -51,7 +51,7 @@
       <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Add New Licence</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" id="close-dialog-btn" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <form action="" [formGroup]="supRegForm">
@@ -71,7 +71,7 @@
                     <div class="sel-file">
                         <!-- <p>Select file</p> -->
                         <input type="file" name="file_license" class="file-input" (change)="handleFileSelection($event, 'licence')">
-                        <p class="details">File Size must be less than 5megabytes</p>
+                        <p class="details small text-danger" style="font-size:smaller">File Size must be less than 5megabytes</p>
                     </div>
                 </div>
                 
@@ -82,7 +82,7 @@
                         <option value="NGN">NGN</option>
                     </select>
                 </div>-->
-                <button class="button primary-btn my-4" type="button">Add</button>
+                <button class="button primary-btn my-4" [disabled]="!supRegForm.valid || is_registering" type="button" (click)="submitRegistration()">{{is_registering ? (is_uploading ? '...Uploading' : 'Adding...') : 'Add'}}</button>
             </form>
 
         </div>

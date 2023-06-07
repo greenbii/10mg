@@ -20,7 +20,7 @@
                     <p *ngIf="licence !== null">Expiring date: {{licence.expiry_date | date: "d/M/y"}}</p>
                 </div>
                 <div class="action-btn">
-                    <button class="button secondary-btn">Edit</button>
+                    <button class="button secondary-btn" [routerLink]="['/', 'auth', 'settings']" [queryParams]="{tab: 'profile'}">Edit</button>
                 </div>
             </div>
             <div class="pry-delivery-address details-container">
@@ -34,7 +34,7 @@
                     <p><span class="p-2 mt-2 small text-white bg-danger rounded">{{address.verification_status}}</span></p>
                 </div>
                 <div class="action-btn">
-                    <button class="button secondary-btn">Edit</button>
+                    <button class="button secondary-btn" data-bs-toggle="modal" data-bs-target="#addressModal">Edit</button>
                 </div>
             </div>
             <!-- <div class="account-settings details-container">
@@ -43,3 +43,113 @@
         </div>
     </div>
 </section>
+
+
+<div class="modal fade" id="addressModal" aria-hidden="true" aria-labelledby="addressModalLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Edit Address</h5>
+            <button type="button" class="btn-close" id="close-address-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!--<div class="border border-secondary rounded p-2 mb-3" *ngFor="let biz_address of business_addresses">
+                <p>{{biz_address?.address | titlecase}}</p>
+                <p>{{biz_address?.city | titlecase}}</p>
+                <p>{{biz_address?.state+", "+biz_address?.country | titlecase}}</p>
+            </div>-->
+
+            
+            <div class="border border-secondary rounded p-2 mt-2">
+                <fieldset>
+                    <form [formGroup]="bRegForm">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label>Address</label>
+                                <input type="text" name="street" formControlName="address" class="textfield form-control" placeholder="Street name">
+                            </div>
+    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="small text-muted">State/Region</label>
+                                    <select class="form-select mt-3" formControlName="state" (change)="loadStateCities()" aria-label="Default select example">
+                                        <option value="{{state}}" *ngFor="let state of states">{{state | titlecase}}</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="small text-muted">City/Town</label>
+                                    <select class="form-select mt-3" formControlName="city" aria-label="Default select example">
+                                        <option value="{{city}}" *ngFor="let city of cities">{{city | titlecase}}</option>
+                                    </select>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="small text-muted">Country</label>
+                                    <select class="form-select mt-3" formControlName="country" aria-label="Default select example">
+                                        <option value="nigeria">Nigeria</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mt-2">
+                            <button class="btn primary-btn my-4" (click)="updateAddress()" [disabled]="!bRegForm.valid || is_update_in_progress" type="button">{{is_update_in_progress ? 'Updating...' : 'Update Address'}}</button>
+                        </div>
+                        
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addLicence" aria-hidden="true" aria-labelledby="addLicenceToggle" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Update Licence</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" [formGroup]="supRegForm">
+                <div class="form-group mt-3">
+                    <label>Licence Number</label>
+                    <input type="number" name="licenseNo" formControlName="licence_number" class="textfield" placeholder="License number">
+                </div>
+                
+                <div class="form-group mt-3">
+                    <label>Expiry Date</label>
+                    <input type="date" name="expiry_date" formControlName="expiry_date" class="textfield" placeholder="Expiry date [dd/mm/yyyy]" title="Expiry date">
+                </div>
+
+                <div class="business-license mt-4">
+                    <!-- <label for="bl">Business Approval License</label> -->
+                    <label for="bl">Retention of premises certificate</label>
+                    <div class="sel-file">
+                        <!-- <p>Select file</p> -->
+                        <input type="file" name="file_license" class="file-input" (change)="handleFileSelection($event, 'licence')">
+                        <p class="details">File Size must be less than 5megabytes</p>
+                    </div>
+                </div>
+                
+                <!--<div class="form-group mt-3">
+                    <label>Selling Currency</label>
+                    <select class="form-select textfield" formControlName="currency" aria-label="Default select example">
+                        <option selected>Selling Currency</option>
+                        <option value="NGN">NGN</option>
+                    </select>
+                </div>-->
+                <button class="button primary-btn my-4" type="button">Add</button>
+            </form>
+
+        </div>
+      </div>
+    </div>
+</div>
