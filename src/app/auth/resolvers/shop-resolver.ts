@@ -22,12 +22,15 @@ export class ShopResolver implements Resolve<any> {
 
     async getData() {
         try {
+
+            if(this.appService.products.length !== 0) return this.appService.products;
             
             const uToken = await this.appService.getCurrentUserToken();
             const resp = await this.appService.initiateHttpRequest('get', '/products', null, uToken).toPromise();
             if(resp) {
                 if(resp.status === true) {
                     //this.appMarketService.user_apps = resp.data.filter((apps)=> apps !== null);
+                    this.appService.products = resp.data;
                     return resp.data;
                 }
                 else {

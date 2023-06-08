@@ -107,7 +107,7 @@ export class CartComponent implements OnInit {
   getSubtotal() {
     let total = 0;
     this.cart_items.forEach(f=>{
-      const tt = (f.discount_price !== 0 ? f.discount_price : f.actual_price) + f.tenmg_amount;
+      const tt = f.actual_price + f.tenmg_amount;
       total += f.quantity * tt; //f.discount_price; //(tt + f.tenmg_amount)
     })
 

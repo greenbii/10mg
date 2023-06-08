@@ -2,7 +2,7 @@
     <div class="product-flex">
         <div class="products" *ngFor="let product of products" [routerLink]="['/', 'auth', 'products', product.product_id]">
             <div class="product" [ngStyle]="{'background-image': 'url('+product.images[0]+')'}">
-                <p class="product-percentage small" *ngIf="product.discount_price !== 0 && product.discount_price < product.actual_price">-{{getPercentage(product)}}%</p>
+                <!-- <p class="product-percentage small" *ngIf="product.discount_price !== 0 && product.discount_price < product.actual_price">-{{getPercentage(product)}}%</p> -->
                 <div class="favorite-product"><i class="fa-regular fa-heart"></i></div>
             </div>
             <div class="product-details">
@@ -10,11 +10,11 @@
                     <p>{{product.drug.name | titlecase}}</p>
                 </div>
                 <div class="product-price">
-                    <p>{{((product.discount_price !== 0 ? product.discount_price :  product.actual_price)+product.tenmg_amount) | currency:"₦"}}</p>
+                    <p>{{(product.actual_price+product.tenmg_amount) | currency:"₦"}}</p>
                 </div>
-                <div class="product-old-price" *ngIf="product.discount_price !== 0">
+                <!-- <div class="product-old-price" *ngIf="product.discount_price !== 0">
                     <small>{{product.actual_price | currency: "₦"}}</small>
-                </div>
+                </div> -->
                 <button class="button primary-btn add-to-cart-btn">Add to cart</button>
             </div>
         </div>

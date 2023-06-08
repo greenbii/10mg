@@ -45,6 +45,8 @@ export class AppService {
     prompt: null
   }
 
+  products: any[] = [];
+
   dialogResponse: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
 
