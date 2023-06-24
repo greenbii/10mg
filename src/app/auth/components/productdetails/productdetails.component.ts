@@ -40,6 +40,7 @@ export class ProductdetailsComponent implements OnInit {
         const token = await this.appService.getCurrentUserToken();
         const response = await this.appService.initiateHttpRequest('post', '/cart', dt, token).toPromise();
         if(response?.status === true) {
+          this.appService.loadCustomerCart();
           //navigate to the user's cart page
           this.appService.redirect("/auth/cart");
         }

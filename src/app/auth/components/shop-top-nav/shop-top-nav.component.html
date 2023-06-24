@@ -43,7 +43,7 @@
                 </li>
                 <div class="divider mt-2"></div>
                 <li><a class="dropdown-item" role="button" routerLink="/auth/settings">
-                        <i class="fa-solid fa-settings me-2"></i> Settings
+                        <i class="fa-solid fa-gears me-2"></i> Settings
                     </a>
                 </li>
                 <div class="divider mt-2"></div>
@@ -59,8 +59,15 @@
             </ul>
         </div>
         <div class="cart" routerLink="/auth/cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <p>Cart</p>
+            <i class="fa-solid fa-cart-shopping position-relative">
+                <span *ngIf="appService.current_customer_cart?.items?.length !== 0" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                    <!-- <span class="text-white" style="font-size:xx-small">{{appService.current_customer_cart?.items?.length}}</span> -->
+                </span>
+            </i>
+            <p class="position-relative">
+                Cart
+            </p>
         </div>
         <div class="notification dropdown">
             <i class="fa-solid fa-bell" data-bs-toggle="dropdown"></i>

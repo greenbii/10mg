@@ -58,7 +58,8 @@ export class CartComponent implements OnInit {
 
     if(dt.cart) {
       if(!dt.cart.items) return;
-      this.cart_items = dt.cart?.items;
+      //this.cart_items = dt.cart?.items;
+      this.cart_items = this.appService.current_customer_cart.items;
       this.business_address = dt.cart?.business_address[0];
       this.address_delivery = dt.cart?.address_delivery;
       this.business_addresses = dt.cart?.business_address;
@@ -306,9 +307,9 @@ export class CartComponent implements OnInit {
       const token = await this.appService.getCurrentUserToken();
       const resp = await this.appService.initiateHttpRequest('delete', '/cart/'+item_id, undefined, token).toPromise();
       if(resp?.status === true) {
-        const it = this.cart_items.findIndex(ff=> ff.cart_id === item_id)
+        const it = this.appService.current_customer_cart?.items?.findIndex((ff:any)=> ff.cart_id === item_id)
         if(it !== -1) {
-          this.cart_items.splice(it, 1);
+          this.appService.current_customer_cart.items.splice(it, 1);
         }
       }
       else {

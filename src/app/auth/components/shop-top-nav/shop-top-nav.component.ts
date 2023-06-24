@@ -11,7 +11,7 @@ export class ShopTopNavComponent implements OnInit {
 
   openShopNav: boolean = false
 
-  constructor(private appService: AppService, private auth: AngularFireAuth) { }
+  constructor(public appService: AppService, private auth: AngularFireAuth) { }
 
   ngOnInit(): void {
   }

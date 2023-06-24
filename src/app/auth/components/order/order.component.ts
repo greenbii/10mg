@@ -176,7 +176,29 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  openFincraPopUp() {
+  async openFincraPopUp() {
+    if(this.order.status === 'Pending') {
+      this.is_operation_in_progress = true;
+      if(this.order.payment_details !== null) {
+        //redirect user to the payment page
+        document.location.href = this.order.payment_details.link;
+      }
+      else {
+        //get the payment link for the user
+        const token = await this.appService.getCurrentUserToken();
+        const rs = await this.appService.initiateHttpRequest('post', '/order/initiate-payment', {order_id: this.order.order_id}, token).toPromise();
+        if(rs?.status === true) {
+          document.location.href = rs.data.link;
+        }
+        else {
+          alert(rs?.message);
+        }
+      }
+
+      this.is_operation_in_progress = false;
+    }
+
+    return;
     let nme = this.appService.current_user.displayName.toString().trim().split(" ");
     let uname = nme[0].trim()+" "+(nme[1] && nme[1].toString().trim().length !== 0 ? nme[1].toString().trim() : nme[0])
     Fincra.initialize({
@@ -208,10 +230,10 @@ export class OrderComponent implements OnInit {
         this.is_paid_order = true;
         //console.log(this.order);
 
-        alert("Payment received, we are proceesing your payment, you will be notitied when payment is confirmed, Click OK to proceed")
+        //alert("Payment received, we are proceesing your payment, you will be notitied when payment is confirmed, Click OK to proceed")
 
-        this.appService.redirect("/auth/shop");
-        /*const token = await this.appService.getCurrentUserToken();
+        //this.appService.redirect("/auth/shop");
+        const token = await this.appService.getCurrentUserToken();
         const resp = await this.appService.initiateHttpRequest('post', '/order' ,{reference: reference}, token).toPromise();
         if(resp?.status === true) {
           //notify the user that the payment method has been added
@@ -222,7 +244,7 @@ export class OrderComponent implements OnInit {
         else {
           //this.appService.showErrorNotification(resp.msg);
           alert(resp?.message)
-        }*/
+        }
 
         //this.is_adding_in_progress = false;
   
@@ -231,6 +253,8 @@ export class OrderComponent implements OnInit {
       },
     });
   }
+
+
 
 
 

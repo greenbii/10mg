@@ -70,6 +70,18 @@ export class SigninComponent implements OnInit {
   constructor(private router: Router, private appService: AppService) { }
 
   ngOnInit(): void {
+    this.appService.auth.onAuthStateChanged(u=>{
+      if(u && u !== null) {
+        this.appService.getCurrentUserClaims().then(claims=>{
+          if(claims.claims["customer_type"] && claims.claims["customer_type"] === "supplier") {
+            this.appService.redirect("/supplier")
+          }
+          else {
+            this.appService.redirect("/auth/shop");
+          }
+        })
+      }
+    })
   }
 
   initiateForgotPassword() {

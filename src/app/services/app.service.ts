@@ -45,6 +45,8 @@ export class AppService {
     prompt: null
   }
 
+  current_customer_cart: any = null;
+
   products: any[] = [];
 
   dialogResponse: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -55,12 +57,16 @@ export class AppService {
     this.auth.onAuthStateChanged(u=>{
       if(u && u !== null) {
         this._is_current_user = true;
-        this.current_user = u
+        this.current_user = u;
+
+        //load the current customer cart
+        this.loadCustomerCart()
       }
       else {
         this._is_current_user = false;
         this.current_business_details = null;
         this.current_user = null
+        this.current_customer_cart = null;
       }
     })
   }
@@ -158,6 +164,25 @@ export class AppService {
     this.dialogDetails.prompt = msg_prompt;
     const tt = document.getElementById("open-confirm-dialog")?.click();
     return this.dialogResponse;
+  }
+
+  async loadCustomerCart() {
+    try {
+      const uToken = await this.getCurrentUserToken();
+      const resp = await this.initiateHttpRequest('get', '/cart', null, uToken).toPromise();
+      if(resp) {
+          if(resp.status === true) {
+              //this.appMarketService.user_apps = resp.data.filter((apps)=> apps !== null);
+              this.current_customer_cart = resp.data;
+          }
+          else {
+              throw resp.message;
+          }
+      }
+    }
+    catch(er) {
+      console.log(er);
+    }
   }
 
 
