@@ -28,6 +28,8 @@ export class OrderComponent implements OnInit {
 
   is_paid_order: boolean = false;
 
+  order_reference: string | null = null;
+
 
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
@@ -42,6 +44,13 @@ export class OrderComponent implements OnInit {
       //this.business_address = dt.cart?.business_address;
       //this.address_delivery = dt.cart?.address_delivery;
     }
+
+    this.route.queryParamMap.subscribe(s=>{
+      if(s.has("reference")) {
+        this.order_reference = s.get("reference");
+        this.confirmPayment();
+      }
+    })
   }
 
 
@@ -252,6 +261,33 @@ export class OrderComponent implements OnInit {
         //this.is_operation_in_progress = false;
       },
     });
+  }
+
+  async confirmPayment(){
+    this.is_operation_in_progress = true;
+    //console.log(this.order);
+
+    //this.appService.redirect("/auth/shop");
+    const token = await this.appService.getCurrentUserToken(); //().getIdToken().getJwtToken();
+    const resp = await this.appService.initiateHttpRequest('get', '/order/complete/'+this.order.order_id+"?reference="+this.order_reference, undefined, token).toPromise();
+    if(resp?.status === true) {
+      //notify the user that the payment method has been added
+      //or rather display the payment methods for the user
+      //this.payment_methods.push(resp.data);
+      this.is_paid_order = true;
+      this.order = resp.data;
+      //alert(resp?.message);
+    }
+    else {
+      //this.appService.showErrorNotification(resp.msg);
+      alert(resp?.message)
+      this.order_reference = null;
+    }
+
+    //this.is_adding_in_progress = false;
+
+    // Make an AJAX call to your server with the reference to verify the transaction
+    this.is_operation_in_progress = false;
   }
 
 

@@ -7,6 +7,7 @@
     "build": "ng build && mv dist/10mg _static",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "start-dev": "ng serve --port 4700",
     "deploy": "export NODE_OPTIONS=--openssl-legacy-provider && ng build && aws s3 sync dist/10mg s3://10mg.co.uk --exclude --profile=10mg && aws cloudfront create-invalidation --distribution-id E2D3Y3YZEZNAQJ  --paths '/*' --profile=10mg"
   },
   "private": true,
