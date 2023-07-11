@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,7 +43,7 @@ export class DashboardComponent implements OnInit {
     responsive: true,
     maintainAspectRatio: false
   };
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private appService: AppService) { }
 
   ngOnInit(): void {
     const dt: any = this.route.snapshot.data;
@@ -57,6 +58,17 @@ export class DashboardComponent implements OnInit {
 
       this.orders.shipped = this.summary.total_orders.filter((f: any)=> f.status.toLowerCase() === "shipped").length;
 
+    }
+  }
+
+  async smart() {
+    try {
+      const token = await this.appService.getCurrentUserToken();
+      const rs = await this.appService.initiateHttpRequest('get', '/admin', undefined, token).toPromise();
+      console.log(rs);
+    }
+    catch(e) {
+      console.log(e);
     }
   }
 

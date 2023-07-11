@@ -1,92 +1,195 @@
 <div class="main">
     <div class="container">
-        <h4>Users</h4>
+        <h4 *ngIf="!show_edit_user">Users</h4>
+        <h4 *ngIf="show_edit_user"><span role="button" class="text-primary" [routerLink]="['/', 'backend', 'users']" (click)="show_edit_user = false; selected_user = null;">Users</span> <span *ngIf="show_edit_user && selected_user && selected_user !== null"> > {{selected_user.name}}</span></h4>
 
-        <div class="">
-            <ul class="s-items">
-                <li [ngClass]="{'active': current_tab === 'supplier'}" (click)="current_tab = 'supplier'; switchUser('supplier')">Suppliers</li>
-                <li [ngClass]="{'active': current_tab === 'pharmacy'}" (click)="current_tab = 'pharmacy'; switchUser('pharmacy')">Pharmacies</li>
-            </ul>
-        </div>
+        <div *ngIf="!show_edit_user">
+            <div class="">
+                <ul class="s-items">
+                    <li [ngClass]="{'active': current_tab === 'supplier'}" (click)="current_tab = 'supplier'; switchUser('supplier')">Suppliers</li>
+                    <li [ngClass]="{'active': current_tab === 'pharmacy'}" (click)="current_tab = 'pharmacy'; switchUser('pharmacy')">Pharmacies</li>
+                </ul>
+            </div>
 
-        <div class="">
-            
-            <table class="table table-striped" *ngIf="!is_loading_users && users.length !== 0 && current_tab === 'supplier'">
-                <thead>
-                    <tr style="cursor: pointer;">
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Supplier ID</th>
-                    <th>Brand</th>
-                    <!-- <th>Shipment Method</th> -->
-                    <th>Status</th>
-                    <!-- <th>Action</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let reg of users; let i=index" role="button">
-                        <td>{{i+1}}</td>
-                        <td>{{reg.contact_person}}</td>
-                        <td>{{reg.id.toUpperCase()}}</td>
-                        <td>{{reg.name}}</td>
-                        <!-- <td>&nbsp;</td> -->
-                        <!-- <td><span class="d-block p-1 small rounded text-white" [ngClass]="{'bg-danger': reg.status === 'Pending', 'bg-success': reg.status === 'Active'}">{{reg.status}}</span></td> -->
-                        <td>
-                            <div class="dropdown">
-                                <!--{{reg.status === 'Active' ? 'Suspend' : (reg.status === 'Pending' ? 'Approve' : 'Unsuspend')}}-->
-                                <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="{'btn-danger': reg.status=== 'Pending', 'btn-success': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status}}</button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" (click)="selected_user = reg" data-bs-toggle="modal" data-bs-target="#exampleModal">View Profile</a></li>
-                                    <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
-                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
-                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>
-                                    <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Suspended'" (click)="approveUser()">Unsuspend</a></li>
-                                </ul>
-                            </div>
+            <div class="">
+                
+                <table class="table table-striped" *ngIf="!is_loading_users && users.length !== 0 && current_tab === 'supplier'">
+                    <thead>
+                        <tr style="cursor: pointer;">
+                        <th>#</th>
+                        <th>Customer</th>
+                        <th>Supplier ID</th>
+                        <th>Brand</th>
+                        <!-- <th>Shipment Method</th> -->
+                        <th>Status</th>
+                        <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reg of users; let i=index" role="button">
+                            <td>{{i+1}}</td>
+                            <td>{{reg.contact_person}}</td>
+                            <td>{{reg.id.toUpperCase()}}</td>
+                            <td>{{reg.name}}</td>
+                            <!-- <td>&nbsp;</td> -->
+                            <!-- <td><span class="d-block p-1 small rounded text-white" [ngClass]="{'bg-danger': reg.status === 'Pending', 'bg-success': reg.status === 'Active'}">{{reg.status}}</span></td> -->
+                            <td>
+                                <div class="dropdown">
+                                    <!--{{reg.status === 'Active' ? 'Suspend' : (reg.status === 'Pending' ? 'Approve' : 'Unsuspend')}}-->
+                                    <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="{'btn-danger': reg.status=== 'Pending', 'btn-success': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status}}</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" [routerLink]="['/', 'backend', 'users']" [queryParams]="{edit: reg.id}" (click)="editUser(reg)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile</a></li>
+                                        <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
+                                        <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
+                                        <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>
+                                        <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Suspended'" (click)="approveUser()">Unsuspend</a></li>
+                                        <li><a class="dropdown-item text-danger" (click)="deleteUserAccount()">Delete</a></li>
+                                    </ul>
+                                </div>
+                                
+                            </td>
                             
-                        </td>
-                        
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
 
 
-            <table class="table table-striped" *ngIf="!is_loading_users && users.length !== 0 && current_tab === 'pharmacy'">
-                <thead>
-                    <tr style="cursor: pointer;">
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Pharmacy ID</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let reg of users; let i=index" (click)="selected_user = reg" role="button">
-                        <td>{{i+1}}</td>
-                        <td>{{reg.contact_person}}</td>
-                        <td>{{reg.id.toUpperCase()}}</td>
-                        <td>{{reg.name}}</td>
-                        <td>&nbsp;</td>
-                        <td>
-                            <div class="dropdown">
-                                <!--{{reg.status === 'Active' ? 'Suspend' : (reg.status === 'Pending' ? 'Approve' : 'Unsuspend')}}-->
-                                <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="{'btn-danger': reg.status=== 'Pending', 'btn-success': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status}}</button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" (click)="selected_user = reg" data-bs-toggle="modal" data-bs-target="#exampleModal">View Profile</a></li>
-                                    <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
-                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
-                                    <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>
-                                    <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Suspended'" (click)="approveUser()">Unsuspend</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-striped" *ngIf="!is_loading_users && users.length !== 0 && current_tab === 'pharmacy'">
+                    <thead>
+                        <tr style="cursor: pointer;">
+                        <th>#</th>
+                        <th>Customer</th>
+                        <th>Pharmacy ID</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let reg of users; let i=index" (click)="selected_user = reg" role="button">
+                            <td>{{i+1}}</td>
+                            <td>{{reg.contact_person}}</td>
+                            <td>{{reg.id.toUpperCase()}}</td>
+                            <td>{{reg.name}}</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <div class="dropdown">
+                                    <!--{{reg.status === 'Active' ? 'Suspend' : (reg.status === 'Pending' ? 'Approve' : 'Unsuspend')}}-->
+                                    <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="{'btn-danger': reg.status=== 'Pending', 'btn-success': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status}}</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" [routerLink]="['/', 'backend', 'users']" [queryParams]="{edit: reg.id}" (click)="editUser(reg)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile</a></li>
+                                        <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
+                                        <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
+                                        <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>
+                                        <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Suspended'" (click)="approveUser()">Unsuspend</a></li>
+                                        <li><a class="dropdown-item text-danger" (click)="deleteUserAccount()">Delete</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <div *ngIf="show_edit_user" class="row">
+            <div class="col-md-6">
+                <div class="bg-white shadow-sm p-2 mb-2">
+                    <h4>Business Details</h4>
+                    <form [formGroup]="uDetailsForm">
+                        <div class="form-floating mb-2">
+                            <input type="text" formControlName="name" class="form-control" id="floatingInput" placeholder="Pharmacy Name">
+                            <label for="floatingInput">Pharmacy Name</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" formControlName="contact_person" id="floatingPassword" placeholder="Contact Person">
+                            <label for="floatingPassword">Contact Person</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="email" readonly class="form-control" formControlName="email" id="floatingEmail" placeholder="Email">
+                            <label for="floatingEmail">Email</label>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <input type="tel" class="form-control" formControlName="phone" id="floatingTel" placeholder="Phone">
+                            <label for="floatingTel">Phone</label>
+                        </div>
+
+                        <div class="">
+                            <span class="text-muted small">Accout created on {{selected_user.date_created | date: "d/M/Y h:m a"}}</span>
+                        </div>
+
+                        <!-- <div class="d-flex justify-content-end">
+                            <button class="btn btn-primary">Update</button>
+                        </div> -->
+                    </form>
+                </div>
+
+                <div class="" *ngIf="selected_user.verifications && selected_user.verifications.length !== 0">
+                    
+                    <div class="bg-white shadow-sm p-2 mt-3">
+                        <h4>Licence Detail</h4>
+                        <form [formGroup]="lDetails">
+                            <div class="form-floating mb-2">
+                                <input type="text" formControlName="licence_no" class="form-control" id="floatingInput" placeholder="Licence No">
+                                <label for="floatingInput">Licence Number</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <input type="date" class="form-control" formControlName="expiry_date" id="floatingPassword" placeholder="Expiry Date">
+                                <label for="floatingPassword">Expiry Date</label>
+                            </div>
+                            <div class="form-floating mb-2 mt-2">
+                                <a class="small" href="{{current_user_licence.licence}}" target="_blank">Preview File</a>
+                            </div>
+
+                            <span class="small text-muted">Last Updated: {{current_user_licence.date_updated | date: "d/M/Y h:m a"}}</span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="" *ngIf="selected_user.addresses && selected_user.addresses.length !== 0">
+                    <h4>Addresses</h4>
+                    <div class="bg-white shadow-sm p-2" *ngFor="let address of selected_user.addresses; let i=index">
+                        <div class="form">
+                            <div class="form-floating mb-2">
+                                <input type="text" name="addr" [(ngModel)]="address.address" class="form-control" id="floatingInput" placeholder="Address">
+                                <label for="floatingInput">Address</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <div class="form-floating">
+                                    <select name="st" class="form-select" id="floatingSelectState" [(ngModel)]="address.state" (change)="loadStateCities(address.state, i)" aria-label="Floating label select example">
+                                        <option *ngFor="let s of states" value="{{s}}">{{s | titlecase}}</option>
+                                    </select>
+                                    <label for="floatingSelectState">State</label>
+                                </div>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <div class="form-floating">
+                                    <select name="ct" class="form-select" id="floatingSelectCity" [(ngModel)]="address.city" aria-label="Floating label select example">
+                                        <option value="{{c}}" *ngFor="let c of cities[i]">{{c | titlecase}}</option>
+                                    </select>
+                                    <label for="floatingSelectCity">City</label>
+                                </div>
+                            </div>
+    
+                            <div class="form-floating mb-2">
+                                <input type="text" name="country" class="form-control" readonly [(ngModel)]="address.country" id="floatingTel" placeholder="Country">
+                                <label for="floatingTel">Country</label>
+                            </div>
+    
+                            <div class="">
+                                <span class="text-muted small">Last Updated on {{address.date_created | date: "d/M/Y h:m a"}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="text-center mt-5" *ngIf="users.length === 0 && !is_operation_in_progress && !is_loading_users">
             <span>No user is available for this account</span>

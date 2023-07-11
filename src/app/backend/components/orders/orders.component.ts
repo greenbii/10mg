@@ -47,7 +47,7 @@ export class OrdersComponent implements OnInit {
     try {
       const token = 'asdfghjklqwertyuiop';
       this.is_loading = true;
-      const rs = await this.appService.initiateHttpRequest('get', '/adm/orders', null, token).toPromise();
+      const rs = await this.appService.initiateHttpRequest('get', '/admin/orders', null, token).toPromise();
       if(rs) {
         if(rs.status === true) {
           this.allorders = rs.data;

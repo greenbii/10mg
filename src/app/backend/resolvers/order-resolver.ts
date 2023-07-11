@@ -28,7 +28,7 @@ export class AdminOrdersResolver implements Resolve<any> {
         try {
             
             const uToken = await this.appService.getCurrentUserToken();
-            const resp = await this.appService.initiateHttpRequest('get', '/adm/orders'+(id ? '/'+id : ''), null, uToken).toPromise();
+            const resp = await this.appService.initiateHttpRequest('get', '/admin/orders'+(id ? '/'+id : ''), null, uToken).toPromise();
             if(resp) {
                 if(resp.status === true) {
                     //this.appMarketService.user_apps = resp.data.filter((apps)=> apps !== null);
