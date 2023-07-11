@@ -223,4 +223,31 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  async loginAsUser(u:any) {
+    if(!confirm("Are you sure you want to login to user account?")) return;
+
+    try {
+      const token = await this.appService.getCurrentUserToken();
+
+      const rs = await this.appService.initiateHttpRequest('post', '/admin/user/login', {email: u.email}, token).toPromise();
+      if(rs?.status === true) {
+        alert("Successfully logged in to user account, click OK to proceed");
+        ///signout current user
+        await this.appService.auth.signOut();
+
+        //user the token to sign in user
+        await this.appService.auth.signInWithCustomToken(rs.data.token);
+        const pt = u.type === "Supplier" ? "/supplier" : "/auth";
+        this.appService.redirect(pt);
+        
+      }
+      else {
+        alert(rs?.message);
+      }
+    }
+    catch(e) {
+      alert(e);
+    }
+  }
+
 }

@@ -64,7 +64,7 @@ export class AccountComponent implements OnInit {
       this.address = this.appService.current_business_details.addresses[0];
     }
 
-    if(this.address !== null) {
+    if(this.address && this.address !== null) {
       this.bRegForm.patchValue({
         address: this.address.address,
         city: this.address.city,
@@ -102,7 +102,7 @@ export class AccountComponent implements OnInit {
     try {
       this.is_update_in_progress = true;
       const token = await this.appService.getCurrentUserToken();
-      const rs = await this.appService.initiateHttpRequest('post', '/address', {...this.bRegForm.value, id: this.address.id}, token).toPromise();
+      const rs = await this.appService.initiateHttpRequest('post', '/address', {...this.bRegForm.value, id: this.address?.id}, token).toPromise();
       this.is_update_in_progress = false;
       if(rs?.status === true) {
         this.address = rs.data;

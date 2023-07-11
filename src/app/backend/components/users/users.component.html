@@ -39,6 +39,7 @@
                                     <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="{'btn-danger': reg.status=== 'Pending', 'btn-success': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status}}</button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" [routerLink]="['/', 'backend', 'users']" [queryParams]="{edit: reg.id}" (click)="editUser(reg)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile</a></li>
+                                        <li><a class="dropdown-item small text-info" (click)="loginAsUser(reg)">Login as user</a></li>
                                         <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
                                         <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
                                         <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>
@@ -78,6 +79,7 @@
                                     <button class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" [ngClass]="{'btn-danger': reg.status=== 'Pending', 'btn-success': reg.status === 'Active', 'btn-warning': reg.status === 'Suspended'}">{{reg.status}}</button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" [routerLink]="['/', 'backend', 'users']" [queryParams]="{edit: reg.id}" (click)="editUser(reg)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Profile</a></li>
+                                        <li><a class="dropdown-item small text-info" (click)="loginAsUser(reg)">Login as user</a></li>
                                         <li><a class="dropdown-item text-success" *ngIf="reg.status === 'Pending'" (click)="approveUser()">Approve</a></li>
                                         <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Pending'" data-bs-toggle="modal" data-bs-target="#eModal1" (click)="action='disapprove'; selected_user = reg">Disapprove</a></li>
                                         <li><a class="dropdown-item text-danger" *ngIf="reg.status === 'Active'" data-bs-target="#eModal1" data-bs-toggle="modal" (click)="action='suspend'; selected_user = reg">Suspend</a></li>

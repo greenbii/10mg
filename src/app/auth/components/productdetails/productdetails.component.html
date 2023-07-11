@@ -52,7 +52,7 @@
                     <div class="text">
                         <p> <span>Plus shipping to</span>
                             <br>
-                            <span *ngIf="current_address !== null">{{current_address?.address+" "+current_address?.city+" "+current_address.state+", "+current_address.country}}</span>
+                            <span *ngIf="current_address && current_address !== null">{{current_address?.address+" "+current_address?.city+" "+current_address.state+", "+current_address.country}}</span>
                         </p>
                     </div>
                 </div>

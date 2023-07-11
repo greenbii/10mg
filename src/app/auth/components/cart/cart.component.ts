@@ -64,18 +64,21 @@ export class CartComponent implements OnInit {
       this.address_delivery = dt.cart?.address_delivery;
       this.business_addresses = dt.cart?.business_address;
 
-      if(this.business_address.state === "lagos") {
-        this.delivery = "normal"
-        this.is_normal_delivery_available = true;
-      }
-      else {
-        if(this.address_delivery.length > 1) {
-          this.is_express_delivery_available = true;
+      if(this.business_address) {
+
+        if(this.business_address.state === "lagos") {
+          this.delivery = "normal"
           this.is_normal_delivery_available = true;
         }
         else {
-          this.is_normal_delivery_available = true;
-          this.delivery = "normal"
+          if(this.address_delivery.length > 1) {
+            this.is_express_delivery_available = true;
+            this.is_normal_delivery_available = true;
+          }
+          else {
+            this.is_normal_delivery_available = true;
+            this.delivery = "normal"
+          }
         }
       }
 
@@ -131,7 +134,7 @@ export class CartComponent implements OnInit {
   getDeliveryFee() {
     //calculate the delivery fee here
     //console.log(this.address_delivery);
-    if(this.address_delivery === null) return 0;
+    if(!this.address_delivery || this.address_delivery === null) return 0;
 
     const cur_del = this.address_delivery.find((v: any)=> v.delivery_type === this.delivery);
 
