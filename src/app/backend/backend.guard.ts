@@ -27,10 +27,13 @@ export class BackendGuard implements CanActivate {
 
       if(u.email !== "admin@10mg.co.uk") throw "Account not authorize to visit route";
 
+      console.log(u);
+
       return true;
     }
     catch(er) {
       console.log(er);
+      this.appService.redirect("/signin");
       return false;
     }
   }

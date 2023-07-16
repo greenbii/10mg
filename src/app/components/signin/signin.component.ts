@@ -40,7 +40,7 @@ export class SigninComponent implements OnInit {
       try {
         const u = await this.appService.auth.signInWithEmailAndPassword(this.regForm.value.email, this.regForm.value.password);
         //get the user type to know where to redirect
-        if(u.user?.email === "admin@10mg.co.uk") {
+        /*if(u.user?.email === "admin@10mg.co.uk") {
           this.appService.redirect("/backend");
           return;
         }
@@ -51,7 +51,7 @@ export class SigninComponent implements OnInit {
         }
         else {
           this.appService.redirect("/auth/shop");
-        }
+        }*/
 
         this.is_signing_in = false;
         
@@ -76,8 +76,11 @@ export class SigninComponent implements OnInit {
           if(claims.claims["customer_type"] && claims.claims["customer_type"] === "supplier") {
             this.appService.redirect("/supplier")
           }
-          else {
+          else if(claims.claims["customer_type"] && (claims.claims["customer_type"] === "pharmacy" || claims.claims["customer_type"] === "pharmacist"))  {
             this.appService.redirect("/auth/shop");
+          }
+          else {
+            this.appService.redirect("/backend")
           }
         })
       }
