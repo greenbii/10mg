@@ -94,7 +94,24 @@ export class AppService {
         catchError(e=>{
           //console.log(e);
           //return e; //null;
-          const err: responseObject = {status: false, message: e.toString()}
+          //console.log(e);
+          let err_message = null;
+          if(e.hasOwnProperty("status")) {
+            switch(e.status) {
+              case 0:
+                err_message = "Unable to connect to the server at the moment, please wait and try again";
+                break;
+
+              case 404:
+                err_message = e.error.message;
+                break;
+
+              default:
+                err_message = e.toString();
+            }
+
+          }
+          const err: responseObject = {status: false, message: err_message}
           throw err;
         })
       )

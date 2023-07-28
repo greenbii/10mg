@@ -16,6 +16,7 @@ import { RegistrationsComponent } from './components/registrations/registrations
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TermsandconditionComponent } from './components/terms/termsandcondition/termsandcondition.component';
+import { SubmitreviewComponent } from './components/submitreview/submitreview.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'submit-review',
+    component: SubmitreviewComponent
   },
   {
     path: 'become-supplier',

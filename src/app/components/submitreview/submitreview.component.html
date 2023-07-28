@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row justify-content-center" style="margin-top: 7rem;">
+        <h4 class="text-center">Submit a review</h4>
+        <p class="small text-muted text-center">We value your feedback, let's hear about your experience to help us serve you better</p>
+        <div class="col-md-6 p-2 shadow-sm rounded">
+            <form [formGroup]="rForm">
+                <div class="form-group form-floating">
+                    <input type="text" class="form-control" formControlName="name"  id="floatingInput" placeholder="Name">
+                    <label for="floatingInput" class="text-muted small">Name</label>
+                </div>
+    
+                <div class="form-group form-floating">
+                    <input type="email" class="form-control" formControlName="email" id="floatingInput" placeholder="yourname@yourdomain.com">
+                    <label for="floatingInput" class="text-muted small">Email (Optional)</label>
+                </div>
+    
+                <div class="form-group form-floating">
+                    <input type="text" class="form-control" id="floatingInput" formControlName="designation" placeholder="e.g. Pharmacist/CEO">
+                    <label for="floatingInput" class="text-muted small">Designation</label>
+                </div>
+    
+                <div class="form-floating form-group">
+                    <textarea class="form-control" placeholder="Your review here" formControlName="review" id="floatingTextarea2" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2">Review</label>
+                </div>
+    
+                <div class="form-floating form-group" *ngIf="is_success">
+                    <div class="alert alert-success text-center">
+                        <p>We have received your submission. Thank you for taking out time to tell us about your experience on our platform</p>
+                    </div>
+                </div>
+
+                <div class="form-floating form-group" *ngIf="is_error">
+                    <div class="alert alert-danger text-center">
+                        <p>Error Occured:</p>
+                        <p>{{error_message}}</p>
+                    </div>
+                </div>
+
+                <div class="form-group mt-2">
+                    <button class="button primary-btn w-100" (click)="submitReview()" [disabled]="!rForm.valid || is_operation_in_progress">{{is_operation_in_progress ? '...Submitting' : 'Submit Review'}}</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

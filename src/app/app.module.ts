@@ -31,6 +31,7 @@ import { CommonModule } from '@angular/common';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { InitappService } from './services/initapp.service';
 import { ForgotpasswordComponent } from './components/forgotpassword/forgotpassword.component';
+import { SubmitreviewComponent } from './components/submitreview/submitreview.component';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -69,7 +70,8 @@ export function app_init(appService: InitappService) {
     SigninComponent,
     ComingsoonComponent,
     RegistrationsComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    SubmitreviewComponent
   ],
   imports: [
     CommonModule,
