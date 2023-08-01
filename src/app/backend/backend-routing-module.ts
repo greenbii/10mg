@@ -16,6 +16,7 @@ import { AdminOrdersResolver } from './resolvers/order-resolver';
 import { AdminWalletResolver } from './resolvers/wallet-resolver';
 import { EditproductComponent } from './components/dbproduct/addproduct/addproduct.component';
 import { ProductDetailResolver } from '../auth/resolvers/product-details-resolver';
+import { ReviewsComponent } from './components/reviews/reviews.component';
 
 
 
@@ -70,6 +71,10 @@ const routes: Routes = [
           path: 'edit/:id',
           component: EditproductComponent,
           resolve: {details: ProductDetailResolver}
+        },
+        {
+          path: 'reviews',
+          component: ReviewsComponent
         },
         {
           path: '**',

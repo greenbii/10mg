@@ -22,6 +22,7 @@ import { CustomersupportComponent } from './components/settings/customersupport/
 import { AccountstatusComponent } from './components/settings/accountstatus/accountstatus.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { EditproductComponent } from './components/dbproduct/addproduct/addproduct.component';
+import {ReviewsComponent as Reviews} from './components/reviews/reviews.component'
 
 
 
@@ -45,7 +46,8 @@ import { EditproductComponent } from './components/dbproduct/addproduct/addprodu
     CustomersupportComponent,
     AccountstatusComponent,
     MessagesComponent,
-    EditproductComponent
+    EditproductComponent,
+    Reviews
   ],
   imports: [
     CommonModule,
