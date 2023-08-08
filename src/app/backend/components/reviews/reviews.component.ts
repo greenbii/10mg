@@ -13,6 +13,7 @@ export class ReviewsComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   reviews: any[] = [];
+  stars: number[] = [1,2,3,4,5];
 
   ngOnInit(): void {
     this.loadReviews();
@@ -20,6 +21,7 @@ export class ReviewsComponent implements OnInit {
 
   approveReview(id: number, status: string) {
     //this.is_loading = true;
+    if(!confirm("Are you sure you want to "+status+" this review?")) return;
     this.appService.getCurrentUserToken().then(async (token)=>{
       try {
         const rs = await this.appService.initiateHttpRequest('post', '/admin/reviews', {review_id: id, status: status} , token).toPromise();
@@ -45,7 +47,29 @@ export class ReviewsComponent implements OnInit {
   }
 
   deleteReview(id: number){
-    
+    if(!confirm("Are you sure you want to Delete this review?")) return;
+    this.appService.getCurrentUserToken().then(async (token)=>{
+      try {
+        const rs = await this.appService.initiateHttpRequest('delete', '/admin/reviews/'+id, undefined , token).toPromise();
+        if(rs?.status === true) {
+          const rv = this.reviews.findIndex((ff)=> ff.id === id);
+          if(rv !== -1) {
+            this.reviews.splice(rv, 1);
+          }
+        }
+        else {
+          alert(rs?.message);
+        }
+        this.is_loading = false;
+      }
+      catch(e){
+        this.is_loading = false;
+      }
+    },
+    (e)=>{
+      console.log(e);
+      this.is_loading = false;
+    })
   }
 
   loadReviews() {

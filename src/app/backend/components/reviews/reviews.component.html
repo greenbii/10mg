@@ -1,5 +1,5 @@
 <main class="container">
-    <h4 class="mt-2">Reviews</h4>
+    <h4 class="mt-2">Reviews <i class="fa fa-refresh" role="button" (click)="loadReviews()"></i></h4>
     <hr>
     <div class="row">
         <div class="col-md-12" *ngIf="is_loading">
@@ -7,20 +7,32 @@
         </div>
         <div class="col-md-12 mt-3 rounded" *ngFor="let review of reviews">
             <div class="p-2 shadow-sm">
-                <p>{{review.review}}</p>
                 <div class="d-flex justify-content-end">
+                    <span class="badge" [ngClass]="{'bg-danger': review.approval_status === 'pending', 'bg-success': review.approval_status === 'approved'}">{{review.approval_status | titlecase}}</span>
+                </div>
+                <p>{{review.review}}</p>
+                <div class="d-flex justify-content-between">
+                    <div class="">
+                        <img class="pic-box" src="{{review.image !== null ? review.image : '../../../../assets/images/no-user-image.png'}}">
+                        <div class="">
+                            <span class="text-success" *ngFor="let star of stars; let i=index"><i class="fa fa-star" *ngIf="star >= review.rating"></i><i class="fa fa-star-o" *ngIf="review.rating < star" role="button"></i></span>
+                        </div>
+                    </div>
                     <div class="">
                         <span class="small text-muted">{{review.name}}</span>
                         <br>
                         <span class="small">{{review.designation}}</span>
+                        <br>
+                        <span class="small">{{review.location}}</span>
                     </div>
+                    
                 </div>
                 
                 <div class="dropdown">
                     <a class="btn btn-sm btn-warning" data-bs-toggle="dropdown">Action</a>
                     <ul class="dropdown-menu p-2">
-                        <li><a role="button" class="small text-success" (click)="approveReview(review.id, 'approved')">Approved</a></li>
-                        <li><a role="button" class="small text-warning" (click)="approveReview(review.id, 'declined')">Decline</a></li>
+                        <li><a role="button" class="small text-success" [ngClass]="{'d-none': review.approval_status === 'approved'}" (click)="approveReview(review.id, 'approved')">Approved</a></li>
+                        <li><a role="button" class="small text-warning" [ngClass]="{'d-none': review.approval_status === 'declined'}" (click)="approveReview(review.id, 'declined')">Decline</a></li>
                         <li><a role="button" class="small text-danger" (click)="deleteReview(review.id)">Delete</a></li>
                     </ul>
                 </div>
