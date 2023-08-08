@@ -1,3 +1,23 @@
 .form-group {
     margin-top: 15px;
 }
+
+.paint-review {
+    color: forestgreen;
+}
+
+.pic-box {
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    border: 1px solid #cfcfcf;
+    cursor: pointer;
+}
+
+.pic-box:hover {
+    background-color: rgba(104, 104, 104, 0.3);
+    content: 'Click to Add Image';
+    color: black;
+    border: 1px solid #ff9900;
+    transform:scale(1)
+}

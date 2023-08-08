@@ -6,7 +6,12 @@
             <form [formGroup]="rForm">
                 <div class="form-group form-floating">
                     <input type="text" class="form-control" formControlName="name"  id="floatingInput" placeholder="Name">
-                    <label for="floatingInput" class="text-muted small">Name</label>
+                    <label for="floatingInput" class="text-muted small">Name of Pharmacy/Hospital</label>
+                </div>
+
+                <div class="form-group form-floating">
+                    <input type="text" class="form-control" id="floatingInput" formControlName="location" placeholder="e.g. Ajah, Lagos">
+                    <label for="floatingInput" class="text-muted small">Location(Town)</label>
                 </div>
     
                 <div class="form-group form-floating">
@@ -18,11 +23,31 @@
                     <input type="text" class="form-control" id="floatingInput" formControlName="designation" placeholder="e.g. Pharmacist/CEO">
                     <label for="floatingInput" class="text-muted small">Designation</label>
                 </div>
+
+                
     
                 <div class="form-floating form-group">
                     <textarea class="form-control" placeholder="Your review here" formControlName="review" id="floatingTextarea2" style="height: 100px"></textarea>
                     <label for="floatingTextarea2">Review</label>
                 </div>
+
+                <div class="form-group text-center">
+                    <label>Rating</label>
+                    <div class="d-flex justify-content-center p-3">
+                        <i class="fa fa-star-o" role="button" (mouseover)="hover_review_index = star" (mouseout)="hover_review_index = 0" (click)="selected_rating = star" [ngClass]="{'paint-review': (hover_review_index >= star || selected_rating >= star)}" *ngFor="let star of stars; let i=index"></i>
+                        <!-- <i class="fa fa-star paint-review" role="button" [ngClass]="{'d-none': selected_rating === 0 || selected_rating < star }" *ngFor="let star of stars; let i=index"></i> -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="justify-content-center">
+                        <div class="text-center mb-2">
+                            <img src="{{image_data === '' || image_data === null ? '../../../assets/images/no-user-image.png' : image_data}}" class="pic-box" (click)="file.click()">
+                        </div>
+                    </div>
+                </div>
+
+                
     
                 <div class="form-floating form-group" *ngIf="is_success">
                     <div class="alert alert-success text-center">
@@ -36,6 +61,8 @@
                         <p>{{error_message}}</p>
                     </div>
                 </div>
+                
+                <input type="file" class="d-none" accept=".png,.jpg,.jpeg" #file (change)="handleSelection($event)">
 
                 <div class="form-group mt-2">
                     <button class="button primary-btn w-100" (click)="submitReview()" [disabled]="!rForm.valid || is_operation_in_progress">{{is_operation_in_progress ? '...Submitting' : 'Submit Review'}}</button>

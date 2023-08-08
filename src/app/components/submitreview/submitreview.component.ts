@@ -13,14 +13,22 @@ export class SubmitreviewComponent implements OnInit {
     email: new FormControl(null, [Validators.email]),
     name: new FormControl(null, Validators.required),
     designation: new FormControl(null, Validators.required),
-    review: new FormControl(null, Validators.required)
+    review: new FormControl(null, Validators.required),
+    location: new FormControl(null)
   })
 
   is_operation_in_progress: boolean = false;
 
+  image_data: any = "";
+
   is_success: boolean = false;
   is_error: boolean = false;
   error_message: any = null;
+
+  hover_review_index = 0;
+  selected_rating = 0;
+
+  stars: number[] = [1,2,3,4,5];
 
   constructor(private appService: AppService) { }
 
@@ -31,11 +39,13 @@ export class SubmitreviewComponent implements OnInit {
     if(this.rForm.valid) {
       //send the requet to the server
       this.is_operation_in_progress = true;
-      this.appService.initiateHttpRequest('post', '/submit-site-review', this.rForm.value).subscribe(response=>{
+      this.appService.initiateHttpRequest('post', '/submit-site-review', {...this.rForm.value, rating: this.selected_rating, image: this.image_data}).subscribe(response=>{
         this.is_operation_in_progress = false;
         if(response.status === true) {
           this.rForm.reset();
           this.is_success = true;
+          this.selected_rating = 0;
+          this.image_data = "";
         }
         else {
           this.is_error = true;
@@ -59,6 +69,21 @@ export class SubmitreviewComponent implements OnInit {
         }, 10000)
       })
 
+    }
+  }
+
+  handleSelection($event: any) {
+    const fl = $event.srcElement
+    //console.log(fl.files);
+    if(fl.files.length !== 0) {
+    const reader = new FileReader;
+    const file: File = fl.files[0] as File;
+    reader.onloadend = (ff)=>{
+      this.image_data = reader.result;
+    }
+    reader.readAsDataURL(file);
+    
+    //if($event.FilesList)
     }
   }
 
