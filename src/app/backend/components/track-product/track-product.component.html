@@ -11,7 +11,13 @@
         </div>
         <div class="status-lead-texts">
             <p>{{status.action | titlecase}}</p>
-            <small>{{status.date_created | date: "dd, MMMM, yyyy"}}</small>
+            <small>{{status.date_created | date: "dd, MMMM, yyyy HH:mm a"}}</small><br>
+            <small class="text-muted" *ngIf="status.action_description !== null">
+                <span>{{status.action_description.text}}</span><br>
+                <span *ngIf="status.action_description.tracking_id && status.action_description.tracking_id.length !== 0">
+                    <span *ngFor="let tracking of status.action_description.tracking_id"><strong>Tracking ID:</strong> {{tracking}}</span><br>
+                </span>
+            </small>
         </div>
     </div>
 
@@ -21,7 +27,7 @@
         </div>
         <div class="delivered-lead-texts mt-2">
             <p>Delivered</p>
-            <small>17th November 2022</small>
+            <small>--</small>
         </div>
 
     </div>
