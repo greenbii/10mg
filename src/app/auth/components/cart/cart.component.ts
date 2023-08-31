@@ -168,11 +168,22 @@ export class CartComponent implements OnInit {
 
   getDeliveryFee() {
     //calculate the delivery fee here
-    //console.log(this.address_delivery);
+    
     if(!this.address_delivery || this.address_delivery === null) return 0;
 
-    const cur_del = this.address_delivery.find((v: any)=> v.delivery_type === this.delivery);
+    if(this.selected_address === null) return 0;
 
+    //get the current delivery address
+    const address_id = parseInt(""+this.selected_address);
+    const address_index = this.business_addresses.findIndex((ff:any)=> ff.id === address_id);
+    
+    if(address_index === -1) return 0;
+
+
+
+
+    const cur_del = this.address_delivery[address_index].find((v: any)=> v.delivery_type === this.delivery);
+    
     if(!cur_del) return 0;
 
     const total_weight = parseFloat(""+this.getTotalWeight());

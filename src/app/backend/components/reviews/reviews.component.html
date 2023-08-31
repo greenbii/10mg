@@ -15,7 +15,14 @@
                     <div class="">
                         <img class="pic-box" src="{{review.image !== null ? review.image : '../../../../assets/images/no-user-image.png'}}">
                         <div class="">
-                            <span class="text-success" *ngFor="let star of stars; let i=index"><i class="fa fa-star" *ngIf="star >= review.rating"></i><i class="fa fa-star-o" *ngIf="review.rating < star" role="button"></i></span>
+                            <span class="text-success">
+                                <!--<span><i class="fa fa-star" *ngIf="review.rating <= 1"></i><i class="fa fa-star-o" *ngIf="review.rating >= 1" role="button"></i></span>
+                                <span><i class="fa fa-star" *ngIf="review.rating <= 1"></i><i class="fa fa-star-o" *ngIf="review.rating >= 2" role="button"></i></span>
+                                <span><i class="fa fa-star" *ngIf="review.rating <= "></i><i class="fa fa-star-o" *ngIf="review.rating >= 3" role="button"></i></span>
+                                <span><i class="fa fa-star" *ngIf="review.rating < 4"></i><i class="fa fa-star-o" *ngIf="review.rating >= 4" role="button"></i></span>
+                                <span><i class="fa fa-star" *ngIf="review.rating < 5"></i><i class="fa fa-star-o" *ngIf="review.rating >= 5" role="button"></i></span>-->
+                                <i *ngFor="let star of stars" [ngClass]="{'fa fa-star-o': star < review.rating, 'fa fa-start': star >= review.rating}"></i>
+                            </span>
                         </div>
                     </div>
                     <div class="">
