@@ -85,7 +85,7 @@
                             </label>
                             <div style="padding-left: 5px;">
                                 <p class="small" style="margin-left: 5px; margin: 0; padding: 0;">Pickup Station</p>
-                                <p class="small text-muted" style="font-size: x-small; margin: 0; padding: 0;">Only available in Lagos only</p>
+                                <p class="small text-muted" style="font-size: x-small; margin: 0; padding: 0;">Only available in Lagos</p>
                             </div>
                         </div>
                     </div>
@@ -139,10 +139,16 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="border border-secondary rounded p-2 mb-3" *ngFor="let biz_address of business_addresses">
+            <div class="border border-secondary rounded p-2 mb-3" [ngClass]="{'bg-info bg-gradient text-white': ((biz_address?.is_default === 1 && selected_address === biz_address.id.toString()) || selected_address === biz_address.id.toString())}" role="button" *ngFor="let biz_address of business_addresses">
+                <div class="d-flex justify-content-end mt-1">
+                    <label><input type="radio" name="dAddress" value="{{biz_address.id}}" (click)="changeAddress(biz_address)" [(ngModel)]="selected_address"></label>
+                </div>
                 <p>{{biz_address?.address | titlecase}}</p>
                 <p>{{biz_address?.city | titlecase}}</p>
                 <p>{{biz_address?.state+", "+biz_address?.country | titlecase}}</p>
+                <div class="d-flex justify-content-end mt-1" *ngIf="biz_address?.is_default !== 1">
+                    <i class="fa fa-trash text-danger" role="button" (click)="removeAddress(biz_address)"></i>
+                </div>
             </div>
 
             <label><input type="checkbox" [(ngModel)]="is_add_address"> Add another delivery address</label>
@@ -184,7 +190,7 @@
                         </div>
                         
                         <div class="form-group mt-2">
-                            <button class="btn primary-btn my-4" [disabled]="!bRegForm.valid" type="button">Add Address</button>
+                            <button class="btn primary-btn my-4" (click)="addAddress()" [disabled]="!bRegForm.valid" type="button">Add Address</button>
                         </div>
                         
                     </form>

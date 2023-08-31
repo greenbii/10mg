@@ -102,7 +102,7 @@ export class AccountComponent implements OnInit {
     try {
       this.is_update_in_progress = true;
       const token = await this.appService.getCurrentUserToken();
-      const rs = await this.appService.initiateHttpRequest('post', '/address', {...this.bRegForm.value, id: this.address?.id}, token).toPromise();
+      const rs = await this.appService.initiateHttpRequest(this.address?.id ? 'put' : 'post', '/address', {...this.bRegForm.value, id: this.address?.id}, token).toPromise();
       this.is_update_in_progress = false;
       if(rs?.status === true) {
         this.address = rs.data;

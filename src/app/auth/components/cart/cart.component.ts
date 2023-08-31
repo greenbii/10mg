@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
 
   is_normal_delivery_available: boolean = false;
   is_express_delivery_available: boolean = false;
+  is_update_in_progress: boolean = false;
 
   available_delivery_options: string[] = [];
 
@@ -40,6 +41,9 @@ export class CartComponent implements OnInit {
     country: new FormControl("", [Validators.required])
   })
   is_add_address: boolean = false;
+
+  selected_address: any = null;
+
 
 
   constructor(private appService: AppService, private route: ActivatedRoute) { }
@@ -60,9 +64,13 @@ export class CartComponent implements OnInit {
       if(!dt.cart.items) return;
       //this.cart_items = dt.cart?.items;
       this.cart_items = this.appService.current_customer_cart.items;
-      this.business_address = dt.cart?.business_address[0];
+      const default_biz_address = dt.cart?.business_address.find((ff:any)=> ff.is_default === 1);
+      this.business_address = default_biz_address ? default_biz_address : dt.cart?.business_address[0];
       this.address_delivery = dt.cart?.address_delivery;
       this.business_addresses = dt.cart?.business_address;
+
+      this.selected_address = this.business_address?.id.toString()
+
 
       if(this.business_address) {
 
@@ -89,6 +97,33 @@ export class CartComponent implements OnInit {
       })
       this.total_weight = total_weight;
     }
+  }
+
+  async removeAddress(address: any) {
+    if(!confirm("Are you sure you want to remove this address?")) return;
+    
+    try {
+      const token = await this.appService.getCurrentUserToken();
+      const rs = await this.appService.initiateHttpRequest('delete', '/address/'+address.id, undefined, token).toPromise();
+      if(rs?.status === true) {
+        //remove the address from list
+        const tIndex = this.business_addresses.findIndex((ff: any)=> ff.id === address.id);
+        if(tIndex !== -1) {
+          this.business_addresses.splice(tIndex, 1);
+        }
+      }
+      else {
+        alert(rs?.message);
+      }
+    }
+    catch(ee) {
+      console.log(ee);
+    }
+    
+  }
+
+  changeAddress(address: any) {
+    this.business_address = address;
   }
 
   getAmount(item: any) {
@@ -286,6 +321,7 @@ export class CartComponent implements OnInit {
       const token = await this.appService.getCurrentUserToken();
       const resposne = await this.appService.initiateHttpRequest('post', '/order', data, token).toPromise();
       if(resposne?.status === true) {
+        this.appService.current_customer_cart = null;
         //navigate to the order page
         this.appService.redirect("/auth/order/"+resposne?.data.order_id)
       }
@@ -313,6 +349,9 @@ export class CartComponent implements OnInit {
         const it = this.appService.current_customer_cart?.items?.findIndex((ff:any)=> ff.cart_id === item_id)
         if(it !== -1) {
           this.appService.current_customer_cart.items.splice(it, 1);
+          if(this.appService.current_customer_cart.items.length === 0) {
+            this.appService.current_customer_cart = null;
+          }
         }
       }
       else {
@@ -340,6 +379,29 @@ export class CartComponent implements OnInit {
     catch(e){
       console.log(e);
     }
+  }
+
+  async addAddress() {
+    try {
+      this.is_update_in_progress = true;
+      const token = await this.appService.getCurrentUserToken();
+      const rs = await this.appService.initiateHttpRequest('post', '/address', {...this.bRegForm.value}, token).toPromise();
+      this.is_update_in_progress = false;
+      if(rs?.status === true) {
+        this.selected_address = rs.data?.id.toString();
+        this.business_address = rs.data;
+        //document.getElementById("close-address-modal")?.click();
+      }
+      else {
+        throw rs?.message;
+      }
+      
+    }
+    catch(er: any) {
+      this.is_update_in_progress = false;
+      alert(er.toString())
+    }
+  
   }
 
 }
