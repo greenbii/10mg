@@ -10,11 +10,11 @@
         </div>
         <div class="row">
             <!--to show the variations of any give drug-->
-            <div class="col-md-3">
+            <!--<div class="col-md-3">
                 <div class="variation-wrapper pt-2">
                     <h5 class="pl-2">Variations <i class="fa fa-info-circle"></i></h5>
                 </div>
-            </div>
+            </div>-->
             <!--Show the images for the drug here-->
             <div class="col-md-4">
                 <div class="gallery-wrapper">
@@ -23,7 +23,7 @@
 
                 <div class="mt-3 d-flex" style="overflow: hidden;">
                     <div class="gallery-wrapper" style="margin-right: 10px" *ngFor="let img of product?.images">
-                        <img src="{{img}}" class="img-fluid" style="width: 100%;">
+                        <img src="{{img}}" class="img-fluid thumb-image">
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <p style="padding: 0; margin: 0; font-size: larger;"><strong>{{product?.drug?.name | titlecase}}</strong></p>
                 <span class="text-muted mb-2">{{product?.brand?.name | titlecase}} ({{product?.brand?.variation?.strength_value+""+product?.brand?.variation?.strength}})</span>
                 <div class="d-flex" style="margin-top: 15px;">
-                    <i class="fa fa-star" *ngFor="let rating of ratings"></i>
+                    <i class="fa fa-star-o text-success" *ngFor="let rating of ratings"></i>
                     <span class="ml-3 text-muted small">(0 Ratings)</span>
                 </div>
 
@@ -89,13 +89,9 @@
                     </span>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-3"></div>
-
-            <div class="col-md-9 mt-3">
-                <div class="description mt-5">
+            <div class="col-md-3">
+                <div class="description">
                     <h4>Description</h4>
                     <hr>
                     <p>{{product?.brand?.variation?.description}}</p>
@@ -106,6 +102,37 @@
                     <hr>
                     <div class="mt-2 text-center">
                         <span>No review is available for this product yet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- <div class="col-md-3"></div> -->
+            <!--Show related products down here-->
+            <div class="col-md-12 mt-5">
+                <h4>Similar Products</h4>
+            </div>
+
+            <div class="col-md-12 mt-2">
+                <div class="product-flex">
+                    <div class="products" *ngFor="let product of other_products" [routerLink]="['/', 'auth', 'products', product.product_id]">
+                        <div class="product" [ngStyle]="{'background-image': 'url('+product.images[0]+')'}">
+                            <!-- <p class="product-percentage small" *ngIf="product.discount_price !== 0 && product.discount_price < product.actual_price">-{{getPercentage(product)}}%</p> -->
+                            <div class="favorite-product"><i class="fa-regular fa-heart"></i></div>
+                        </div>
+                        <div class="product-details">
+                            <div class="product-name">
+                                <p>{{product.drug.name | titlecase}}</p>
+                            </div>
+                            <div class="product-price">
+                                <p>{{(product.actual_price+product.tenmg_amount) | currency:"₦"}}</p>
+                            </div>
+                            <!-- <div class="product-old-price" *ngIf="product.discount_price !== 0">
+                                <small>{{product.actual_price | currency: "₦"}}</small>
+                            </div> -->
+                            <button class="button primary-btn add-to-cart-btn">Add to cart</button>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -17,6 +17,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { TermsandconditionComponent } from './components/terms/termsandcondition/termsandcondition.component';
 import { SubmitreviewComponent } from './components/submitreview/submitreview.component';
+import { ShopResolver } from './auth/resolvers/shop-resolver';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: ()=>import('./auth/auth.module').then(a=> a.AuthModule),
     canActivate: [AuthGuard],
-    resolve: {u: AccountOverviewResolver}
+    resolve: {u: AccountOverviewResolver, pp: ShopResolver}
   },
   {
     path: 'supplier',
@@ -91,6 +92,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AdminGuard, AuthGuard, AccountOverviewResolver]
+  providers: [AdminGuard, AuthGuard, AccountOverviewResolver, ShopResolver]
 })
 export class AppRoutingModule { }

@@ -11,6 +11,11 @@
     padding: 10px;
 }
 
+.thumb-image {
+    width: 50px;
+    height: auto;
+}
+
 .left-content {
     display: flex;
     align-items: center;
@@ -19,4 +24,113 @@
 
 .left-content i {
     cursor: pointer;
+}
+
+
+
+
+.product-flex {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    row-gap: 3rem;
+    width: 100%;
+}
+
+.product {
+    background-image: url(../../../../assets/images/pills-img.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 25px #00000012;
+    margin-bottom: 1rem;
+    height: 180px;
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+}   
+
+.product-percentage {
+    font-size: 18px;
+    background-color: white;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 3px 10px;
+    box-shadow: 0 0 10px #00000012;
+}
+
+.favorite-product i {
+    font-size: 18px;
+    background-color: white;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px #00000012;
+    border-radius: 50%;
+    color: red;
+    cursor: pointer;
+}
+
+/* .favorite-product i:hover {
+    background-color: red;
+} */
+
+.product-details {
+    position: relative;
+}
+
+.product-price {
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.product-old-price {
+    font-size: 12px;
+    position: absolute;
+    top: 35px;
+    left: 90px;
+    text-decoration: line-through;
+}
+
+.add-to-cart-btn {
+    padding: 10px;
+    width: 100%;
+    font-weight: 600;
+    margin-top: 20px;
+    visibility: hidden;
+}
+
+.products:hover .add-to-cart-btn {
+    visibility: visible;
+}
+
+
+@media screen and (max-width: 998px) {
+    .product-flex {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    .product-flex {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .product-flex {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .product {
+        height: 350px;
+    } 
 }

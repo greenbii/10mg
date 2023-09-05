@@ -60,9 +60,8 @@
         </div>
         <div class="cart" routerLink="/auth/cart">
             <i class="fa-solid fa-cart-shopping position-relative">
-                <span *ngIf="appService.current_customer_cart?.items?.length !== 0" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span *ngIf="appService.current_customer_cart !== null && appService.current_customer_cart?.items?.length > 0" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <span class="visually-hidden">New alerts</span>
-                    <!-- <span class="text-white" style="font-size:xx-small">{{appService.current_customer_cart?.items?.length}}</span> -->
                 </span>
             </i>
             <p class="position-relative">

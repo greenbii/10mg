@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from 'src/app/services/app.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-productdetails',
@@ -14,6 +15,8 @@ export class ProductdetailsComponent implements OnInit {
   current_address: any = null;
   required_quantity: number = 1;
 
+  other_products: any[] = [];
+
   is_operation_in_progress: boolean = false;
 
   constructor(private route: ActivatedRoute, public appService: AppService) { }
@@ -25,6 +28,11 @@ export class ProductdetailsComponent implements OnInit {
 
     if(this.appService.current_business_details !== null && this.appService.current_business_details.addresses) {
       this.current_address = this.appService.current_business_details.addresses[0];
+    }
+
+    if(this.appService.products.length !== 0) {
+      //sort the product here
+      this.other_products = this.appService.products.filter((f: any)=> f.product_id !== p.details.product_id).slice(0, 5);
     }
   }
 

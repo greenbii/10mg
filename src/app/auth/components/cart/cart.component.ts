@@ -163,7 +163,7 @@ export class CartComponent implements OnInit {
       total_weight = total_weight + (item.brand.packaging.weight * parseFloat(item.quantity))
     })
 
-    return Math.round(total_weight)
+    return Math.round(total_weight * 10) / 10;
   }
 
   getDeliveryFee() {
@@ -179,9 +179,6 @@ export class CartComponent implements OnInit {
     
     if(address_index === -1) return 0;
 
-
-
-
     const cur_del = this.address_delivery[address_index].find((v: any)=> v.delivery_type === this.delivery);
     
     if(!cur_del) return 0;
@@ -189,7 +186,12 @@ export class CartComponent implements OnInit {
     const total_weight = parseFloat(""+this.getTotalWeight());
     let amount = 0;
 
-    if(this.business_address.state.toLowerCase() === "lagos") {
+    if(cur_del.amount) {
+      amount += Math.round(parseFloat(""+cur_del.amount) * total_weight)
+    }
+    return amount;
+
+    /*if(this.business_address.state.toLowerCase() === "lagos") {
       if(total_weight <= 50) {
         //
         amount = cur_del["zero_to_50"];
@@ -253,7 +255,7 @@ export class CartComponent implements OnInit {
       //get the total item weight
 
       return amount;
-    }
+    }*/
   }
 
 
