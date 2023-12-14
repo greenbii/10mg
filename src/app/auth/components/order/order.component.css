@@ -26,6 +26,16 @@
     border: none;
 }
 
+.left-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.left-content i {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 500px) {
     .item-wrapper {
         display: block;

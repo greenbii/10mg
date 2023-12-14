@@ -9,6 +9,16 @@ import { AppService } from 'src/app/services/app.service';
 })
 export class DashboardComponent implements OnInit {
 
+  headings = [
+    {key: "loan", label: "Loans"},
+    {key: "revenue", label: "Revenues"},
+    {key: "order", label: "Orders"},
+    {key: "healthcare", label: "Healthcare Providers"}
+  ]
+
+  selected_filter_item: string = 'revenue';
+  selected_filter_period: string = 'monthly';
+
   supplier = {
     income: 0,
     quantity_sold: 0,
@@ -24,18 +34,30 @@ export class DashboardComponent implements OnInit {
 
   summary: any = null;
 
-  type = 'line';
+  type = 'bar';
   data = {
     labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     datasets: [
+      // {
+      //   label: "App Installations",
+      //   data: [0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0],
+      //   borderColor: 'rgb(75, 192, 192)'
+      // },
       {
-        label: "App Installations",
-        data: [0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0],
-        borderColor: 'rgb(75, 192, 192)'
-      },
-      {
-        label: "Monthly Revenue",
-        data: [0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0]       
+        label: "Revenue",
+        data: [50000, 100000, 20000, 115000, 27890, 56721, 67900, 121234, 67890,43215,678543,22000]   ,
+        borderColor: 'rgb(0, 0, 255)',
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.7)',
+          'rgba(255, 159, 64, 0.8)',
+          'rgba(255, 205, 86, 0.5)',
+          'rgba(75, 192, 192, 0.4)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(153, 102, 255, 0.7)',
+          'rgba(201, 203, 207, 0.2)'
+        ],
+        minBarLength: 20,
+        borderWidth: 2
       }
     ]
   };

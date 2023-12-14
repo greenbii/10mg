@@ -23,6 +23,7 @@ import { AccountstatusComponent } from './components/settings/accountstatus/acco
 import { MessagesComponent } from './components/messages/messages.component';
 import { EditproductComponent } from './components/dbproduct/addproduct/addproduct.component';
 import {ReviewsComponent as Reviews} from './components/reviews/reviews.component'
+import { ChartModule } from 'angular2-chartjs';
 
 
 
@@ -54,7 +55,8 @@ import {ReviewsComponent as Reviews} from './components/reviews/reviews.componen
     FormsModule,
     ReactiveFormsModule,
     BackendRoutingModule,
-    MiscsModule
+    MiscsModule,
+    ChartModule
   ]
 })
 export class BackendModule { }

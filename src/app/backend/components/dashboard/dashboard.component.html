@@ -55,4 +55,31 @@
             </ul>
         </div>
     </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12 mt-3 mb-5">
+            <h2 class="text-center">Platform Analytics</h2>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <select class="form-control">
+                    <option value="revenue">Revenue</option>
+                    <option value="orders">Orders</option>
+                    <option value="loan">Loan</option>
+                    <option value="healthcare">Health Providers</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <select class="form-control">
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <chart [type]="type" [data]="data" [options]="options"></chart>
+        </div>
+    </div>
 </div>

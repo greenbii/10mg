@@ -29,12 +29,12 @@ export class SettingsComponent implements OnInit {
       icon: "fa fa-key",
       tab: "verify"
     },*/
-    // {
-    //   title: "Account Health",
-    //   description: "Know you accout health status",
-    //   icon: "fa fa-heart",
-    //   tab: "health"
-    // },
+    {
+      title: "Account Health",
+      description: "Know you accout health status",
+      icon: "fa fa-heart",
+      tab: "health"
+    },
     // {
     //   title: "Customer Reviews",
     //   description: "See what customers are saying",
