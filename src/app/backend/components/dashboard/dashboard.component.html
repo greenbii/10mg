@@ -83,9 +83,9 @@
             <button class="btn btn-primary" (click)="getChartData()">Get Analytics</button>
         </div>
         
-        <div class="col-md-12" style="min-height: 400px;">
+        <div class="col-md-12 mt-3" style="height: 400px;">
             <div class="text-center" *ngIf="is_loading_chart_data"><p class="small">...loading chart data</p></div>
-            <chart [type]="type" #myChart [data]="data" [options]="options"></chart>
+            <chart [type]="type" #myChart [data]="data" [options]="options" style="height: 100%;"></chart>
         </div>
     </div>
 </div>
