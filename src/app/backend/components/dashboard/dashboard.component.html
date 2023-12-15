@@ -62,7 +62,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <select class="form-control">
+                <select class="form-control" [(ngModel)]="chart_category">
                     <option value="revenue">Revenue</option>
                     <option value="orders">Orders</option>
                     <option value="loan">Loan</option>
@@ -72,14 +72,20 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <select class="form-control">
+                <select class="form-control" [(ngModel)]="chart_period">
                     <option value="monthly">Monthly</option>
                     <option value="yearly">Yearly</option>
                 </select>
             </div>
         </div>
-        <div class="col-md-12">
-            <chart [type]="type" [data]="data" [options]="options"></chart>
+
+        <div class="col-md-3">
+            <button class="btn btn-primary" (click)="getChartData()">Get Analytics</button>
+        </div>
+        
+        <div class="col-md-12" style="min-height: 400px;">
+            <div class="text-center" *ngIf="is_loading_chart_data"><p class="small">...loading chart data</p></div>
+            <chart [type]="type" #myChart [data]="data" [options]="options"></chart>
         </div>
     </div>
 </div>
