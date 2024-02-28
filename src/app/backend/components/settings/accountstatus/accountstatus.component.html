@@ -18,11 +18,12 @@
                         <option value="orders">Orders</option>
                         <option value="loan">Loan</option>
                         <option value="healthcare">Health Providers</option>
+                        <option value="active_healthcare">Health Providers (% Active)</option>
                     </select>
                 </div>
 
                 <div class="form-group mb-2 mt-2">
-                    <label>Amount</label>
+                    <label>{{uForm.value.category === 'revenue' || uForm.value.category === 'loan' ? 'Amount' : 'Total'}}</label>
                     <input type="number" class="form-control" min="0" formControlName="amount">
                 </div>
 
