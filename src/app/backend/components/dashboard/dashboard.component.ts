@@ -37,9 +37,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   orders = {
-    total_orders: 0,
-    shipped: 0,
-    unshipped: 0
+    total_orders: 35,
+    shipped: 21,
+    unshipped: 14
   }
 
   summary: any = null;
@@ -78,11 +78,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.summary = dt.summary;
 
       //get total orders 
-      this.orders.total_orders = this.summary.total_orders.length;
+      //this.orders.total_orders = this.summary.total_orders.length;
 
-      this.orders.shipped = this.summary.total_orders.filter((f:any)=> f.status.toLowerCase() === "unshipped" || f.status.toLowerCase() === "paid").length;
+      //this.orders.shipped = this.summary.total_orders.filter((f:any)=> f.status.toLowerCase() === "unshipped" || f.status.toLowerCase() === "paid").length;
 
-      this.orders.shipped = this.summary.total_orders.filter((f: any)=> f.status.toLowerCase() === "shipped").length;
+      //this.orders.shipped = this.summary.total_orders.filter((f: any)=> f.status.toLowerCase() === "shipped").length;
 
     }
 
