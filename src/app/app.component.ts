@@ -16,6 +16,12 @@ export class AppComponent {
 
   show_nav_bar: boolean = true;
 
+  no_header_routes = [
+    '/signin',
+    '/signup',
+    '/forgotpassword',
+  ];
+
   constructor(private router: Router, public appService: AppService) {
       this.router.events.subscribe((e: Event)=>{
         if(e instanceof NavigationEnd || e instanceof NavigationStart)  {
@@ -27,6 +33,16 @@ export class AppComponent {
           else {
             this.show_nav_bar = true;
           }
+
+          /*if (this.no_header_routes.includes(e.url.trim()) || e.url.includes("login") || e.url.includes("register")) {
+            this.show_nav_bar = false;
+            try{
+            }
+            catch(e){}
+          }
+          else {
+            this.show_nav_bar = true;
+          }*/
           
         }
       })

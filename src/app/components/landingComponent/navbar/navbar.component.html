@@ -8,14 +8,17 @@
                 <a href="https://10mg.co.uk" class="me-4">
                     <li>Home</li>
                 </a>
-                <a href="https://10mg.co.uk/about.html" class="mx-4">
+                <a href="https://10mg.co.uk/about" class="mx-4">
                     <li>About</li>
                 </a>
                 <a routerLink="/auth/shop" class="mx-4" [ngClass]="{'d-none': !appService._is_current_user}">
                     <li>Shop</li>
                 </a>
-                <a href="https://10mg.co.uk/become-supplier.html" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
-                    <li>Become a Supplier</li>
+                <a href="https://10mg.co.uk/services" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
+                    <li>Services</li>
+                </a>
+                <a href="https://10mg.co.uk/faq" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
+                    <li>FAQ</li>
                 </a>
                 <a routerLink="/signup" class="ms-4" [ngClass]="{'d-none': appService._is_current_user}">
                     <li>Register</li>

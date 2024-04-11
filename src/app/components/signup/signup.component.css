@@ -1,3 +1,28 @@
+@font-face {
+    font-family: "pangaia";
+    font-weight: 200;
+    src: url('./../../../assets/fonts/PPPangaia-Ultralight.otf');
+    /* src: url("./fonts/PPPangaia-Ultralight.otf"); */
+  }
+  @font-face {
+    font-family: "pangaia";
+    font-weight: 475;
+    src: url("./../../../assets/fonts/PPPangaia-Medium.otf"),
+      url("./../../../assets/fonts/PPPangaia-MediumItalic.otf");
+  }
+
+  @font-face {
+    font-family: "pangaia";
+    font-weight: 700;
+    src: url("./../../../assets/fonts/PPPangaia-Bold.otf"),
+      url("./../../../assets/fonts/PPPangaia-BoldItalic.otf");
+  }
+
+
+.main-title {
+    font-family: 'pangaia';
+}
+
 .signup {
     padding: 4rem 80px;
 }
@@ -6,11 +31,15 @@ img {
     width: 80px;
 }
 
-.form-contents, .tabs {
+.tabs {
     width: 30%;
     margin: auto;
     text-align: center;
     margin-top: 3rem;
+}
+
+.form-contents {
+    padding: 30px;
 }
 
 .top-contents {
@@ -28,10 +57,19 @@ img {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    font-size: small;
+    text-transform:uppercase;
 }
 
+.pharmacist {
+    font-family: 'IBM Plex Sans';
+    border: 1px solid #EEEEF0;
+    border-radius: 10px
+}
+
+
 a {
-    color: var(--primary-color);
+    color: #181818
 }
 
 a.active {
@@ -42,12 +80,26 @@ a.active {
     font-family: 'Poppins', 'Tahoma';
 }
 
+.reg-button {
+    border-radius: 30px;
+    border: 1px solid #090055;
+}
+
 form input, select {
     width: 100%;
-    padding: 7px;
-    border-radius: 3px;
-    background-color: white;
-    font-family: 'Poppins', 'Roboto', 'Tahoma';
+    padding: 11px;
+    border-radius: 10px;
+    border: 1px solid #eeeef0;
+    background-color: #fafafc;
+    font-family: 'IBM Plex Sans', 'Roboto', 'Tahoma';
+}
+
+p, label, span {
+    font-family: 'IBM Plex Sans';
+}
+
+label {
+    margin: 0; padding: 0;
 }
 
 .password-container {
@@ -58,9 +110,11 @@ form input, select {
 }
 
 .password-container input {
-    border: none;
-    outline: none;
-    padding: 10px;
+    padding: 11px;
+    border-radius: 10px;
+    border: 1px solid #eeeef0;
+    background-color: #fafafc;
+    font-family: 'IBM Plex Sans', 'Roboto', 'Tahoma';
     margin: 0;
 }
 
@@ -135,8 +189,18 @@ label {
     width: 180px;
 }
 
+.text-4xl {
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
 @media screen and (max-width: 1450px) {
-    .form-contents, .tabs {
+    .tabs {
         width: 50%;
     }
 }

@@ -1,208 +1,234 @@
 <section class="signup">
     <!-- <img src="./assets/images/10mgVert.png" alt="logo"> -->
-    <p class="form-title">Register</p>
+    <!-- <p class="form-title">Register</p> -->
     <div class="top-contents" *ngIf="steps === 1">
         
         <div class="tabs">
-            <a role="button" (click)="current_tab = 'pharmacist'" [ngClass]="{active: current_tab === 'pharmacist'}">I
-                am a Pharmacy owner</a>
-            <a role="button" (click)="current_tab = 'supplier'" [ngClass]="{active: current_tab === 'supplier'}">I am a
-                Supplier</a>
+            <!--<a role="button" (click)="current_tab = 'pharmacist'" [ngClass]="{active: current_tab === 'pharmacist'}">I am a Pharmacy owner</a>
+            <a role="button" (click)="current_tab = 'supplier'" [ngClass]="{active: current_tab === 'supplier'}">I am a Supplier</a>-->
+            
+            <a role="button" (click)="current_tab = 'pharmacist'" [ngClass]="{'top-tab': current_tab === 'pharmacist'}">SIGNUP AS A PHARMACY</a>
+            <a role="button" (click)="current_tab = 'supplier'" [ngClass]="{'top-tab': current_tab === 'supplier'}">SIGNUP AS A SUPPLIER</a>
         </div>
     </div>
 
     <!-- PHARMACIST FLOW -->
-    <div class="pharmacist">
-        <div class="form-contents" *ngIf="steps === 1">
-            <!-- For Pharmacy -->
-            <div class=""></div>
-            <form action="" [formGroup]="regForm">
-                <input type="text" name="name" required formControlName="pharmacy_name" placeholder="{{ current_tab === 'supplier' ? 'Name of Pharmacy' : 'Name of Pharmacy/Hospital'}}" class="textfield mt-3">
-                <input type="text" name="contact" formControlName="contact_person" placeholder="Name of contact person" class="textfield mt-3">
-                <!-- <select class="form-select textfield mt-3" aria-label="Default select example">
-                    <option selected>Position</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select> -->
-                <input type="text" name="position" *ngIf="current_tab !== 'supplier'" placeholder="Position" formControlName="position" class="textfield mt-3">
-                <input type="email" name="email" placeholder="Email" formControlName="email" class="textfield mt-3">
-                <input type="tel" name="telephone" placeholder="Phone number" formControlName="phone" required class="textfield mt-3">
-                <div class="password-container textfield mt-3">
-                    <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="password" placeholder="Password" required>
-                    <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
-                </div>
-                <!-- <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
-                    <span class="text-danger small" *ngIf="f.password.errors.required">
-                        Password is required
-                    </span>
-                    <span class="text-danger" style="font-size: 12px;" *ngIf="f.password.errors.minlength">
-                        Password length must be at least 5 characters long
-                    </span>
-                </div> -->
-                <div class="password-container textfield mt-3">
-                    <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="confirm_password" placeholder="Confirm Password" required>
-                    <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
-                </div>
-                
-                <p *ngIf="reg_error !== null" class="border border-danger d-block text-center bg-danger p-2 rounded text-white mb-2 small">{{reg_error}}</p>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="text-center" *ngIf="steps === 1">
+                <h4 class="text-4xl m-2 main-title">Register your {{current_tab === 'pharmacist' ? 'Pharmacy' : 'Business' }}</h4>
+                <p class="text-lg text-muted m-2">Let's get you on board</p>
+            </div>
+            <div class="pharmacist">
+                <div class="form-contents" *ngIf="steps === 1">
+                    <!-- For Pharmacy -->
+                    <form action="" [formGroup]="regForm">
+                        <label class="text-sm">Company Name</label>
+                        <input type="text" name="name" required formControlName="pharmacy_name" placeholder="{{ current_tab === 'supplier' ? 'My Logistics' : 'My Pharmacy'}}" class="textfield mt-1 mb-3">
+                        <label class="text-sm">Contact Person</label>
+                        <input type="text" name="contact" formControlName="contact_person" placeholder="Your name" class="textfield mb-3">
+                        <!-- <select class="form-select textfield mt-3" aria-label="Default select example">
+                            <option selected>Position</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select> -->
+                        <label class="text-sm">Position</label>
+                        <input type="text" name="position" *ngIf="current_tab !== 'supplier'" placeholder="HR" formControlName="position" class="textfield mt-1 mb-3">
+                        <label class="text-sm">Email</label>
+                        <input type="email" name="email" placeholder="you@yourcompany.com" formControlName="email" class="textfield mt-1 mb-3">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <button class="button primary-btn my-4" type="button" [disabled]="!regForm.valid || is_registering" (click)="register()">{{is_registering ? '...Please wait' : 'Register'}}</button>
-                    </div>
+                        <label class="text-sm">Phone</label>
+                        <input type="tel" name="telephone" placeholder="+234 1111 1212" formControlName="phone" required class="textfield mt-1 mb-3">
+                        
+                        <label class="text-sm">Password</label>
+                        <div class="password-container textfield mt-1 mb-3">
+                            <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="password" placeholder="Create New Password" required>
+                            <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
+                        </div>
 
-                    <div class="col-md-6">
-                        <button class="button btn-secondary my-4" type="button" routerLink="/signin">Login</button>
-                    </div>
+                        <div class="d-flex">
+                            <input type="checkbox" style="width: auto; margin: 0; padding-right: 3px;">
+                            <label class="text-sm" style="margin-top:5px; margin-left: 7px;"> I agree to the terms and conditions</label> 
+                        </div>
+                        <!-- <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+                            <span class="text-danger small" *ngIf="f.password.errors.required">
+                                Password is required
+                            </span>
+                            <span class="text-danger" style="font-size: 12px;" *ngIf="f.password.errors.minlength">
+                                Password length must be at least 5 characters long
+                            </span>
+                        </div> -->
+                        <!--<div class="password-container textfield mt-3">
+                            <input type="{{reveal_password ? 'text' : 'password'}}" name="password" formControlName="confirm_password" placeholder="Confirm Password" required>
+                            <i class="fa-regular fa-eye" (click)="reveal_password = !reveal_password"></i>
+                        </div>-->
+                        
+                        <p *ngIf="reg_error !== null" class="border border-danger d-block text-center bg-danger p-2 rounded text-white mb-2 small">{{reg_error}}</p>
+        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="button primary-outline-primary my-4 reg-button text-sm" type="button" [disabled]="!regForm.valid || is_registering" (click)="register()">{{is_registering ? '...Please wait' : 'Register'}}</button>
+                            </div>
+        
+                            <!--<div class="col-md-6">
+                                <button class="button btn-secondary my-4" type="button" routerLink="/signin">Login</button>
+                            </div>-->
+                        </div>
+                        <!-- <p class="mb-5">I have an account? <a routerLink="/signin">Login</a></p> -->
+                        <!-- <a href="#">Forgot Password</a> -->
+                    </form>
                 </div>
-                <!-- <p class="mb-5">I have an account? <a routerLink="/signin">Login</a></p> -->
-                <!-- <a href="#">Forgot Password</a> -->
-            </form>
-        </div>
-
-        <div class="form-contents" *ngIf="steps === 2">
-            <form action="">
-                <h2>Enter verification code</h2>
-                <p class="mt-3">Please enter the six (6) digit verification code sent to your email address to complete your account set up.</p>
-                <div class="code-input mt-4">
-                    <input type="text" maxlength="1" [(ngModel)]="code_fields[0]" inputmode="numeric" name="code1" class="textfield">
-                    <input type="text" maxlength="1" [(ngModel)]="code_fields[1]" inputmode="numeric" name="code2" class="textfield">
-                    <input type="text" maxlength="1" [(ngModel)]="code_fields[2]" inputmode="numeric" name="code3" class="textfield">
-                    <input type="text" maxlength="1" [(ngModel)]="code_fields[3]" inputmode="numeric" name="code4" class="textfield">
-                    <input type="text" maxlength="1" [(ngModel)]="code_fields[4]" inputmode="numeric" name="code5" class="textfield">
-                    <input type="text" maxlength="1" [(ngModel)]="code_fields[5]" inputmode="numeric" name="code6" class="textfield">
+        
+                <div class="form-contents" *ngIf="steps === 2">
+                    <form action="">
+                        <h2>Enter verification code</h2>
+                        <p class="mt-3">Please enter the six (6) digit verification code sent to your email address to complete your account set up.</p>
+                        <div class="code-input mt-4">
+                            <input type="text" maxlength="1" [(ngModel)]="code_fields[0]" inputmode="numeric" name="code1" class="textfield">
+                            <input type="text" maxlength="1" [(ngModel)]="code_fields[1]" inputmode="numeric" name="code2" class="textfield">
+                            <input type="text" maxlength="1" [(ngModel)]="code_fields[2]" inputmode="numeric" name="code3" class="textfield">
+                            <input type="text" maxlength="1" [(ngModel)]="code_fields[3]" inputmode="numeric" name="code4" class="textfield">
+                            <input type="text" maxlength="1" [(ngModel)]="code_fields[4]" inputmode="numeric" name="code5" class="textfield">
+                            <input type="text" maxlength="1" [(ngModel)]="code_fields[5]" inputmode="numeric" name="code6" class="textfield">
+                        </div>
+                        <button class="button primary-btn my-4" [disabled]="checkValidCodeInput() || is_registering" type="button" (click)="verifyToken()">{{is_registering ? 'Verifying...' : 'Verify Email'}}</button>
+                        <a role="button" (click)="requestVerificationCode()" >Get a new code</a>
+                    </form>
                 </div>
-                <button class="button primary-btn my-4" [disabled]="checkValidCodeInput() || is_registering" type="button" (click)="verifyToken()">{{is_registering ? 'Verifying...' : 'Verify Email'}}</button>
-                <a role="button" (click)="requestVerificationCode()" >Get a new code</a>
-            </form>
-        </div>
-
-        <div class="form-contents" *ngIf="steps === 3 && current_tab === 'pharmacist'">
-            <form [formGroup]="bRegForm">
-                <h2>Let's get you verified</h2>
-                <p class="mt-3">Delivery Information</p>
-                <input type="text" name="street" formControlName="address" class="textfield mt-3" placeholder="Street name">
-                <!-- <input type="text" name="city" formControlName="city" class="textfield mt-3" placeholder="City"> -->
-                <select class="form-select mt-3" formControlName="state" (change)="loadStateCities()" aria-label="Default select example">
-                    <option value="" selected>State/Region</option>
-                    <option value="{{state}}" *ngFor="let state of states">{{state | titlecase}}</option>
-                </select>
-                <select class="form-select mt-3" formControlName="city" aria-label="Default select example">
-                    <option value="" selected>City</option>
-                    <option value="{{city}}" *ngFor="let city of cities">{{city | titlecase}}</option>
-                </select>
-                <select class="form-select mt-3" formControlName="country" aria-label="Default select example">
-                    <option value="" selected>Country</option>
-                    <option value="nigeria">Nigeria</option>
-                    <!--<option value="united states of america">United States of America</option>
-                    <option value="united kingdom">United Kingdom</option>-->
-                </select>
-                <button class="button primary-btn my-4" [disabled]="!bRegForm.valid" type="button" (click)="steps = 4">Next</button>
-                <p class="pag">Page 1 <span>of 2</span></p>
-            </form>
-        </div>
-
-        <div class="form-contents" *ngIf="steps === 3 && current_tab === 'supplier'">
-            <form action="" [formGroup]="supRegForm">
-                <h2>Let's get you verified</h2>
-                <p class="mt-3">Supplier's Information</p>
-                <div class="form-group mt-3">
-                    <label>Licence Number</label>
-                    <input type="number" name="licenseNo" formControlName="licence_number" class="textfield" placeholder="License number">
+        
+                <div class="form-contents" *ngIf="steps === 3 && current_tab === 'pharmacist'">
+                    <form [formGroup]="bRegForm">
+                        <h2>Let's get you verified</h2>
+                        <p class="mt-3">Delivery Information</p>
+                        <input type="text" name="street" formControlName="address" class="textfield mt-3" placeholder="Street name">
+                        <!-- <input type="text" name="city" formControlName="city" class="textfield mt-3" placeholder="City"> -->
+                        <select class="form-select mt-3" formControlName="state" (change)="loadStateCities()" aria-label="Default select example">
+                            <option value="" selected>State/Region</option>
+                            <option value="{{state}}" *ngFor="let state of states">{{state | titlecase}}</option>
+                        </select>
+                        <select class="form-select mt-3" formControlName="city" aria-label="Default select example">
+                            <option value="" selected>City</option>
+                            <option value="{{city}}" *ngFor="let city of cities">{{city | titlecase}}</option>
+                        </select>
+                        <select class="form-select mt-3" formControlName="country" aria-label="Default select example">
+                            <option value="" selected>Country</option>
+                            <option value="nigeria">Nigeria</option>
+                            <!--<option value="united states of america">United States of America</option>
+                            <option value="united kingdom">United Kingdom</option>-->
+                        </select>
+                        <button class="button primary-btn my-4" [disabled]="!bRegForm.valid" type="button" (click)="steps = 4">Next</button>
+                        <p class="pag">Page 1 <span>of 2</span></p>
+                    </form>
                 </div>
-                
-                <div class="form-group mt-3">
-                    <label>Expiry Date</label>
-                    <input type="date" name="expiry_date" formControlName="expiry_date" class="textfield" placeholder="Expiry date [dd/mm/yyyy]" title="Expiry date">
+        
+                <div class="form-contents" *ngIf="steps === 3 && current_tab === 'supplier'">
+                    <form action="" [formGroup]="supRegForm">
+                        <h2>Let's get you verified</h2>
+                        <p class="mt-3">Supplier's Information</p>
+                        <div class="form-group mt-3">
+                            <label>Licence Number</label>
+                            <input type="number" name="licenseNo" formControlName="licence_number" class="textfield" placeholder="License number">
+                        </div>
+                        
+                        <div class="form-group mt-3">
+                            <label>Expiry Date</label>
+                            <input type="date" name="expiry_date" formControlName="expiry_date" class="textfield" placeholder="Expiry date [dd/mm/yyyy]" title="Expiry date">
+                        </div>
+                        
+                        <!--<input type="text" name="bank" formControlName="bank" id="bank" class="textfield mt-3" placeholder="Name of Bank">
+                        <input type="number" name="account-num" formControlName="account_number" id="account-num" class="textfield mt-3" placeholder="Account Number">-->
+                        <div class="form-group mt-3">
+                            <label>Selling Currency</label>
+                            <select class="form-select textfield" formControlName="currency" aria-label="Default select example">
+                                <option selected>Selling Currency</option>
+                                <option value="NGN">NGN</option>
+                                <!--<option value="USD">USD</option>
+                                <option value="GBP">GBP</option>-->
+                            </select>
+                        </div>
+                        <button class="button primary-btn my-4" type="button" (click)="steps = 4">Next</button>
+                        <div class="actions-btn">
+                            <!-- <p class="back-btn" (click)="steps = 4" role="button">Skip</p> -->
+                            <p class="pag">Page 1 <span>of 2</span></p>
+                        </div>
+                    </form>
                 </div>
-                
-                <!--<input type="text" name="bank" formControlName="bank" id="bank" class="textfield mt-3" placeholder="Name of Bank">
-                <input type="number" name="account-num" formControlName="account_number" id="account-num" class="textfield mt-3" placeholder="Account Number">-->
-                <div class="form-group mt-3">
-                    <label>Selling Currency</label>
-                    <select class="form-select textfield" formControlName="currency" aria-label="Default select example">
-                        <option selected>Selling Currency</option>
-                        <option value="NGN">NGN</option>
-                        <!--<option value="USD">USD</option>
-                        <option value="GBP">GBP</option>-->
-                    </select>
+        
+                <div class="form-contents" *ngIf="steps === 4">
+                    <form action="" [formGroup]="pharmForm">
+                        <h2>Let's get you verified</h2>
+                        <p class="mt-3">Business Verification</p>
+                        <div *ngIf="current_tab === 'pharmacist'">
+                            <input type="text" name="lnumber" formControlName="licence_number" required class="textfield mt-3" placeholder="Pharmacy license">
+                            <input type="date" name="exp_date" formControlName="expiry_date" required class="textfield mt-3">
+                        </div>
+        
+                        <!--<div class="cac-doc mt-4">
+                            <label for="cac-doc">CAC Document</label>
+                            <div class="sel-file">
+                                <!-- <p>Select file</p>
+                                <input type="file" name="file_cac" class="file-input" (change)="handleFileSelection($event, 'cac')">
+                                <p class="details">File Size must be less than 5megabytes</p>
+                                <p class="details">(.png, .pdf, .jpeg, .jpg) allowed</p>
+                            </div>
+                        </div>-->
+                        <div class="business-license mt-4">
+                            <!-- <label for="bl">Business Approval License</label> -->
+                            <label for="bl">Retention of premises certificate</label>
+                            <div class="sel-file">
+                                <!-- <p>Select file</p> -->
+                                <input type="file" name="file_license" class="file-input" (change)="handleFileSelection($event, 'licence')">
+                                <p class="details">File Size must be less than 5megabytes</p>
+                            </div>
+                        </div>
+                        <!-- <button class="btn btn-primary" (click)="uploadFiles()">Upload Files</button> -->
+                        <button class="button primary-btn my-4" [disabled]="(current_tab === 'pharmacist' && !pharmForm.valid) || !licenceFile || is_registering" type="button" (click)="completeReg()">{{is_registering ? (is_uploading ? 'Uploading...' : '...Submitting Info') : 'Next'}}</button>
+                        <div class="actions-btn">
+                            <p class="back-btn" (click)="steps = 3" role="button">Back</p>
+                            <p class="pag">Page 2 <span>of {{current_tab === 'supplier' ? '2' : '2'}}</span></p>
+                        </div>
+                    </form>
                 </div>
-                <button class="button primary-btn my-4" type="button" (click)="steps = 4">Next</button>
-                <div class="actions-btn">
-                    <!-- <p class="back-btn" (click)="steps = 4" role="button">Skip</p> -->
-                    <p class="pag">Page 1 <span>of 2</span></p>
-                </div>
-            </form>
-        </div>
-
-        <div class="form-contents" *ngIf="steps === 4">
-            <form action="" [formGroup]="pharmForm">
-                <h2>Let's get you verified</h2>
-                <p class="mt-3">Business Verification</p>
-                <div *ngIf="current_tab === 'pharmacist'">
-                    <input type="text" name="lnumber" formControlName="licence_number" required class="textfield mt-3" placeholder="Pharmacy license">
-                    <input type="date" name="exp_date" formControlName="expiry_date" required class="textfield mt-3">
-                </div>
-
-                <!--<div class="cac-doc mt-4">
-                    <label for="cac-doc">CAC Document</label>
-                    <div class="sel-file">
-                        <!-- <p>Select file</p>
-                        <input type="file" name="file_cac" class="file-input" (change)="handleFileSelection($event, 'cac')">
-                        <p class="details">File Size must be less than 5megabytes</p>
-                        <p class="details">(.png, .pdf, .jpeg, .jpg) allowed</p>
-                    </div>
+        
+                <!--<div class="form-contents" *ngIf="steps === 5 && current_tab === 'supplier'">
+                    <form action="">
+                        <h2>Let's get you verified</h2>
+                        <p class="mt-3">Select Shipment method</p>
+                        <div class="form-check mt-5">
+                            <input class="form-check-input my-0" value="10mg" [(ngModel)]="supplier_shipment_mode" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label ms-3 w-100 mb-0" for="flexRadioDefault1">
+                              Confirm shipment to 10Mg warehouse
+                            </label>
+                          </div>
+                          <div class="form-check mt-3">
+                            <input class="form-check-input my-0" type="radio" [(ngModel)]="supplier_shipment_mode" value="customer" name="flexRadioDefault" id="flexRadioDefault2">
+                            <label class="form-check-label ms-3 w-100 mb-0" for="flexRadioDefault2">
+                              Confirm shipment directly to customer
+                            </label>
+                          </div>
+                        <button class="button primary-btn my-4" type="button" [disabled]="is_registering" (click)="completeReg()">{{is_registering ? (is_uploading ? 'Uploading...' : '...Submitting Info') : 'Done'}}</button>
+                        <div class="actions-btn">
+                            <p class="back-btn" (click)="steps = 3" role="button">Back</p>
+                            <p class="pag">Page 3 <span>of 3</span></p>
+                        </div>
+                    </form>
                 </div>-->
-                <div class="business-license mt-4">
-                    <!-- <label for="bl">Business Approval License</label> -->
-                    <label for="bl">Retention of premises certificate</label>
-                    <div class="sel-file">
-                        <!-- <p>Select file</p> -->
-                        <input type="file" name="file_license" class="file-input" (change)="handleFileSelection($event, 'licence')">
-                        <p class="details">File Size must be less than 5megabytes</p>
-                    </div>
+        
+                <div class="form-contents" *ngIf="steps === 5">
+                    <img src="./assets/images/Ok.gif" alt="okay">
+                    <h4>Verification Submitted Successfully</h4>
+                    <p>We will review your information and get back to you</p>
+                    <button class="button primary-btn my-4" type="button" (click)="proceed()">{{current_tab === 'supplier' ? 'Continue to Dashboard' : 'Start Shopping'}}</button>
                 </div>
-                <!-- <button class="btn btn-primary" (click)="uploadFiles()">Upload Files</button> -->
-                <button class="button primary-btn my-4" [disabled]="(current_tab === 'pharmacist' && !pharmForm.valid) || !licenceFile || is_registering" type="button" (click)="completeReg()">{{is_registering ? (is_uploading ? 'Uploading...' : '...Submitting Info') : 'Next'}}</button>
-                <div class="actions-btn">
-                    <p class="back-btn" (click)="steps = 3" role="button">Back</p>
-                    <p class="pag">Page 2 <span>of {{current_tab === 'supplier' ? '2' : '2'}}</span></p>
-                </div>
-            </form>
-        </div>
+            </div>
 
-        <!--<div class="form-contents" *ngIf="steps === 5 && current_tab === 'supplier'">
-            <form action="">
-                <h2>Let's get you verified</h2>
-                <p class="mt-3">Select Shipment method</p>
-                <div class="form-check mt-5">
-                    <input class="form-check-input my-0" value="10mg" [(ngModel)]="supplier_shipment_mode" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label ms-3 w-100 mb-0" for="flexRadioDefault1">
-                      Confirm shipment to 10Mg warehouse
-                    </label>
-                  </div>
-                  <div class="form-check mt-3">
-                    <input class="form-check-input my-0" type="radio" [(ngModel)]="supplier_shipment_mode" value="customer" name="flexRadioDefault" id="flexRadioDefault2">
-                    <label class="form-check-label ms-3 w-100 mb-0" for="flexRadioDefault2">
-                      Confirm shipment directly to customer
-                    </label>
-                  </div>
-                <button class="button primary-btn my-4" type="button" [disabled]="is_registering" (click)="completeReg()">{{is_registering ? (is_uploading ? 'Uploading...' : '...Submitting Info') : 'Done'}}</button>
-                <div class="actions-btn">
-                    <p class="back-btn" (click)="steps = 3" role="button">Back</p>
-                    <p class="pag">Page 3 <span>of 3</span></p>
-                </div>
-            </form>
-        </div>-->
-
-        <div class="form-contents" *ngIf="steps === 5">
-            <img src="./assets/images/Ok.gif" alt="okay">
-            <h4>Verification Submitted Successfully</h4>
-            <p>We will review your information and get back to you</p>
-            <button class="button primary-btn my-4" type="button" (click)="proceed()">{{current_tab === 'supplier' ? 'Continue to Dashboard' : 'Start Shopping'}}</button>
+            <div class="text-center mt-5" *ngIf="steps === 1">
+                <p class="text-lg text-muted m-2">Already have an account? <a routerLink="/signin">Login</a></p>
+            </div>
         </div>
     </div>
+
 
 
     <!-- SUPPLIER FLOW
